@@ -23,4 +23,88 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+}
+
+.container {
+  @apply max-w-[1280px] mx-auto px-4;
+}
+
+.dashed-border {
+  height: 1px;
+  background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='black' stroke-width='4' stroke-dasharray='6%2c 14' stroke-dashoffset='60' stroke-linecap='square'/%3e%3c/svg%3e");
+}
+
+@media (prefers-color-scheme: dark) {
+  .dashed-border {
+    background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='white' stroke-width='4' stroke-dasharray='6%2c 14' stroke-dashoffset='60' stroke-linecap='square'/%3e%3c/svg%3e");
+  }
+}
+
+.dashed-border-right {
+  background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='black' stroke-width='4' stroke-dasharray='6%2c 14' stroke-dashoffset='60' stroke-linecap='square'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-size: 1px 100%;
+  background-position: right;
+}
+
+
+.dashed-border-bottom {
+  background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='black' stroke-width='4' stroke-dasharray='6%2c 14' stroke-dashoffset='60' stroke-linecap='square'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-size: 100% 1px;
+  background-position: bottom;
+}
+
+@media (prefers-color-scheme: dark) {
+  .dashed-border-right {
+    background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='white' stroke-width='4' stroke-dasharray='6%2c 14' stroke-dashoffset='60' stroke-linecap='square'/%3e%3c/svg%3e");
+  }
+
+  .dashed-border-bottom {
+    background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='white' stroke-width='4' stroke-dasharray='6%2c 14' stroke-dashoffset='60' stroke-linecap='square'/%3e%3c/svg%3e");
+  }
+}
+
+/* Light mode — softer, more saturated to show on white */
+.hero-gradient {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 55% 55% at 50% 50%,
+    #7DFFA5 0%,
+    #89C4FF 20%,
+    #B4BCEE 38%,
+    #CC80D8 55%,
+    #ABABF5 70%,
+    transparent 100%
+  );
+  filter: blur(50px);
+  opacity: 0.55;
+}
+
+@keyframes floatY {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-10px); }
+}
+
+@keyframes pulse {
+  0%, 100% { r: 13; opacity: 1; }
+  50%       { r: 16; opacity: 0.8; }
+}
+
+@keyframes spinSlow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* Dark mode — vivid glow, bleeds to transparent */
+@media (prefers-color-scheme: dark) {
+  .hero-gradient {
+    background:
+      radial-gradient(ellipse 35% 40% at 30% 50%, #00E676 0%, transparent 90%),
+      radial-gradient(ellipse 40% 45% at 55% 45%, #448AFF 0%, transparent 90%),
+      radial-gradient(ellipse 30% 35% at 75% 55%, #E040FB 0%, transparent 90%);
+    filter: blur(90px);
+    opacity: 0.85;
+  }
 }
