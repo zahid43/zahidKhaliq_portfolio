@@ -1,7 +1,45 @@
 <svg width="1169" height="321" viewBox="0 0 1169 321" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g opacity="0.25">
-<path d="M-0.333252 198.184C13.5221 198.184 118.823 317.34 258.168 317.34C451.748 317.34 555.975 -116.735 828.614 4.60439C1044.76 100.8 1139.77 111.093 1179.35 44.1913" stroke="#BECED8"/>
-<path d="M-0.333252 95.258C11.9387 104.363 118.823 317.34 258.168 317.34C451.748 317.34 587.644 -69.231 860.283 52.1084C1076.43 148.304 1110.47 132.865 1179.35 83.7779" stroke="#BECED8"/>
-<path d="M-0.333252 261.522C13.5221 261.522 118.823 320.507 258.168 320.507C451.748 320.507 558.236 -187.581 812.779 -31.8157C998.441 81.7983 1108.1 126.927 1179.35 75.8604" stroke="#BECED8"/>
-</g>
+  <defs>
+    <linearGradient id="waveStrokeA" x1="-32" y1="278" x2="1178" y2="36" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#67E8F9" stop-opacity="0.05"/>
+      <stop offset="0.43" stop-color="#F0ABFC" stop-opacity="0.42"/>
+      <stop offset="0.74" stop-color="#C4B5FD" stop-opacity="0.28"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0.1"/>
+    </linearGradient>
+    <linearGradient id="waveStrokeB" x1="8" y1="72" x2="1140" y2="292" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFFFFF" stop-opacity="0.08"/>
+      <stop offset="0.38" stop-color="#99F6E4" stop-opacity="0.36"/>
+      <stop offset="0.7" stop-color="#F0ABFC" stop-opacity="0.34"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0.08"/>
+    </linearGradient>
+    <radialGradient id="waveGlow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(733 116) rotate(161) scale(520 214)">
+      <stop stop-color="#F0ABFC" stop-opacity="0.2"/>
+      <stop offset="0.48" stop-color="#22D3EE" stop-opacity="0.1"/>
+      <stop offset="1" stop-color="#22D3EE" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="softGlow" x="-80" y="-130" width="1320" height="610" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="14"/>
+    </filter>
+  </defs>
+
+  <rect width="1169" height="321" fill="url(#waveGlow)"/>
+
+  <g filter="url(#softGlow)" opacity="0.42">
+    <path d="M-0.333252 198.184C13.5221 198.184 118.823 317.34 258.168 317.34C451.748 317.34 555.975 -116.735 828.614 4.60439C1044.76 100.8 1139.77 111.093 1179.35 44.1913" stroke="#F0ABFC" stroke-width="8"/>
+    <path d="M-0.333252 95.258C11.9387 104.363 118.823 317.34 258.168 317.34C451.748 317.34 587.644 -69.231 860.283 52.1084C1076.43 148.304 1110.47 132.865 1179.35 83.7779" stroke="#22D3EE" stroke-width="7"/>
+  </g>
+
+  <g opacity="0.82">
+    <path d="M-0.333252 198.184C13.5221 198.184 118.823 317.34 258.168 317.34C451.748 317.34 555.975 -116.735 828.614 4.60439C1044.76 100.8 1139.77 111.093 1179.35 44.1913" stroke="url(#waveStrokeA)" stroke-width="1.8"/>
+    <path d="M-0.333252 95.258C11.9387 104.363 118.823 317.34 258.168 317.34C451.748 317.34 587.644 -69.231 860.283 52.1084C1076.43 148.304 1110.47 132.865 1179.35 83.7779" stroke="url(#waveStrokeB)" stroke-width="1.8"/>
+    <path d="M-0.333252 261.522C13.5221 261.522 118.823 320.507 258.168 320.507C451.748 320.507 558.236 -187.581 812.779 -31.8157C998.441 81.7983 1108.1 126.927 1179.35 75.8604" stroke="url(#waveStrokeA)" stroke-width="1.4" stroke-opacity="0.72"/>
+    <path d="M-8 144C72 122 152 186 246 187C458 189 554 -31 739 28C914 84 1038 183 1175 132" stroke="url(#waveStrokeB)" stroke-width="1.2" stroke-opacity="0.5"/>
+  </g>
+
+  <g opacity="0.72">
+    <circle cx="646" cy="72" r="3" fill="#F0ABFC"/>
+    <circle cx="824" cy="53" r="2.4" fill="#67E8F9"/>
+    <circle cx="1018" cy="119" r="2.6" fill="#FDE68A"/>
+    <circle cx="258" cy="317" r="2.8" fill="#FFFFFF"/>
+  </g>
 </svg>

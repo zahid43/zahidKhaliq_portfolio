@@ -20,6 +20,13 @@
   background-size: contain;
 }
 
+.bg-waves {
+  background-image: url("/images/wavesCard.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
 @custom-variant dark (&:where(.dark, .dark *));
 
 :root.dark {

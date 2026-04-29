@@ -8,10 +8,9 @@ const contactLinks = [
 
 const cardSecData = [
   {
-    id: "card_1",
     heading: "Try me out, risk Free!",
     desc: "Lets build some great together.",
-    linkText: "Contact Me",
+    btnText: "Contact Me",
     Blink: "/",
   },
 ];
@@ -36,10 +35,9 @@ export default function Contacts() {
           </div>
           <div className="rightSection">
             <SecondaryCard
-              id={cardSecData[0].id}
               heading={cardSecData[0].heading}
               desc={cardSecData[0].desc}
-              linkText={cardSecData[0].linkText}
+              btnText={cardSecData[0].btnText}
               Blink={cardSecData[0].Blink}
             />
           </div>
