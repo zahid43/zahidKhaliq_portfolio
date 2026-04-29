@@ -1,5 +1,7 @@
-import Link from "next/link";
-import { CustomButtonContent, customButtonClassName } from "./CustomButton";
+"use client";
+
+import { useRouter } from "next/navigation";
+import CustomButton from "./CustomButton";
 
 interface SecondaryCardProps {
   id: string;
@@ -18,6 +20,8 @@ export default function SecondaryCard({
   Blink,
   bgUpdate = "bg-teal-950",
 }: SecondaryCardProps) {
+  const router = useRouter();
+
   return (
     <div className="relative rounded-lg bg-purple-800 -rotate-2 text-white">
       <div className={`${bgUpdate} rounded-lg rotate-2 p-10 bg-waves`}>
@@ -26,15 +30,14 @@ export default function SecondaryCard({
             <h6>{heading}</h6>
             <p>{desc}</p>
           </div>
-          <Link
+          <CustomButton
             key={id}
-            href={Blink}
-            className={`${customButtonClassName} shrink-0`}
+            onClick={() => router.push(Blink)}
+            className="shrink-0"
+            textClassName="bg-amber-100 text-zinc-950 group-hover:bg-amber-200"
           >
-            <CustomButtonContent textClassName="bg-amber-100 text-zinc-950">
-              {linkText}
-            </CustomButtonContent>
-          </Link>
+            {linkText}
+          </CustomButton>
         </div>
       </div>
     </div>
