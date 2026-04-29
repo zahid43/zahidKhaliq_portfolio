@@ -20,11 +20,11 @@
   background-size: contain;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root.dark {
+  --background: #0a0a0a;
+  --foreground: #ededed;
 }
 
 body {
@@ -43,10 +43,8 @@ body {
   background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='black' stroke-width='4' stroke-dasharray='6%2c 14' stroke-dashoffset='60' stroke-linecap='square'/%3e%3c/svg%3e");
 }
 
-@media (prefers-color-scheme: dark) {
-  .dashed-border {
-    background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='white' stroke-width='4' stroke-dasharray='6%2c 14' stroke-dashoffset='60' stroke-linecap='square'/%3e%3c/svg%3e");
-  }
+.dark .dashed-border {
+  background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='white' stroke-width='4' stroke-dasharray='6%2c 14' stroke-dashoffset='60' stroke-linecap='square'/%3e%3c/svg%3e");
 }
 
 .dashed-border-right {
@@ -64,14 +62,12 @@ body {
   background-position: bottom;
 }
 
-@media (prefers-color-scheme: dark) {
-  .dashed-border-right {
-    background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='white' stroke-width='4' stroke-dasharray='6%2c 14' stroke-dashoffset='60' stroke-linecap='square'/%3e%3c/svg%3e");
-  }
+.dark .dashed-border-right {
+  background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='white' stroke-width='4' stroke-dasharray='6%2c 14' stroke-dashoffset='60' stroke-linecap='square'/%3e%3c/svg%3e");
+}
 
-  .dashed-border-bottom {
-    background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='white' stroke-width='4' stroke-dasharray='6%2c 14' stroke-dashoffset='60' stroke-linecap='square'/%3e%3c/svg%3e");
-  }
+.dark .dashed-border-bottom {
+  background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='white' stroke-width='4' stroke-dasharray='6%2c 14' stroke-dashoffset='60' stroke-linecap='square'/%3e%3c/svg%3e");
 }
 
 /* Light mode — softer, more saturated to show on white */
@@ -106,15 +102,13 @@ body {
 }
 
 /* Dark mode — vivid glow, bleeds to transparent */
-@media (prefers-color-scheme: dark) {
-  .hero-gradient {
-    background:
-      radial-gradient(ellipse 35% 40% at 30% 50%, #00E676 0%, transparent 90%),
-      radial-gradient(ellipse 40% 45% at 55% 45%, #448AFF 0%, transparent 90%),
-      radial-gradient(ellipse 30% 35% at 75% 55%, #E040FB 0%, transparent 90%);
-    filter: blur(90px);
-    opacity: 0.85;
-  }
+.dark .hero-gradient {
+  background:
+    radial-gradient(ellipse 35% 40% at 30% 50%, #00E676 0%, transparent 90%),
+    radial-gradient(ellipse 40% 45% at 55% 45%, #448AFF 0%, transparent 90%),
+    radial-gradient(ellipse 30% 35% at 75% 55%, #E040FB 0%, transparent 90%);
+  filter: blur(90px);
+  opacity: 0.85;
 }
 
 h1 {

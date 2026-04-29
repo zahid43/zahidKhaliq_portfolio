@@ -1,5 +1,5 @@
-import Expertise from "@/components/Expertise";
-import Hero from "@/components/Hero";
+import Expertise from "@/components/HomePage/Expertise";
+import Hero from "@/components/HomePage/Hero";
 
 const Divider = () => <div className="dashed-border w-full" />
 

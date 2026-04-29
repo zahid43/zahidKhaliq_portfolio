@@ -1,5 +1,5 @@
 import Image from "next/image";
-import AvatarGraphic from "@/components/AvatarGraphic";
+import AvatarGraphic from "@/components/ReusableSvgs/AvatarGraphic";
 
 export default function Hero() {
   return (
@@ -13,8 +13,8 @@ export default function Hero() {
           <div className="grid grid-cols-[1fr_1px_1fr] z-1 relative h-full">
             <div className="grid place-items-center">
               <div>
-                <h1>HEY! I'm Zahid Khaliq, Frontend Engineer</h1>
-                <p>I'm a Frontend Engineer with 4+ years of experience in creating user-centered digital products. I specialize in web and mobile app design, and I'm passionate about creating intuitive and engaging user experiences.</p>
+                <h5>HEY! I'm <span className="text-rose-500">Zahid Khaliq</span>, Frontend Engineer</h5>
+                <p className="text-sm">I'm a Frontend Engineer with 4+ years of experience in creating user-centered digital products. I specialize in web and mobile app design, and I'm passionate about creating intuitive and engaging user experiences.</p>
                 <button>Contact me</button>
               </div>
             </div>
