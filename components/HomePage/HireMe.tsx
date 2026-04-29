@@ -18,6 +18,8 @@ export default function HireMe() {
           desc={hireMeData[0].para}
           btnText={hireMeData[0].button}
           Blink={hireMeData[0].link}
+          bgUpdate="bg-blue-900"
+          backBox="bg-rose-500"
         />
       </section>
     </>

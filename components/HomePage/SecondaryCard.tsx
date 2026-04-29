@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import CustomButton from "./CustomButton";
+import { Backpack } from "lucide-react";
 
 interface SecondaryCardProps {
   heading: string;
@@ -9,6 +10,7 @@ interface SecondaryCardProps {
   btnText?: string;
   Blink: string;
   bgUpdate?: string;
+  backBox?: string;
 }
 
 export default function SecondaryCard({
@@ -17,11 +19,12 @@ export default function SecondaryCard({
   btnText = "",
   Blink,
   bgUpdate = "bg-teal-950",
+  backBox = "bg-purple-800",
 }: SecondaryCardProps) {
   const router = useRouter();
 
   return (
-    <div className="relative rounded-lg bg-purple-800 -rotate-2 text-white">
+    <div className={`relative rounded-lg  -rotate-2 text-white ${backBox}`}>
       <div className={`${bgUpdate} relative overflow-hidden rounded-lg rotate-2 p-10`}>
         <img
           src="/images/wavesCard.svg"
