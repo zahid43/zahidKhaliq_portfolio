@@ -1,5 +1,6 @@
 import Image from "next/image";
 import AvatarGraphic from "@/components/ReusableSvgs/AvatarGraphic";
+import CustomButton from "./CustomButton";
 
 export default function Hero() {
   return (
@@ -15,7 +16,7 @@ export default function Hero() {
               <div>
                 <h5>HEY! I'm <span className="text-rose-500">Zahid Khaliq</span>, Frontend Engineer</h5>
                 <p className="text-sm">I'm a Frontend Engineer with 4+ years of experience in creating user-centered digital products. I specialize in web and mobile app design, and I'm passionate about creating intuitive and engaging user experiences.</p>
-                <button>Contact me</button>
+                <CustomButton className="mt-6">Contact me</CustomButton>
               </div>
             </div>
             <div className="dashed-border-right">

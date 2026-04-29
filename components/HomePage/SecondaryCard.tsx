@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { CustomButtonContent, customButtonClassName } from "./CustomButton";
 
 interface SecondaryCardProps {
   id: string;
@@ -28,9 +29,11 @@ export default function SecondaryCard({
           <Link
             key={id}
             href={Blink}
-            className="bg-amber-100 text-zinc-950 w-fit h-fit px-6 py-2 rounded-lg hover:opacity-90 transition-all duration-300"
+            className={`${customButtonClassName} shrink-0`}
           >
-            {linkText}
+            <CustomButtonContent textClassName="bg-amber-100 text-zinc-950">
+              {linkText}
+            </CustomButtonContent>
           </Link>
         </div>
       </div>

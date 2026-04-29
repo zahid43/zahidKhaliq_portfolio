@@ -1,10 +1,9 @@
-import Image from "next/image";
-import Link from "next/link";
 import SecondaryCard from "./SecondaryCard";
+import CustomButton from "./CustomButton";
 
 const contactLinks = [
-  {id: "in", title: "My linkedin" , link: "/", customClass: ""},
-  {id: "resume", title: "My Resume" , link: "/", customClass: " bg-purple-900"},
+  { id: "linkedin", title: "My linkedin", customClass: "bg-purple-900 hover:bg-purple-900/80" },
+  { id: "resume", title: "My Resume", customClass: "" },
 ];
 
 const cardSecData = [
@@ -26,13 +25,12 @@ export default function Contacts() {
             <h4>Lets build it together.</h4>
             <div className="flex gap-3 mt-5">
               {contactLinks.map((i) => (
-                <Link 
-                  key={i.id} 
-                  href={i.link} 
-                  className={`${i.customClass} bg-cyan-950 text-white px-4 py-2 rounded-lg hover:opacity-90 transition-all duration-300`}
+                <CustomButton
+                  key={i.id}
+                  textClassName={i.customClass}
                 >
                   {i.title}
-                </Link>
+                </CustomButton>
               ))}
             </div>
           </div>
