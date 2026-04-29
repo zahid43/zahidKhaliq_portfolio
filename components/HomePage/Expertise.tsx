@@ -1,5 +1,6 @@
 import Image from "next/image";
-import GraphicalCard from "@/components/GraphicalCard";
+import GraphicalCard from "@/components/HomePage/GraphicalCard";
+import { CodeBraces, Webflow, ReactIcon, TailwindIcon, BootstrapIcon } from "@/components/ReusableSvgs";
 
 const expertiseItems = [
   {
@@ -25,6 +26,39 @@ const expertiseItems = [
   },
 ];
 
+const expertiseIcons = [
+  {
+    Icon: CodeBraces,
+    posClass: "top-1/2 left-1/2",
+    bgClass: "bg-[#111] text-white p-7",
+    size: 60,
+  },
+  {
+    Icon: Webflow,
+    posClass: "top-[18%] left-[22%]",
+    bgClass: "bg-blue-600 text-white p-5",
+    size: 45,
+  },
+  {
+    Icon: ReactIcon,
+    posClass: "top-[28%] left-[82%]",
+    bgClass: "bg-[#20232a] text-[#61dafb] p-5",
+    size: 45,
+  },
+  {
+    Icon: TailwindIcon,
+    posClass: "top-[78%] left-[18%]",
+    bgClass: "bg-white text-cyan-400 p-5 shadow-xl border border-gray-100",
+    size: 45,
+  },
+  {
+    Icon: BootstrapIcon,
+    posClass: "top-[72%] left-[78%]",
+    bgClass: "bg-purple-600 text-white p-5",
+    size: 45,
+  },
+];
+
 export default function Expertise() {
   return (
     <>
@@ -32,13 +66,28 @@ export default function Expertise() {
         <div className="container">
           <div className="grid grid-cols-[1fr_1px_1fr] z-1 relative">
 
-            <div className="bg-circles w-full h-full"></div>
-
-            <div className="dashed-border-right relative">
-              <div className="absolute top-25 w-full">
-                <Image src="/images/dot.svg" alt="dot" width={20} height={20} />
+            {/* right section of the expertise section */}
+            <div className="w-full h-full grid place-items-center">
+              <div className="bg-circles w-full aspect-square relative max-w-[500px]">
+                {expertiseIcons.map((item, index) => (
+                  <div 
+                    key={index} 
+                    className={`absolute -translate-x-1/2 -translate-y-1/2 rounded-full grid place-items-center shadow-lg transition-transform hover:scale-110 ${item.bgClass} ${item.posClass}`}
+                  >
+                    <item.Icon width={item.size} height={item.size} />
+                  </div>
+                ))}
               </div>
             </div>
+
+            {/* divider of the expertise section */}
+            <div className="dashed-border-right relative overflow-visible h-full w-full">
+              <div className="absolute -top-2.5 left-1/2 -translate-x-1/2 z-50 flex items-center justify-center w-[20px] h-[20px] bg-red-500 rounded-full">
+                <img src="/images/dot.svg" alt="dot" className="w-full h-full" />
+              </div>
+            </div>
+
+            {/* left section of the expertise section */}
             <div className="grid grid-cols-1 gap-12 py-8 pl-8">
               <h4 className="font-bold mb-8">My Specialization</h4>
               {expertiseItems.map((item) => (
