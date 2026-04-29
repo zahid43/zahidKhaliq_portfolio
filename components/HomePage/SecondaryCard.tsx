@@ -11,6 +11,8 @@ interface SecondaryCardProps {
   Blink: string;
   bgUpdate?: string;
   backBox?: string;
+  cardHeight?: string;
+  cardPadding: string;
 }
 
 export default function SecondaryCard({
@@ -20,12 +22,14 @@ export default function SecondaryCard({
   Blink,
   bgUpdate = "bg-teal-950",
   backBox = "bg-purple-800",
+  cardHeight = "",
+  cardPadding = "p-10",
 }: SecondaryCardProps) {
   const router = useRouter();
 
   return (
     <div className={`relative rounded-lg  -rotate-2 text-white ${backBox}`}>
-      <div className={`${bgUpdate} relative overflow-hidden rounded-lg rotate-2 p-10`}>
+      <div className={`${bgUpdate} ${cardHeight} ${cardPadding} relative flex items-center justify-center overflow-hidden rounded-lg rotate-2`}>
         <img
           src="/images/wavesCard.svg"
           alt=""
@@ -33,7 +37,7 @@ export default function SecondaryCard({
           className="absolute inset-0 h-full w-full object-cover opacity-90 mix-blend-screen pointer-events-none"
         />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_85%_20%,rgba(255,255,255,0.16),transparent_30%)] pointer-events-none" />
-        <div className="relative flex items-center gap-10 justify-between">
+        <div className="relative flex w-full items-center justify-between gap-6">
           <div>
             <h6>{heading}</h6>
             <p>{desc}</p>

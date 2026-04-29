@@ -13,6 +13,7 @@ export default function Home() {
       <Hero />
       <Divider />
       <Expertise />
+      <Divider />
       <Endorsements />
       <HireMe />
       <Contacts />

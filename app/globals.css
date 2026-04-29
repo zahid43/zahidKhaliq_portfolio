@@ -1,8 +1,16 @@
 @import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
 
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  color-scheme: light;
+}
+
+.dark {
+  --background: #0a0a0a;
+  --foreground: #ededed;
+  color-scheme: dark;
 }
 
 @theme inline {
@@ -20,20 +28,6 @@
   background-size: contain;
 }
 
-.bg-waves {
-  background-image: url("/images/wavesCard.svg");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-}
-
-@custom-variant dark (&:where(.dark, .dark *));
-
-:root.dark {
-  --background: #0a0a0a;
-  --foreground: #ededed;
-}
-
 body {
   background: var(--background);
   color: var(--foreground);
@@ -43,6 +37,63 @@ body {
 
 .container {
   @apply max-w-[1280px] mx-auto px-4;
+}
+
+.glass-header {
+  position: relative;
+  isolation: isolate;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(244, 247, 255, 0.94)),
+    linear-gradient(180deg, rgba(226, 232, 240, 0.92), rgba(255, 255, 255, 0.96));
+  border-bottom: 1px solid rgba(15, 23, 42, 0.12);
+  box-shadow:
+    0 12px 30px rgba(15, 23, 42, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+}
+
+.glass-header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.45), transparent 22%, transparent 78%, rgba(255, 255, 255, 0.28)),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.38), transparent 42%);
+  pointer-events: none;
+}
+
+.glass-header::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.75), transparent);
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.dark .glass-header {
+  background:
+    linear-gradient(135deg, rgba(17, 25, 40, 0.96), rgba(21, 32, 52, 0.94)),
+    linear-gradient(180deg, rgba(8, 15, 28, 0.96), rgba(17, 25, 40, 0.96));
+  border-bottom-color: rgba(255, 255, 255, 0.14);
+  box-shadow:
+    0 14px 34px rgba(0, 0, 0, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+.dark .glass-header::before {
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.08), transparent 24%, transparent 76%, rgba(255, 255, 255, 0.06)),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.08), transparent 40%);
+}
+
+.dark .glass-header::after {
+  background: linear-gradient(90deg, transparent, rgba(148, 163, 184, 0.55), transparent);
 }
 
 .dashed-border {
@@ -117,39 +168,21 @@ body {
   filter: blur(90px);
   opacity: 0.85;
 }
-
 h1 {
   font-size: clamp(2.5rem, 5vw + 1rem, 4.5rem);
-  line-height: 1.1;
-  font-weight: 700;
 }
-
 h2 {
   font-size: clamp(2rem, 4vw + 1rem, 3.5rem);
-  line-height: 1.2;
-  font-weight: 700;
 }
-
 h3 {
   font-size: clamp(1.75rem, 3vw + 1rem, 2.5rem);
-  line-height: 1.2;
-  font-weight: 600;
 }
-
 h4 {
   font-size: clamp(1.5rem, 2vw + 1rem, 2rem);
-  line-height: 1.3;
-  font-weight: 600;
 }
-
 h5 {
   font-size: clamp(1.25rem, 1.5vw + 1rem, 1.5rem);
-  line-height: 1.4;
-  font-weight: 600;
 }
-
 h6 {
   font-size: clamp(1rem, 1vw + 1rem, 1.25rem);
-  line-height: 1.4;
-  font-weight: 600;
 }

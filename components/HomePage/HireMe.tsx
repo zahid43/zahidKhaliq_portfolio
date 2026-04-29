@@ -20,6 +20,8 @@ export default function HireMe() {
           Blink={hireMeData[0].link}
           bgUpdate="bg-blue-900"
           backBox="bg-rose-500"
+          cardHeight="min-h-90"
+          cardPadding="px-30"
         />
       </section>
     </>
