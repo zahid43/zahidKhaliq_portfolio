@@ -105,7 +105,7 @@ export default function Endorsements() {
   };
 
   return (
-    <section className="container mt-40 overflow-hidden">
+    <section className="container mt-35 overflow-hidden pb-25">
       <div className="mx-auto max-w-3xl text-center">
         <p className="mb-3 text-sm font-semibold uppercase tracking-[0.35em] text-darkBlue/50 dark:text-white/45">
           Endorsements
@@ -114,22 +114,22 @@ export default function Endorsements() {
       </div>
 
       <div
-        className="relative mx-auto mt-24 flex min-h-[360px] max-w-[520px] items-center justify-center sm:min-h-[410px]"
+        className="relative mx-auto mt-18 flex min-h-[360px] max-w-[520px] items-center justify-center sm:min-h-[410px]"
         onMouseEnter={() => { isPaused.current = true; }}
         onMouseLeave={() => { isPaused.current = false; }}
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
       >
-        <div className="absolute inset-x-8 top-8 h-64 rounded-[2rem] bg-gradient-to-br from-amber-200/60 via-blue-200/50 to-teal-200/60 blur-3xl dark:from-amber-400/20 dark:via-blue-500/20 dark:to-teal-400/20" />
+        <div className="absolute inset-x-8 top-8 h-64 rounded-[2rem] bg-gradient-to-br from-indigo-200/50 via-violet-200/40 to-teal-200/50 blur-3xl dark:from-indigo-500/20 dark:via-violet-500/20 dark:to-teal-500/20" />
 
         {/* Decorative shapes */}
         <div className="pointer-events-none" aria-hidden>
-          <div className="bg-purple-500 absolute -left-20 top-15 h-5 w-5 rounded-full opacity-50 animate-ping [animation-duration:3s]" />
-          <div className="bg-blue-500 absolute -left-20 top-1/2 h-10 w-10 rotate-45 rounded-xl opacity-80 animate-spin [animation-duration:10s]" />
-          <div className="bg-purple-500 absolute -left-5 bottom-10 h-5 w-5 rounded-full opacity-60 animate-ping [animation-duration:1s]" />
-          <div className="bg-teal-400 absolute -right-14 top-8 h-10 w-10 rotate-45 rounded-xl opacity-80 animate-spin [animation-duration:7s]" />
-          <div className="bg-blue-400 absolute -right-6 bottom-20 h-4 w-4 rounded-full opacity-50 animate-ping [animation-duration:4s]" />
-          <div className="bg-purple-400 absolute -right-10 top-1/2 h-3 w-3 rounded-full opacity-40 animate-ping [animation-duration:6s]" />
+          <div className="bg-violet-500 absolute -left-20 top-15 h-5 w-5 rounded-full opacity-50 animate-ping [animation-duration:3s]" />
+          <div className="bg-accent absolute -left-20 top-1/2 h-10 w-10 rotate-45 rounded-xl opacity-80 animate-spin [animation-duration:10s]" />
+          <div className="bg-indigo-400 absolute -left-5 bottom-10 h-5 w-5 rounded-full opacity-60 animate-ping [animation-duration:1s]" />
+          <div className="bg-accentAlt absolute -right-14 top-8 h-10 w-10 rotate-45 rounded-xl opacity-80 animate-spin [animation-duration:7s]" />
+          <div className="bg-teal-400 absolute -right-6 bottom-20 h-4 w-4 rounded-full opacity-50 animate-ping [animation-duration:4s]" />
+          <div className="bg-violet-400 absolute -right-10 top-1/2 h-3 w-3 rounded-full opacity-40 animate-ping [animation-duration:6s]" />
         </div>
 
         {stackedComments.map(({ name, desc, position, linkedinUrl, stackPosition }) => {
@@ -196,7 +196,7 @@ export default function Endorsements() {
           );
         })}
 
-        <div className="absolute -bottom-2 left-1/2 z-50 flex -translate-x-1/2 items-center gap-4">
+        <div className="absolute -bottom-20 left-1/2 z-10 flex -translate-x-1/2 items-center gap-4">
           <button
             type="button"
             onClick={goToPrev}

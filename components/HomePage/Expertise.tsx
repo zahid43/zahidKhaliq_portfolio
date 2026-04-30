@@ -82,7 +82,7 @@ export default function Expertise() {
 
             {/* divider of the expertise section */}
             <div className="dashed-border-right relative overflow-visible h-full w-full">
-              <div className="absolute -top-2.5 left-1/2 -translate-x-1/2 z-50 flex items-center justify-center w-[20px] h-[20px] bg-red-500 rounded-full">
+              <div className="absolute -top-2.5 left-1/2 -translate-x-1/2 z-50 flex items-center justify-center w-[20px] h-[20px] bg-accent rounded-full">
                 <img src="/images/dot.svg" alt="dot" className="w-full h-full" />
               </div>
             </div>

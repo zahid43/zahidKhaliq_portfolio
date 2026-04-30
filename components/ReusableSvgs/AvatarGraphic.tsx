@@ -14,7 +14,7 @@ export default function AvatarGraphic({ className }: { className?: string }) {
         cx="467"
         cy="8"
         r="8"
-        fill="#7B55EC"
+        fill="#6366F1"
         style={{
           animation: "floatY 4s ease-in-out infinite",
           transformOrigin: "467px 8px",
@@ -26,7 +26,7 @@ export default function AvatarGraphic({ className }: { className?: string }) {
         cx="544"
         cy="236"
         r="13"
-        fill="#63B8E7"
+        fill="#818CF8"
         style={{
           animation: "floatY 5s ease-in-out infinite 1s, pulse 5s ease-in-out infinite 1s",
           transformOrigin: "544px 236px",
@@ -38,7 +38,7 @@ export default function AvatarGraphic({ className }: { className?: string }) {
         cx="6"
         cy="349"
         r="6"
-        fill="#583FBC"
+        fill="#4F46E5"
         style={{
           animation: "floatY 3.5s ease-in-out infinite 0.5s",
           animationDirection: "reverse",
@@ -53,7 +53,7 @@ export default function AvatarGraphic({ className }: { className?: string }) {
         width="49.4086"
         height="49.4086"
         rx="12"
-        fill="#7DE0EA"
+        fill="#5EEAD4"
         style={{
           animation: "spinSlow 8s linear infinite",
           transformOrigin: "572px 122px",

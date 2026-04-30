@@ -1,3 +1,4 @@
+
 import type { ButtonHTMLAttributes, ReactNode } from "react";
 
 type BaseProps = {
@@ -15,10 +16,10 @@ export default function CustomButton({
   className = "",
   glowContainerClassName = "",
   glowClassName = "",
-  textClassName = "",
+  textClassName = "bg-darkBlue text-white dark:bg-indigo-500 dark:text-white",
   ...props
 }: CustomButtonProps) {
-  const buttonClassName = `group relative z-[1] inline-flex overflow-hidden rounded-xl bg-transparent p-1 transition-all duration-300 hover:drop-shadow-[0_0_8px_#F0ABFC] ${className}`.trim();
+  const buttonClassName = `group relative z-[1] inline-flex overflow-hidden rounded-xl bg-transparent p-1 transition-all duration-300 hover:drop-shadow-[0_0_8px_#F0ABFC] dark:hover:ring-1 dark:hover:ring-indigo-400/60 ${className}`.trim();
   const { type = "button", ...buttonProps } = props;
 
   return (
@@ -33,7 +34,7 @@ export default function CustomButton({
           className={`absolute -inset-full aspect-square animate-spin bg-[conic-gradient(from_90deg,transparent_20%,#F0ABFC_30%,#F0ABFC_58%,#1cbab5_72%,transparent_82%)] blur-[8px] [animation-delay:-0.7s] [animation-duration:1.4s] [animation-direction:reverse] ${glowClassName}`}
         />
       </span>
-      <span className={`relative block rounded-xl bg-[#1F2124] px-5 py-2.5 text-xl text-white ${textClassName}`}>
+      <span className={`relative block rounded-xl px-5 py-2.5 text-xl ${textClassName}`}>
         {children}
       </span>
     </button>

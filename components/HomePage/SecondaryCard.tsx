@@ -2,7 +2,6 @@
 
 import { useRouter } from "next/navigation";
 import CustomButton from "./CustomButton";
-import { Backpack } from "lucide-react";
 
 interface SecondaryCardProps {
   heading: string;
@@ -12,7 +11,7 @@ interface SecondaryCardProps {
   bgUpdate?: string;
   backBox?: string;
   cardHeight?: string;
-  cardPadding: string;
+  cardPadding?: string;
 }
 
 export default function SecondaryCard({
@@ -20,8 +19,8 @@ export default function SecondaryCard({
   desc,
   btnText = "",
   Blink,
-  bgUpdate = "bg-teal-950",
-  backBox = "bg-purple-800",
+  bgUpdate = "bg-indigo-950",
+  backBox = "bg-violet-700",
   cardHeight = "",
   cardPadding = "p-10",
 }: SecondaryCardProps) {
@@ -45,7 +44,7 @@ export default function SecondaryCard({
           <CustomButton
             onClick={() => router.push(Blink)}
             className="shrink-0"
-            textClassName="bg-amber-100 text-zinc-950 group-hover:bg-amber-200"
+            textClassName="bg-amber-100 text-zinc-950 group-hover:bg-amber-200 dark:bg-amber-200 dark:text-zinc-900"
           >
             {btnText}
           </CustomButton>

@@ -1,10 +1,7 @@
 import SecondaryCard from "./SecondaryCard";
 import CustomButton from "./CustomButton";
-
-const contactLinks = [
-  { id: "linkedin", title: "My linkedin", customClass: "bg-purple-900 hover:bg-purple-900/80" },
-  { id: "resume", title: "My Resume", customClass: "" },
-];
+import LinkedinIcon from "@/components/ReusableSvgs/LinkedinIcon";
+import { FileText } from "lucide-react";
 
 const cardSecData = [
   {
@@ -18,19 +15,19 @@ const cardSecData = [
 export default function Contacts() {
   return (
     <>
-      <div className="container">
+      <section className="container my-10">
         <div className="grid grid-cols-2 gap-3">
           <div className="leftSection">
             <h4>Lets build it together.</h4>
             <div className="flex gap-3 mt-5">
-              {contactLinks.map((i) => (
-                <CustomButton
-                  key={i.id}
-                  textClassName={i.customClass}
-                >
-                  {i.title}
-                </CustomButton>
-              ))}
+              <CustomButton textClassName="flex items-center gap-2 bg-[#0A66C2]">
+                <LinkedinIcon width={18} height={18} aria-hidden="true" />
+                My LinkedIn
+              </CustomButton>
+              <CustomButton textClassName="flex items-center gap-2 bg-violet-600">
+                <FileText size={18} aria-hidden="true" />
+                My Resume
+              </CustomButton>
             </div>
           </div>
           <div className="rightSection">
@@ -42,7 +39,7 @@ export default function Contacts() {
             />
           </div>
         </div>
-      </div>
+      </section>
     </>
   );
 }

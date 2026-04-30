@@ -12,14 +12,14 @@ const hireMeData = [
 export default function HireMe() {
   return (
     <>
-      <section className="container my-20">
+      <section className="container my-30">
         <SecondaryCard
           heading={hireMeData[0].title}
           desc={hireMeData[0].para}
           btnText={hireMeData[0].button}
           Blink={hireMeData[0].link}
-          bgUpdate="bg-blue-900"
-          backBox="bg-rose-500"
+          bgUpdate="bg-gradient-to-br from-violet-600 via-purple-700 to-indigo-900"
+          backBox="bg-teal-400"
           cardHeight="min-h-90"
           cardPadding="px-30"
         />
