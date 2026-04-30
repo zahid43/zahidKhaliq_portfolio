@@ -88,7 +88,7 @@ export default function Expertise() {
             </div>
 
             {/* left section of the expertise section */}
-            <div className="grid grid-cols-1 gap-12 py-8 pl-8">
+            <div className="grid grid-cols-1 gap-12 pl-8 relative -bottom-15">
               <h4 className="font-bold mb-8">My Specialization</h4>
               {expertiseItems.map((item) => (
                 <GraphicalCard
