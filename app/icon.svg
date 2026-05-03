@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+  <!-- Corner bracket top-left -->
+  <path d="M3 9 L3 3 L9 3" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.35"/>
+  <!-- Corner bracket bottom-right -->
+  <path d="M29 23 L29 29 L23 29" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.35"/>
+  <!-- < bracket -->
+  <path d="M9 9L4 16L9 23" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- / slash -->
+  <line x1="20" y1="8" x2="12" y2="24" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- > bracket -->
+  <path d="M23 9L28 16L23 23" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
