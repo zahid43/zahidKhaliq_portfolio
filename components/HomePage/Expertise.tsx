@@ -96,7 +96,7 @@ export default function Expertise() {
           to { transform: rotate(0deg); }
         }
       `}</style>
-      <section className="relative">
+      <section id="about-me" className="relative">
         {/* Galaxy glow orbs */}
         <div className="pointer-events-none absolute left-0 top-20 h-72 w-72 rounded-full bg-teal-400/10 dark:bg-teal-600/15 blur-3xl" />
         <div className="pointer-events-none absolute right-0 bottom-20 h-80 w-80 rounded-full bg-indigo-400/10 dark:bg-indigo-600/15 blur-3xl" />

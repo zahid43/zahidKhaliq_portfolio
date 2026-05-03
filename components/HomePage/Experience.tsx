@@ -132,7 +132,7 @@ const ExperienceCard = ({ exp }: { exp: typeof experiences[0] }) => {
 
 export default function Experience() {
   return (
-    <section className="relative overflow-hidden py-16 lg:py-24">
+    <section id="experience" className="relative overflow-hidden py-16 lg:py-24">
       {/* Galaxy Background Effects */}
       <div className="pointer-events-none absolute left-0 top-1/4 h-96 w-96 rounded-full bg-violet-400/10 dark:bg-violet-600/15 blur-3xl" />
       <div className="pointer-events-none absolute right-0 bottom-1/4 h-96 w-96 rounded-full bg-cyan-400/10 dark:bg-cyan-600/15 blur-3xl" />

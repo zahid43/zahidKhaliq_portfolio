@@ -9,8 +9,7 @@ import LinkedinIcon from "@/components/ReusableSvgs/LinkedinIcon";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { useTheme } from "next-themes";
 import Link from "next/link";
-
-const navLinks = ["Home", "About me", "Projects", "Contact"];
+import { navLinks } from "@/lib/constants";
 
 const socialLinks = [
   { href: "https://linkedin.com", label: "LinkedIn profile", icon: LinkedinIcon },

@@ -106,7 +106,7 @@ export default function Endorsements() {
   };
 
   return (
-    <section className="container mt-35 overflow-hidden pb-25">
+    <section id="endorsements" className="container mt-35 overflow-hidden pb-25">
       <div className="mx-auto max-w-3xl text-center">
         <span className="inline-flex items-center justify-center gap-2 text-xs font-bold uppercase tracking-[0.25em] text-accent mb-3">
           <span className="h-[2px] w-4 rounded-full bg-accent" />

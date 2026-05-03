@@ -1,43 +1,55 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Logo } from "@/components/ReusableSvgs";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import MobileMenu from "@/components/HomePage/MobileMenu";
-
-const navLinks = ["Home", "About me", "Projects", "Contact"];
+import { navLinks } from "@/lib/constants";
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
     <>
-      <header className="sticky top-0 z-100 glass-header">
+      <header
+        className={`sticky top-0 z-100 glass-header transition-[padding] duration-300 ${scrolled ? "py-0" : ""}`}
+      >
         <div className="container">
-          <nav className="flex items-center justify-between py-3">
-            <Logo width={200} height={50} className="text-accent" />
+          <nav className={`flex items-center justify-between transition-[padding] duration-300 ${scrolled ? "py-2" : "py-3"}`}>
+            <a href="#home" aria-label="Home">
+              <Logo width={160} height={40} className="text-accent" />
+            </a>
 
             {/* Desktop links */}
-            <ul className="hidden items-center gap-18 md:flex">
+            <ul className="hidden items-center gap-7 md:flex">
               {navLinks.map((label) => (
-                <li key={label}>{label}</li>
+                <li key={label}>
+                  <a
+                    href={`#${label.toLowerCase().replace(/ /g, "-")}`}
+                    className="text-sm font-medium text-foreground/60 transition-colors duration-200 hover:text-foreground"
+                  >
+                    {label}
+                  </a>
+                </li>
               ))}
+
               <li>
                 <ThemeToggle />
               </li>
             </ul>
 
-            {/* Mobile hamburger */}
-            <button
-              type="button"
-              aria-label="Open navigation menu"
-              onClick={() => setMenuOpen(true)}
-              className="group flex h-10 w-10 flex-col items-center justify-center gap-[5px] rounded-xl border border-foreground/10 bg-surface transition-colors hover:bg-surface/70 md:hidden"
-            >
-              <span className="h-0.5 w-5 rounded-full bg-foreground transition-all duration-300 group-hover:w-3.5" />
-              <span className="h-0.5 w-5 rounded-full bg-foreground transition-all duration-300" />
-              <span className="h-0.5 w-3 rounded-full bg-foreground transition-all duration-300 group-hover:w-5" />
-            </button>
+            {/* Mobile: theme toggle + hamburger */}
+            <div className="flex items-center gap-2 md:hidden">
+              <ThemeToggle />
+
+            </div>
           </nav>
         </div>
       </header>

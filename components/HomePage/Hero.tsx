@@ -13,7 +13,7 @@ const techStack = ["React", "Next.js", "Tailwind", "Webflow"];
 export default function Hero() {
   return (
     <>
-      <section className="relative h-auto lg:h-200 overflow-hidden py-20 lg:py-0">
+      <section className="relative h-auto lg:h-200 overflow-hidden py-20 lg:py-0" id="home">
 
         {/* Cosmic nebula glow orbs */}
         <div className="pointer-events-none absolute -left-32 top-10 h-96 w-96 rounded-full bg-indigo-400/15 dark:bg-indigo-600/25 blur-3xl" />

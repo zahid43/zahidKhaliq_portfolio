@@ -6,3 +6,5 @@ export { default as TailwindIcon } from './TailwindIcon';
 export { default as BootstrapIcon } from './BootstrapIcon';
 export { default as NextjsIcon } from './NextjsIcon';
 export { default as FigmaIcon } from './FigmaIcon';
+export { default as WhatsAppIcon } from './WhatsAppIcon';
+export { default as XIcon } from './XIcon';
