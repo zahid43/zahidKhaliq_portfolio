@@ -4,6 +4,7 @@ import Endorsements from "@/components/HomePage/Endorsements";
 import Contacts from "@/components/HomePage/Contacts";
 import Footer from "@/components/HomePage/Footer";
 import Experience from "@/components/HomePage/Experience";
+import Certifications from "@/components/HomePage/Certifications";
 import Projects from "@/components/HomePage/Projects";
 import DarkModeToast from "@/components/HomePage/DarkModeToast";
 
@@ -22,6 +23,8 @@ export default function Home() {
       <Expertise />
       <Divider />
       <Experience />
+      <Divider />
+      <Certifications />
       <Divider />
       <Projects />
       <Divider />

@@ -173,3 +173,8 @@ h5 {
 h6 {
   font-size: clamp(1rem, 1vw + 1rem, 1.25rem);
 }
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}

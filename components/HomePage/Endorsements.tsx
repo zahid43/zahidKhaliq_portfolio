@@ -7,28 +7,40 @@ import LinkedinIcon from "@/components/ReusableSvgs/LinkedinIcon";
 
 const comments = [
   {
-    name: "Ayesha Khan",
-    desc: "Zahid brings a rare mix of clean engineering and thoughtful design taste. Every handoff felt calm, clear, and production-ready.",
-    position: "Product Lead",
-    linkedinUrl: "/",
+    name: "Hamza Fida",
+    desc: "Zahid is a master of modern front-end technologies, including Bootstrap, CSS, and Tailwind CSS, and he applies them with exceptional skill and efficiency. Whether it's designing clean, responsive interfaces or solving complex layout challenges, Zahid brings both expertise and dedication to the table. He would be a valuable asset to any team.",
+    position: "Senior Software Engineer · Ruby on Rails",
+    linkedinUrl: "https://www.linkedin.com/in/zaahidkhaliq/",
   },
   {
-    name: "Hamza Malik",
-    desc: "He understood the brief quickly, improved the interaction details, and shipped a polished experience without overcomplicating the build.",
-    position: "Founder, Studio Nine",
-    linkedinUrl: "/",
+    name: "Ahsan Ali",
+    desc: "Zahid Khaliq is one of the most reliable and skilled Front-End Developers I've collaborated with. He consistently brought a high level of precision and creativity to every task, turning complex UI/UX designs into seamless, responsive web experiences.",
+    position: "SQA Engineer · Manual & API Testing",
+    linkedinUrl: "https://www.linkedin.com/in/zaahidkhaliq/",
   },
   {
-    name: "Sarah Ahmed",
-    desc: "The work had that extra layer of care you notice immediately: responsive layouts, smooth states, and code that was easy to maintain.",
-    position: "UX Designer",
-    linkedinUrl: "/",
+    name: "Yisal Khan",
+    desc: "Zahid Khaliq is one of the most motivated, hard working people I've ever met and worked with. His skills of Frontend Designing are amazing. He is always motivated to learn new Frontend Technologies — Tailwind, Webflow, MaterialUI and many more.",
+    position: "Senior Software Engineer · NodeJS · Laravel",
+    linkedinUrl: "https://www.linkedin.com/in/zaahidkhaliq/",
   },
   {
-    name: "Bilal Raza",
-    desc: "A dependable collaborator who keeps momentum high. Zahid made the frontend feel elegant while staying practical about timelines.",
-    position: "Engineering Manager",
-    linkedinUrl: "/",
+    name: "Hassan Haroon",
+    desc: "Zahid is a very productive and multi-skilled person with vast knowledge. He is careful, proactive, self motivated and an intelligent team player. Thanks to his interpersonal skills, Zahid has great relations with both company clients and potential customers.",
+    position: "Senior Software Engineer · Rails · React",
+    linkedinUrl: "https://www.linkedin.com/in/zaahidkhaliq/",
+  },
+  {
+    name: "Ahmed Aziz",
+    desc: "Zahid is a hardworking colleague who continuously strives to learn new things and enhance his abilities. He has solid knowledge and expertise in front-end designing.",
+    position: "Senior Ruby on Rails Developer · Full-Stack",
+    linkedinUrl: "https://www.linkedin.com/in/zaahidkhaliq/",
+  },
+  {
+    name: "Minahil Hussain",
+    desc: "Zahid is a wonderful, friendly, articulate person who knows how to buckle down and get things done. At Square63 I experienced firsthand his fabulous communication, interpersonal, and design skills. I highly recommend him to anyone looking to add a humble, uplifting, and dependable teammate.",
+    position: "Senior Software Engineer · MERN Stack",
+    linkedinUrl: "https://www.linkedin.com/in/zaahidkhaliq/",
   },
 ];
 
@@ -106,8 +118,8 @@ export default function Endorsements() {
   };
 
   return (
-    <section id="endorsements" className="container mt-35 overflow-hidden pb-25">
-      <div className="mx-auto max-w-3xl text-center">
+    <section id="endorsements" className="container mt-35 overflow-hidden pb-32">
+      <div className="mx-auto max-w-3xl text-center mb-28">
         <span className="inline-flex items-center justify-center gap-2 text-xs font-bold uppercase tracking-[0.25em] text-accent mb-3">
           <span className="h-[2px] w-4 rounded-full bg-accent" />
           Endorsements
@@ -117,7 +129,7 @@ export default function Endorsements() {
       </div>
 
       <div
-        className="relative mx-auto mt-18 flex min-h-[360px] max-w-[520px] items-center justify-center sm:min-h-[410px]"
+        className="relative mx-auto flex min-h-[360px] max-w-[520px] items-center justify-center sm:min-h-[420px]"
         onMouseEnter={() => { isPaused.current = true; }}
         onMouseLeave={() => { isPaused.current = false; }}
         onTouchStart={handleTouchStart}
@@ -222,7 +234,7 @@ export default function Endorsements() {
           );
         })}
 
-        <div className="absolute -bottom-20 left-1/2 z-10 flex -translate-x-1/2 items-center gap-4">
+        <div className="absolute -bottom-32 left-1/2 z-10 flex -translate-x-1/2 items-center gap-4">
           <button
             type="button"
             onClick={goToPrev}
