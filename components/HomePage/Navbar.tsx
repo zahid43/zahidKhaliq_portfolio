@@ -5,6 +5,7 @@ import { Logo } from "@/components/ReusableSvgs";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import MobileMenu from "@/components/HomePage/MobileMenu";
 import { navLinks } from "@/lib/constants";
+import { HamburgerIcon } from "@/components/ReusableSvgs";
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -45,10 +46,9 @@ export default function Navbar() {
               </li>
             </ul>
 
-            {/* Mobile: theme toggle + hamburger */}
-            <div className="flex items-center gap-2 md:hidden">
-              <ThemeToggle />
-
+            {/* Mobile: hamburger only — ThemeToggle lives in the sidebar */}
+            <div className="md:hidden">
+              <HamburgerIcon onClick={() => setMenuOpen(true)} />
             </div>
           </nav>
         </div>

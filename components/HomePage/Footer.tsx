@@ -1,29 +1,20 @@
 import Image from "next/image";
 import { Mail } from "lucide-react";
-import LinkedinIcon from "@/components/ReusableSvgs/LinkedinIcon";
-import GithubIcon from "@/components/ReusableSvgs/GithubIcon";
 import { NextjsIcon, TailwindIcon, FigmaIcon } from "@/components/ReusableSvgs";
+import { socialLinks } from "@/lib/socialLinks";
 
-const socials = [
-  {
-    label: "LinkedIn",
-    href: "/",
-    icon: <LinkedinIcon width={16} height={16} aria-hidden="true" />,
-    hover: "hover:bg-[#0A66C2] hover:border-[#0A66C2] hover:text-white",
-  },
-  {
-    label: "GitHub",
-    href: "/",
-    icon: <GithubIcon width={16} height={16} aria-hidden="true" />,
-    hover: "hover:bg-darkBlue hover:border-darkBlue hover:text-white dark:hover:bg-white dark:hover:text-darkBlue dark:hover:border-white",
-  },
-  {
-    label: "Email",
-    href: "mailto:zaahid.khaliq@gmail.com",
-    icon: <Mail size={16} aria-hidden="true" />,
-    hover: "hover:bg-rose-500 hover:border-rose-500 hover:text-white",
-  },
-];
+const hoverColors: Record<string, string> = {
+  LinkedIn: "hover:bg-[#0A66C2] hover:border-[#0A66C2] hover:text-white",
+  GitHub: "hover:bg-darkBlue hover:border-darkBlue hover:text-white dark:hover:bg-white dark:hover:text-darkBlue dark:hover:border-white",
+  "X / Twitter": "hover:bg-zinc-900 hover:border-zinc-900 hover:text-white dark:hover:bg-white dark:hover:text-zinc-900 dark:hover:border-white",
+};
+
+const emailLink = {
+  label: "Email",
+  href: "mailto:zaahid.khaliq@gmail.com",
+  Icon: Mail,
+  hover: "hover:bg-rose-500 hover:border-rose-500 hover:text-white",
+};
 
 export default function Footer() {
   return (
@@ -53,7 +44,7 @@ export default function Footer() {
         </div>
 
         <div className="flex items-center gap-3">
-          {socials.map(({ label, href, icon, hover }) => (
+          {[...socialLinks, emailLink].map(({ label, href, Icon }) => (
             <a
               key={label}
               href={href}
@@ -62,10 +53,10 @@ export default function Footer() {
               aria-label={label}
               className={[
                 "grid h-10 w-10 place-items-center rounded-full border border-black/10 bg-white text-darkBlue shadow-sm transition-all duration-200 dark:border-white/10 dark:bg-white/5 dark:text-white",
-                hover,
+                hoverColors[label] ?? emailLink.hover,
               ].join(" ")}
             >
-              {icon}
+              <Icon width={16} height={16} aria-hidden="true" />
             </a>
           ))}
         </div>

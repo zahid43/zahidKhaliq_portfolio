@@ -9,7 +9,7 @@ const expertiseItems = [
     title: "Webflow",
     description: "I also use Client First system for class naming structure, which allows me to build any project fast and conveniently.",
     starClass: "-bottom-4 right-20 animate-spin [animation-duration:10s] dark:[filter:brightness(1.6)]",
-    cardSpecial: "-rotate-2 animate-[floatY_2s_ease-in-out_infinite] bg-gradient-to-br from-teal-50 via-cyan-50 to-indigo-100 dark:from-[#041510] dark:via-[#071e1a] dark:to-[#0c1428] border-teal-200/80 dark:border-teal-500/20",
+    cardSpecial: "-rotate-2 animate-[floatY_2s_ease-in-out_infinite] bg-linear-to-br from-teal-50 via-cyan-50 to-indigo-100 dark:from-[#041510] dark:via-[#071e1a] dark:to-[#0c1428] border-teal-200/80 dark:border-teal-500/20",
     glowClass: "bg-teal-400/30 dark:bg-teal-500/25",
   },
   {
@@ -17,7 +17,7 @@ const expertiseItems = [
     title: "CSS / SCSS",
     description: "Clean, maintainable, and semantic CSS following modern best practices and naming conventions.",
     starClass: "-bottom-4 -left-4 animate-spin [animation-duration:8s] [animation-direction:reverse] [filter:hue-rotate(60deg)_saturate(1.2)] dark:[filter:hue-rotate(60deg)_saturate(1.2)_brightness(1.6)]",
-    cardSpecial: "rotate-2 animate-[floatY_3s_ease-in-out_infinite] bg-gradient-to-br from-indigo-50 via-blue-50 to-violet-100 dark:from-[#06061e] dark:via-[#0a0828] dark:to-[#100a30] border-indigo-200/80 dark:border-indigo-500/20",
+    cardSpecial: "rotate-2 animate-[floatY_3s_ease-in-out_infinite] bg-linear-to-br from-indigo-50 via-blue-50 to-violet-100 dark:from-[#06061e] dark:via-[#0a0828] dark:to-[#100a30] border-indigo-200/80 dark:border-indigo-500/20",
     glowClass: "bg-indigo-400/30 dark:bg-indigo-500/25",
   },
   {
@@ -25,7 +25,7 @@ const expertiseItems = [
     title: "Tailwind CSS & Bootstrap",
     description: "Rapidly crafting responsive, custom designs using utility classes without leaving the HTML.",
     starClass: "-top-4 -left-4 animate-spin [animation-duration:12s] [filter:hue-rotate(90deg)_saturate(1.1)] dark:[filter:hue-rotate(90deg)_saturate(1.1)_brightness(1.6)]",
-    cardSpecial: "-rotate-2 animate-[floatY_4s_ease-in-out_infinite] bg-gradient-to-br from-violet-50 via-purple-50 to-fuchsia-100 dark:from-[#0e0520] dark:via-[#140728] dark:to-[#1c0a32] border-violet-200/80 dark:border-violet-500/20",
+    cardSpecial: "-rotate-2 animate-[floatY_4s_ease-in-out_infinite] bg-linear-to-br from-violet-50 via-purple-50 to-fuchsia-100 dark:from-[#0e0520] dark:via-[#140728] dark:to-[#1c0a32] border-violet-200/80 dark:border-violet-500/20",
     glowClass: "bg-violet-400/30 dark:bg-violet-500/25",
   },
   {
@@ -33,7 +33,7 @@ const expertiseItems = [
     title: "React & Next.js",
     description: "Crafting performant, SEO-friendly apps with React and Next.js — from component design to full-stack deployment.",
     starClass: "-top-4 right-16 animate-spin [animation-duration:14s] [animation-direction:reverse] [filter:hue-rotate(160deg)_saturate(1.2)] dark:[filter:hue-rotate(160deg)_saturate(1.2)_brightness(1.6)]",
-    cardSpecial: "rotate-2 animate-[floatY_3.5s_ease-in-out_infinite] bg-gradient-to-br from-cyan-50 via-sky-50 to-blue-100 dark:from-[#040d18] dark:via-[#071528] dark:to-[#06122a] border-cyan-200/80 dark:border-cyan-500/20",
+    cardSpecial: "rotate-2 animate-[floatY_3.5s_ease-in-out_infinite] bg-linear-to-br from-cyan-50 via-sky-50 to-blue-100 dark:from-[#040d18] dark:via-[#071528] dark:to-[#06122a] border-cyan-200/80 dark:border-cyan-500/20",
     glowClass: "bg-cyan-400/25 dark:bg-cyan-500/20",
   },
 ];
@@ -115,7 +115,7 @@ export default function Expertise() {
               <div className="bg-circles w-full aspect-square relative max-w-[500px]">
 
                 {/* Nebula glow behind wheel */}
-                <div className="pointer-events-none absolute inset-[15%] rounded-full bg-gradient-to-br from-indigo-400/15 via-violet-400/12 to-teal-400/15 dark:from-indigo-600/20 dark:via-violet-600/18 dark:to-teal-600/20 blur-3xl" />
+                <div className="pointer-events-none absolute inset-[15%] rounded-full bg-linear-to-br from-indigo-400/15 via-violet-400/12 to-teal-400/15 dark:from-indigo-600/20 dark:via-violet-600/18 dark:to-teal-600/20 blur-3xl" />
 
                 {/* Center icon with glow ring */}
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
@@ -163,7 +163,7 @@ export default function Expertise() {
 
             {/* Divider */}
             <div className="hidden lg:block relative h-full">
-              <div className="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-accent/40 to-transparent" />
+              <div className="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-px bg-linear-to-b from-transparent via-accent/40 to-transparent" />
               <div className="absolute left-1/2 top-[-20px] -translate-x-1/2 translate-y-2 z-10">
                 <div className="relative w-5 h-5">
                   <div className="absolute inset-0 scale-[2] rounded-full bg-accent/30 animate-ping [animation-duration:2.5s]" />

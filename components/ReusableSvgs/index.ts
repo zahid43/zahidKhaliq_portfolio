@@ -8,3 +8,4 @@ export { default as NextjsIcon } from './NextjsIcon';
 export { default as FigmaIcon } from './FigmaIcon';
 export { default as WhatsAppIcon } from './WhatsAppIcon';
 export { default as XIcon } from './XIcon';
+export { default as HamburgerIcon } from './HamburgerIcon';

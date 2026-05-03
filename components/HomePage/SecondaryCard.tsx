@@ -1,14 +1,8 @@
-"use client";
-
-import { useRouter } from "next/navigation";
 import Image from "next/image";
-import CustomButton from "./CustomButton";
 
 interface SecondaryCardProps {
   heading: React.ReactNode;
   desc: string;
-  btnText?: string;
-  Blink?: string;
   bgUpdate?: string;
   backBox?: string;
   cardHeight?: string;
@@ -19,16 +13,12 @@ interface SecondaryCardProps {
 export default function SecondaryCard({
   heading,
   desc,
-  btnText = "",
-  Blink,
   bgUpdate = "bg-indigo-50 dark:bg-indigo-950",
   backBox = "bg-indigo-200 dark:bg-violet-700",
   cardHeight = "",
   cardPadding = "p-10",
   children,
 }: SecondaryCardProps) {
-  const router = useRouter();
-
   return (
     <div className={`relative rounded-lg -rotate-2 text-darkBlue dark:text-white ${backBox}`}>
       <div className={`${bgUpdate} ${cardHeight} ${cardPadding} relative flex items-center justify-center overflow-hidden rounded-lg rotate-2`}>
@@ -76,20 +66,11 @@ export default function SecondaryCard({
             </p>
             <h4 className="text-xl md:text-2xl font-bold leading-tight">{desc}</h4>
           </div>
-          <div className="flex flex-wrap gap-4 items-center justify-center md:justify-start shrink-0 mt-6 md:mt-0">
-            {children ? (
-              children
-            ) : (
-              btnText && Blink && (
-                <CustomButton
-                  onClick={() => router.push(Blink)}
-                  textClassName="bg-amber-100 text-zinc-950 group-hover:bg-amber-200 dark:bg-amber-200 dark:text-zinc-900"
-                >
-                  {btnText}
-                </CustomButton>
-              )
-            )}
-          </div>
+          {children && (
+            <div className="flex flex-wrap gap-4 items-center justify-center md:justify-start shrink-0 mt-6 md:mt-0">
+              {children}
+            </div>
+          )}
         </div>
       </div>
     </div>

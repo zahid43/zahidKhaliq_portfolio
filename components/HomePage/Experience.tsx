@@ -64,7 +64,7 @@ const ExperienceCard = ({ exp }: { exp: typeof experiences[0] }) => {
   const initial = exp.company.trim()[0].toUpperCase();
 
   return (
-    <div className={`relative bg-gradient-to-br ${exp.cardGradient} backdrop-blur-xl border ${exp.borderColor} rounded-2xl p-6 lg:p-8 shadow-xl transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl group overflow-hidden`}>
+    <div className={`relative bg-linear-to-br ${exp.cardGradient} backdrop-blur-xl border ${exp.borderColor} rounded-2xl p-6 lg:p-8 shadow-xl transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl group overflow-hidden`}>
 
       {/* Nebula glow orbs */}
       <div className={`pointer-events-none absolute -top-10 -right-10 h-36 w-36 rounded-full ${exp.glowTop} blur-3xl`} />
@@ -156,8 +156,8 @@ export default function Experience() {
         {/* Timeline Container */}
         <div className="relative max-w-5xl mx-auto">
           {/* Vertical Glowing Line */}
-          <div className="absolute left-[20px] lg:left-1/2 top-4 bottom-4 w-[2px] -translate-x-1/2 bg-gradient-to-b from-transparent via-accent/30 to-transparent hidden lg:block" />
-          <div className="absolute left-[20px] lg:hidden top-4 bottom-4 w-[2px] -translate-x-1/2 bg-gradient-to-b from-transparent via-accent/30 to-transparent" />
+          <div className="absolute left-[20px] lg:left-1/2 top-4 bottom-4 w-[2px] -translate-x-1/2 bg-linear-to-b from-transparent via-accent/30 to-transparent hidden lg:block" />
+          <div className="absolute left-[20px] lg:hidden top-4 bottom-4 w-[2px] -translate-x-1/2 bg-linear-to-b from-transparent via-accent/30 to-transparent" />
 
           {/* Timeline Items */}
           <div className="flex flex-col gap-12 lg:gap-16">
@@ -175,7 +175,7 @@ export default function Experience() {
                   </div>
 
                   {/* Horizontal connecting line */}
-                  <div className={`hidden lg:block absolute top-1/2 -translate-y-1/2 w-[calc(50%-2rem)] h-[2px] bg-gradient-to-r ${isEven ? 'right-1/2 from-transparent to-accent/20' : 'left-1/2 from-accent/20 to-transparent'} z-10`} />
+                  <div className={`hidden lg:block absolute top-1/2 -translate-y-1/2 w-[calc(50%-2rem)] h-[2px] bg-linear-to-r ${isEven ? 'right-1/2 from-transparent to-accent/20' : 'left-1/2 from-accent/20 to-transparent'} z-10`} />
 
                   <div className="hidden lg:block w-1/2" />
 

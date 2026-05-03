@@ -123,7 +123,7 @@ export default function Endorsements() {
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
       >
-        <div className="absolute inset-x-8 top-8 h-64 rounded-[2rem] bg-gradient-to-br from-indigo-200/50 via-violet-200/40 to-teal-200/50 blur-3xl dark:from-indigo-500/20 dark:via-violet-500/20 dark:to-teal-500/20" />
+        <div className="absolute inset-x-8 top-8 h-64 rounded-[2rem] bg-linear-to-br from-indigo-200/50 via-violet-200/40 to-teal-200/50 blur-3xl dark:from-indigo-500/20 dark:via-violet-500/20 dark:to-teal-500/20" />
 
         {/* Decorative shapes */}
         <div className="pointer-events-none" aria-hidden>
@@ -149,7 +149,7 @@ export default function Endorsements() {
               key={name}
               aria-hidden={!isActive}
               className={[
-                "absolute w-[min(88vw,360px)] rounded-[2rem] border border-indigo-200/60 bg-gradient-to-br from-indigo-50 to-violet-50 px-6 pb-7 pt-20 text-center shadow-2xl shadow-slate-900/15 transition-all duration-500 ease-out dark:border-violet-500/20 dark:from-[#0d0826] dark:to-[#120a30] dark:shadow-black/30",
+                "absolute w-[min(88vw,360px)] rounded-[2rem] border border-indigo-200/60 bg-linear-to-br from-indigo-50 to-violet-50 px-6 pb-7 pt-20 text-center shadow-2xl shadow-slate-900/15 transition-all duration-500 ease-out dark:border-violet-500/20 dark:from-[#0d0826] dark:to-[#120a30] dark:shadow-black/30",
                 isVisible ? "opacity-100" : "pointer-events-none opacity-0",
                 isActive ? "z-30" : "pointer-events-none",
               ].join(" ")}

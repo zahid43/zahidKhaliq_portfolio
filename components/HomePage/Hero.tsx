@@ -1,6 +1,7 @@
+"use client";
+
 import Image from "next/image";
 import AvatarGraphic from "@/components/ReusableSvgs/AvatarGraphic";
-import CustomButton from "./CustomButton";
 
 const stats = [
   { value: "4+", label: "Years exp." },
@@ -82,8 +83,16 @@ export default function Hero() {
 
                 {/* CTAs */}
                 <div className="flex gap-3 mt-7 justify-center lg:justify-start flex-wrap">
-                  <CustomButton>Contact me</CustomButton>
-                  <a href="#expertise" className="inline-flex items-center gap-2 rounded-full border border-darkBlue/15 dark:border-white/15 px-6 py-2.5 text-sm font-semibold text-darkBlue/70 dark:text-white/70 hover:border-accent/40 hover:text-accent transition-all duration-200">
+                  <a
+                    href="#contact"
+                    className="inline-flex items-center gap-2 rounded-full bg-accent px-6 py-2.5 text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:bg-accent/85 hover:shadow-[0_0_18px_rgba(99,102,241,0.45)]"
+                  >
+                    Contact me
+                  </a>
+                  <a
+                    href="#projects"
+                    className="inline-flex items-center gap-2 rounded-full border border-darkBlue/15 dark:border-white/15 px-6 py-2.5 text-sm font-semibold text-darkBlue/70 dark:text-white/70 hover:border-accent/40 hover:text-accent transition-all duration-200"
+                  >
                     View work ↓
                   </a>
                 </div>
@@ -107,8 +116,8 @@ export default function Hero() {
             <div className="grid place-items-center order-last lg:order-none">
               <div className="relative w-72 h-72 sm:w-96 sm:h-96 lg:w-130 lg:h-130 mt-10 lg:mt-0 mx-auto">
                 {/* Galaxy glow halo behind the circle */}
-                <div className="absolute inset-0 scale-125 rounded-full bg-gradient-to-br from-indigo-300/25 via-violet-300/20 to-teal-300/25 dark:from-indigo-600/30 dark:via-violet-700/25 dark:to-teal-600/20 blur-3xl" />
-                <div className="circle w-full h-full rounded-full bg-gradient-to-br from-violet-100 via-indigo-100 to-teal-50 dark:from-[#100828] dark:via-[#0d0620] dark:to-[#071a14] relative overflow-hidden">
+                <div className="absolute inset-0 scale-125 rounded-full bg-linear-to-br from-indigo-300/25 via-violet-300/20 to-teal-300/25 dark:from-indigo-600/30 dark:via-violet-700/25 dark:to-teal-600/20 blur-3xl" />
+                <div className="circle w-full h-full rounded-full bg-linear-to-br from-violet-100 via-indigo-100 to-teal-50 dark:from-[#100828] dark:via-[#0d0620] dark:to-[#071a14] relative overflow-hidden">
                   {/* Inner spinning stars */}
                   <Image src="/images/star.svg" alt="" width={32} height={32} className="pointer-events-none absolute top-[15%] right-[20%] opacity-40 dark:opacity-60 animate-spin [animation-duration:14s]" />
                   <Image src="/images/star.svg" alt="" width={20} height={20} className="pointer-events-none absolute bottom-[30%] left-[12%] opacity-30 dark:opacity-50 animate-spin [animation-duration:20s] [animation-direction:reverse]" />

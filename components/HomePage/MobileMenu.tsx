@@ -1,20 +1,14 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import { X } from "lucide-react";
 import { Logo } from "@/components/ReusableSvgs";
-import AvatarGraphic from "@/components/ReusableSvgs/AvatarGraphic";
-import GithubIcon from "@/components/ReusableSvgs/GithubIcon";
-import LinkedinIcon from "@/components/ReusableSvgs/LinkedinIcon";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { useTheme } from "next-themes";
 import Link from "next/link";
 import { navLinks } from "@/lib/constants";
-
-const socialLinks = [
-  { href: "https://linkedin.com", label: "LinkedIn profile", icon: LinkedinIcon },
-  { href: "https://github.com", label: "GitHub profile", icon: GithubIcon },
-];
+import { socialLinks } from "@/lib/socialLinks";
 
 interface MobileMenuProps {
   isOpen: boolean;
@@ -64,7 +58,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
         }}
       >
         {/* Gradient base */}
-        <div className="absolute inset-0 bg-gradient-to-br from-[#f5f4ff] via-indigo-50 to-[#f0fffe] dark:from-[#0d0b26] dark:via-indigo-950 dark:to-[#071a17]" />
+        <div className="absolute inset-0 bg-linear-to-br from-[#f5f4ff] via-indigo-50 to-[#f0fffe] dark:from-[#0d0b26] dark:via-indigo-950 dark:to-[#071a17]" />
 
         {/* Wave texture */}
         <img
@@ -153,21 +147,44 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
             </button>
           </div>
 
-          {/* Avatar graphic */}
+          {/* Profile card */}
           <div
-            className="pointer-events-none -mx-4 mt-2 select-none transition-all duration-700"
+            className="mt-6 mb-5 flex items-center gap-4 transition-all duration-500"
             style={{
-              transitionDelay: isOpen ? "150ms" : "0ms",
-              opacity: isOpen ? 0.7 : 0,
-              transform: isOpen ? "translateY(0) scale(1)" : "translateY(28px) scale(0.92)",
+              transitionDelay: isOpen ? "160ms" : "0ms",
+              opacity: isOpen ? 1 : 0,
+              transform: isOpen ? "translateY(0)" : "translateY(16px)",
             }}
           >
-            <AvatarGraphic className="mx-auto w-full max-w-[230px]" />
+            {/* Avatar */}
+            <div className="relative shrink-0">
+              <div className="absolute inset-0 rounded-full bg-accent/30 blur-md scale-110" />
+              <div className="relative h-16 w-16 rounded-full overflow-hidden ring-2 ring-accent/40">
+                <Image
+                  src="/images/zahidTransparent.png"
+                  alt="Zahid Khaliq"
+                  fill
+                  className="object-cover object-top"
+                />
+              </div>
+              {/* Online dot */}
+              <span className="absolute bottom-0.5 right-0.5 h-3 w-3 rounded-full bg-emerald-400 ring-2 ring-white dark:ring-[#0d0b26]" />
+            </div>
+
+            {/* Info */}
+            <div>
+              <p className="text-base font-bold text-indigo-900 dark:text-white leading-tight">Zahid Khaliq</p>
+              <p className="text-xs text-indigo-700/70 dark:text-white/55 mt-0.5">Frontend Engineer</p>
+              <span className="mt-1.5 inline-flex items-center gap-1.5 rounded-full bg-emerald-500/12 dark:bg-emerald-500/15 border border-emerald-500/25 px-2.5 py-0.5 text-[10px] font-semibold text-emerald-700 dark:text-emerald-400">
+                <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                Available for work
+              </span>
+            </div>
           </div>
 
           {/* Top divider */}
           <div
-            className="mb-5 h-px bg-gradient-to-r from-transparent via-indigo-300/40 dark:via-white/20 to-transparent transition-all duration-500 origin-center"
+            className="mb-5 h-px bg-linear-to-r from-transparent via-indigo-300/40 dark:via-white/20 to-transparent transition-all duration-500 origin-center"
             style={{
               transitionDelay: isOpen ? "220ms" : "0ms",
               opacity: isOpen ? 1 : 0,
@@ -207,10 +224,10 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
               transform: isOpen ? "translateY(0)" : "translateY(20px)",
             }}
           >
-            <div className="mb-5 h-px bg-gradient-to-r from-transparent via-indigo-300/40 dark:via-white/20 to-transparent" />
+            <div className="mb-5 h-px bg-linear-to-r from-transparent via-indigo-300/40 dark:via-white/20 to-transparent" />
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2.5">
-                {socialLinks.map(({ href, label, icon: Icon }) => (
+                {socialLinks.map(({ href, label, Icon }) => (
                   <Link
                     key={label}
                     href={href}

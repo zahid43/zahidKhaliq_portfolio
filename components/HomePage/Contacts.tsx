@@ -63,8 +63,8 @@ export default function Contacts() {
               </span>
             }
             desc="Let's build something great together."
-            bgUpdate="bg-gradient-to-br from-violet-300 via-indigo-300 to-teal-200 dark:from-[#07021a] dark:via-[#13065e] dark:to-[#0a1a50]"
-            backBox="bg-gradient-to-br from-violet-500 via-indigo-500 to-teal-400 dark:from-teal-500 dark:via-indigo-600 dark:to-violet-700"
+            bgUpdate="bg-linear-to-br from-violet-300 via-indigo-300 to-teal-200 dark:from-[#07021a] dark:via-[#13065e] dark:to-[#0a1a50]"
+            backBox="bg-linear-to-br from-violet-500 via-indigo-500 to-teal-400 dark:from-teal-500 dark:via-indigo-600 dark:to-violet-700"
             cardHeight="min-h-90"
             cardPadding="px-6 md:px-12 lg:px-20 xl:px-30"
           >
@@ -76,10 +76,10 @@ export default function Contacts() {
                 download="Zahid Khaliq - Frontend Engineer.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative flex items-center justify-between w-full rounded-2xl bg-gradient-to-r from-amber-300 to-amber-400 dark:from-amber-400 dark:to-yellow-400 px-5 py-3.5 text-zinc-900 shadow-[0_0_20px_rgba(251,191,36,0.35)] hover:shadow-[0_0_28px_rgba(251,191,36,0.6)] transition-all duration-300 hover:scale-[1.02] overflow-hidden"
+                className="group relative flex items-center justify-between w-full rounded-2xl bg-linear-to-r from-amber-300 to-amber-400 dark:from-amber-400 dark:to-yellow-400 px-5 py-3.5 text-zinc-900 shadow-[0_0_20px_rgba(251,191,36,0.35)] hover:shadow-[0_0_28px_rgba(251,191,36,0.6)] transition-all duration-300 hover:scale-[1.02] overflow-hidden"
               >
                 {/* shimmer */}
-                <div className="pointer-events-none absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/30 to-transparent skew-x-12" />
+                <div className="pointer-events-none absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-linear-to-r from-transparent via-white/30 to-transparent skew-x-12" />
                 <div className="flex items-center gap-3">
                   <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-zinc-900/12 shrink-0">
                     <FileText size={17} />
