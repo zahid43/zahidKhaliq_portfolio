@@ -4,3 +4,5 @@ export { default as ReactIcon } from './React';
 export { default as Logo } from './Logo';
 export { default as TailwindIcon } from './TailwindIcon';
 export { default as BootstrapIcon } from './BootstrapIcon';
+export { default as NextjsIcon } from './NextjsIcon';
+export { default as FigmaIcon } from './FigmaIcon';

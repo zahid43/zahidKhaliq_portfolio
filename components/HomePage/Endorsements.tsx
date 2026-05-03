@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import LinkedinIcon from "@/components/ReusableSvgs/LinkedinIcon";
 
@@ -107,10 +108,12 @@ export default function Endorsements() {
   return (
     <section className="container mt-35 overflow-hidden pb-25">
       <div className="mx-auto max-w-3xl text-center">
-        <p className="mb-3 text-sm font-semibold uppercase tracking-[0.35em] text-darkBlue/50 dark:text-white/45">
+        <span className="inline-flex items-center justify-center gap-2 text-xs font-bold uppercase tracking-[0.25em] text-accent mb-3">
+          <span className="h-[2px] w-4 rounded-full bg-accent" />
           Endorsements
-        </p>
-        <h4>What People Say</h4>
+          <span className="h-[2px] w-4 rounded-full bg-accent" />
+        </span>
+        <h4 className="font-bold">What People Say</h4>
       </div>
 
       <div
@@ -146,7 +149,7 @@ export default function Endorsements() {
               key={name}
               aria-hidden={!isActive}
               className={[
-                "absolute w-[min(88vw,360px)] rounded-[2rem] border border-black/10 bg-amber-100 px-6 pb-7 pt-20 text-center shadow-2xl shadow-slate-900/15 transition-all duration-500 ease-out dark:border-white/10 dark:bg-darkBlue dark:shadow-black/30",
+                "absolute w-[min(88vw,360px)] rounded-[2rem] border border-indigo-200/60 bg-gradient-to-br from-indigo-50 to-violet-50 px-6 pb-7 pt-20 text-center shadow-2xl shadow-slate-900/15 transition-all duration-500 ease-out dark:border-violet-500/20 dark:from-[#0d0826] dark:to-[#120a30] dark:shadow-black/30",
                 isVisible ? "opacity-100" : "pointer-events-none opacity-0",
                 isActive ? "z-30" : "pointer-events-none",
               ].join(" ")}
@@ -161,6 +164,29 @@ export default function Endorsements() {
               >
                 &ldquo;
               </span>
+
+              {/* Inner Galaxy Effects (isolated to not clip the top avatar bubble) */}
+              <div className="absolute inset-0 overflow-hidden rounded-[2rem] pointer-events-none">
+                <Image
+                  src="/images/star.svg"
+                  alt=""
+                  width={20}
+                  height={20}
+                  className="pointer-events-none absolute top-6 right-8 opacity-20 dark:opacity-45 animate-spin [animation-duration:14s]"
+                />
+                <Image
+                  src="/images/star.svg"
+                  alt=""
+                  width={12}
+                  height={12}
+                  className="pointer-events-none absolute bottom-10 left-6 opacity-15 dark:opacity-35 animate-spin [animation-duration:20s] [animation-direction:reverse]"
+                />
+                
+                {/* Galaxy dust dots */}
+                <div className="pointer-events-none absolute top-12 left-1/4 h-1 w-1 rounded-full bg-darkBlue/25 dark:bg-white/60" />
+                <div className="pointer-events-none absolute top-20 right-1/3 h-[3px] w-[3px] rounded-full bg-darkBlue/20 dark:bg-white/40" />
+                <div className="pointer-events-none absolute bottom-16 right-1/5 h-1 w-1 rounded-full bg-darkBlue/20 dark:bg-white/50" />
+              </div>
 
               <div
                 className={`absolute left-1/2 top-0 flex h-24 w-24 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-4 border-white text-3xl font-bold text-darkBlue shadow-lg dark:border-darkBlue ${getBgClass(name)}`}

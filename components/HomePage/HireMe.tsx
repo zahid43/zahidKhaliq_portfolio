@@ -2,8 +2,8 @@ import SecondaryCard from "./SecondaryCard";
 
 const hireMeData = [
   {
-    title: "Try me out, risk free!",
-    para: "If you're not happy with the design after the first draft, I'll refund your deposit, no questions asked",
+    title: "Hire Me",
+    para: "Let's Work Together",
     button: "Contact me",
     link: "/",
   },
@@ -18,10 +18,10 @@ export default function HireMe() {
           desc={hireMeData[0].para}
           btnText={hireMeData[0].button}
           Blink={hireMeData[0].link}
-          bgUpdate="bg-gradient-to-br from-violet-600 via-purple-700 to-indigo-900"
-          backBox="bg-teal-400"
+          bgUpdate="bg-gradient-to-br from-[#07021a] via-[#13065e] to-[#0a1a50]"
+          backBox="bg-gradient-to-br from-teal-500 via-indigo-600 to-violet-700"
           cardHeight="min-h-90"
-          cardPadding="px-30"
+          cardPadding="px-6 md:px-12 lg:px-30"
         />
       </section>
     </>
