@@ -103,37 +103,6 @@ body {
   background: linear-gradient(90deg, transparent, rgba(148, 163, 184, 0.55), transparent);
 }
 
-.dashed-border {
-  height: 1px;
-  background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='black' stroke-width='4' stroke-dasharray='6%2c 14' stroke-dashoffset='60' stroke-linecap='square'/%3e%3c/svg%3e");
-}
-
-.dark .dashed-border {
-  background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='white' stroke-width='4' stroke-dasharray='6%2c 14' stroke-dashoffset='60' stroke-linecap='square'/%3e%3c/svg%3e");
-}
-
-.dashed-border-right {
-  background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='black' stroke-width='4' stroke-dasharray='6%2c 14' stroke-dashoffset='60' stroke-linecap='square'/%3e%3c/svg%3e");
-  background-repeat: no-repeat;
-  background-size: 1px 100%;
-  background-position: right;
-}
-
-
-.dashed-border-bottom {
-  background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='black' stroke-width='4' stroke-dasharray='6%2c 14' stroke-dashoffset='60' stroke-linecap='square'/%3e%3c/svg%3e");
-  background-repeat: no-repeat;
-  background-size: 100% 1px;
-  background-position: bottom;
-}
-
-.dark .dashed-border-right {
-  background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='white' stroke-width='4' stroke-dasharray='6%2c 14' stroke-dashoffset='60' stroke-linecap='square'/%3e%3c/svg%3e");
-}
-
-.dark .dashed-border-bottom {
-  background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='white' stroke-width='4' stroke-dasharray='6%2c 14' stroke-dashoffset='60' stroke-linecap='square'/%3e%3c/svg%3e");
-}
 
 /* Light mode — soft cosmic nebula */
 .hero-gradient {
