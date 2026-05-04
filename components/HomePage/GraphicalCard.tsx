@@ -22,13 +22,13 @@ export default function GraphicalCard({
   const padded = number.padStart(2, "0");
 
   return (
-    <div className={`relative ${className}`}>
+    <div className={`relative h-full ${className}`}>
       {starClass && (
         <Image src="/images/star.svg" alt="" width={36} height={36}
           className={`absolute ${starClass}`} />
       )}
 
-      <div className={`relative z-10 border rounded-xl text-darkBlue dark:text-foreground py-4 px-5 overflow-hidden ${cardClassName}`}>
+      <div className={`relative z-10 border rounded-xl text-darkBlue dark:text-foreground py-3 px-3 lg:py-4 lg:px-5 overflow-hidden h-full ${cardClassName}`}>
 
         {/* Large number watermark */}
         <div className="pointer-events-none absolute -right-3 -top-3 select-none text-[5rem] font-black leading-none text-darkBlue/[0.055] dark:text-white/[0.055]">
@@ -38,14 +38,6 @@ export default function GraphicalCard({
         {/* Nebula glow orbs */}
         <div className={`pointer-events-none absolute -top-10 -right-10 h-44 w-44 rounded-full blur-3xl ${glowClass}`} />
         <div className={`pointer-events-none absolute -bottom-10 -left-8 h-36 w-36 rounded-full blur-2xl opacity-60 ${glowClass}`} />
-
-        {/* Inner spinning stars */}
-        <Image src="/images/star.svg" alt="" width={18} height={18}
-          className="pointer-events-none absolute top-3 right-28 opacity-35 dark:opacity-70 animate-spin [animation-duration:14s]" />
-        <Image src="/images/star.svg" alt="" width={12} height={12}
-          className="pointer-events-none absolute bottom-5 right-5 opacity-25 dark:opacity-55 animate-spin [animation-duration:20s] [animation-direction:reverse]" />
-        <Image src="/images/star.svg" alt="" width={8} height={8}
-          className="pointer-events-none absolute top-1/2 right-16 opacity-20 dark:opacity-40 animate-spin [animation-duration:9s]" />
 
         {/* Galaxy dust dots */}
         <div className="pointer-events-none absolute top-5 left-1/3 h-1 w-1 rounded-full bg-darkBlue/25 dark:bg-white/60" />
@@ -63,7 +55,7 @@ export default function GraphicalCard({
             <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-muted">{padded}</span>
           </div>
           <h6 className="font-bold mb-1.5 leading-tight">{title}</h6>
-          <p className="text-xs leading-relaxed opacity-80">{description}</p>
+          <p className="text-xs leading-relaxed opacity-80 line-clamp-3 lg:line-clamp-none">{description}</p>
         </div>
 
         <Image src="/images/bottomCard.svg" alt="" width={160} height={65}

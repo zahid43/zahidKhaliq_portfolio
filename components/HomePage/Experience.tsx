@@ -83,7 +83,7 @@ const ExperienceCard = ({ exp }: { exp: typeof experiences[0] }) => {
 
       <div className="relative z-10">
         {/* Top row: date badge + logo */}
-        <div className="flex items-center justify-between gap-3 mb-4">
+        <div className="flex items-center justify-between gap-3 mb-4 flex-wrap">
           <div className={`inline-block px-3 py-1 rounded-full text-xs font-semibold tracking-wider border ${exp.badgeColor}`}>
             {exp.date}
           </div>

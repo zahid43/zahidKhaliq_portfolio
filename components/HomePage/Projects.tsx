@@ -6,6 +6,17 @@ import Image from "next/image";
 const projects = [
   {
     id: 1,
+    title: "Portfolio Website",
+    category: "TailwindCSS / Next.js",
+    year: "2026",
+    description:
+      "My personal portfolio website built with TailwindCSS and Next.js.",
+    tech: ["TailwindCSS", "Next.js"],
+    liveUrl: "https://zahid-khaliq-portfolio.vercel.app/",
+    image: "/images/portfolio/p7.png",
+  },
+  {
+    id: 2,
     title: "FAX Real Estate",
     category: "Bootstrap / SCSS / Drupal",
     year: "2024",
@@ -16,7 +27,7 @@ const projects = [
     image: "/images/portfolio/p1.png",
   },
   {
-    id: 2,
+    id: 3,
     title: "CreativeFaze",
     category: "Bootstrap / SCSS / Drupal",
     year: "2022",
@@ -27,7 +38,7 @@ const projects = [
     image: "/images/portfolio/p3.png",
   },
   {
-    id: 3,
+    id: 4,
     title: "Center of Hope Haiti",
     category: "Bootstrap / SCSS / Drupal",
     year: "2021",
@@ -38,7 +49,7 @@ const projects = [
     image: "/images/portfolio/p2.png",
   },
   {
-    id: 4,
+    id: 5,
     title: "CT Health News",
     category: "Rails / TailwindCSS",
     year: "2022",
@@ -48,16 +59,27 @@ const projects = [
     liveUrl: "https://cthealthnews.com/",
     image: "/images/portfolio/p6.png",
   },
-    {
+  {
     id: 6,
     title: "CPEC",
-    category: "Webflow",
+    category: "Laravel / SCSS / JQuery",
     year: "2021",
     description:
-      "Professional government initiative platform with clean, corporate design and comprehensive CMS-driven content management for stakeholders.",
+      "A professional government initiative platform with clean, corporate design and comprehensive CMS-driven content management for stakeholders.",
     tech: ["Laravel", "SCSS", "JQuery"],
     liveUrl: "#",
-    image: "/images/portfolio/p3.png",
+    image: "/images/portfolio/p4.png",
+  },
+  {
+    id: 7,
+    title: "Slyng",
+    category: "Haml / SCSS",
+    year: "2021",
+    description:
+      "A social media platform for the future of education — featuring integrated donation capabilities and compelling mission storytelling.",
+    tech: ["Laravel", "SCSS", "JQuery"],
+    liveUrl: "https://slyng.com/",
+    image: "/images/portfolio/p5.png",
   },
 ];
 

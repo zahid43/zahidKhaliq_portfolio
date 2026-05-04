@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useRef } from "react";
+import { ExternalLinkIcon, CourseraLogo } from "@/components/ReusableSvgs";
 
 const certifications = [
   {
@@ -35,7 +36,7 @@ export default function Certifications() {
   const trackRef = useRef<HTMLDivElement>(null);
 
   return (
-    <section className="relative overflow-hidden py-16 lg:py-20" id="certifications">
+    <section className="relative overflow-hidden py-16 lg:py-24" id="certifications">
       <div className="pointer-events-none absolute left-0 top-1/2 h-72 w-72 rounded-full bg-blue-400/8 dark:bg-blue-600/10 blur-3xl" />
       <div className="pointer-events-none absolute right-0 top-1/2 h-64 w-64 rounded-full bg-indigo-400/8 dark:bg-indigo-600/10 blur-3xl" />
       <Image src="/images/star.svg" alt="" width={14} height={14}
@@ -87,14 +88,13 @@ export default function Certifications() {
                   <p className="text-sm font-semibold text-darkBlue dark:text-white whitespace-nowrap group-hover:text-[#0056D2] dark:group-hover:text-[#4a90d9] transition-colors duration-200">
                     {cert.title}
                   </p>
-                  <p className="text-[11px] text-darkBlue/45 dark:text-white/40 mt-0.5">
-                    Coursera · {cert.date}
-                  </p>
+                  <div className="flex items-center gap-1 mt-0.5">
+                    <CourseraLogo className="h-2.5 w-auto text-darkBlue/45 dark:text-white/40" />
+                    <span className="text-[11px] text-darkBlue/45 dark:text-white/40">· {cert.date}</span>
+                  </div>
                 </div>
 
-                <svg className="ml-1 shrink-0 w-3 h-3 text-darkBlue/25 dark:text-white/25 group-hover:text-[#0056D2] dark:group-hover:text-[#4a90d9] transition-colors duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                </svg>
+                <ExternalLinkIcon className="ml-1 shrink-0 w-3 h-3 text-darkBlue/25 dark:text-white/25 group-hover:text-[#0056D2] dark:group-hover:text-[#4a90d9] transition-colors duration-200" />
               </a>
             ))}
           </div>

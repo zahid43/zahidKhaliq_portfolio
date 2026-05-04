@@ -41,7 +41,7 @@ const contactLinks = [
 export default function Contacts() {
   return (
     <>
-      <section id="contact" className="container my-20 lg:my-30 relative overflow-hidden">
+      <section id="contact" className="container py-16 lg:py-24 relative overflow-hidden">
         {/* Galaxy dust dots */}
         <div className="pointer-events-none absolute top-4 left-1/3 h-1 w-1 rounded-full bg-darkBlue/25 dark:bg-white/50" />
         <div className="pointer-events-none absolute bottom-6 right-1/4 h-[3px] w-[3px] rounded-full bg-darkBlue/20 dark:bg-white/40" />
