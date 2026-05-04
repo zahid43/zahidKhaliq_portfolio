@@ -11,9 +11,8 @@ const experiences = [
     logo: "/images/logo/devfiedDarkLogo.webp",
     logoClass: "",
     description: [
-      "As a Frontend Developer, I specialize in building robust and scalable web applications using React and Next.js.",
       "Develop and maintain responsive, high-performance interfaces with focus on usability and performance.",
-      "Collaborate closely with designers and backend engineers to implement seamless user experiences.",
+      "Collaborate closely with backend engineers to implement seamless user experiences.",
       "Utilize modern frameworks to deliver production-grade solutions, keeping code clean, reusable, and efficient."
     ],
     cardGradient: "from-teal-50 via-cyan-50 to-emerald-100 dark:from-[#041510] dark:via-[#071e1a] dark:to-[#0c1428]",
