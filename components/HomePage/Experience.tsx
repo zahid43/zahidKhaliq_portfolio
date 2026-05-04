@@ -10,7 +10,12 @@ const experiences = [
     role: "Frontend Developer",
     logo: "/images/logo/devfiedDarkLogo.webp",
     logoClass: "",
-    description: [],
+    description: [
+      "As a Frontend Developer, I specialize in building robust and scalable web applications using React and Next.js.",
+      "Develop and maintain responsive, high-performance interfaces with focus on usability and performance.",
+      "Collaborate closely with designers and backend engineers to implement seamless user experiences.",
+      "Utilize modern frameworks to deliver production-grade solutions, keeping code clean, reusable, and efficient."
+    ],
     cardGradient: "from-teal-50 via-cyan-50 to-emerald-100 dark:from-[#041510] dark:via-[#071e1a] dark:to-[#0c1428]",
     borderColor: "border-teal-200/80 dark:border-teal-500/20 hover:border-teal-400/50 dark:hover:border-teal-400/40",
     glowTop: "bg-teal-400/15 dark:bg-teal-500/20",
@@ -22,14 +27,14 @@ const experiences = [
     id: 2,
     company: "Square 63",
     location: "Lahore, Pakistan",
-    date: "2021 - Present",
+    date: "2021 - 2025",
     role: "Software Engineer (Design)",
     logo: "/images/logo/square63-logo.svg",
     logoClass: "",
     description: [
-      "Over 4 years of experience delivering high-quality projects, consistently meeting deadlines and exceeding client expectations.",
+      "Delivering high-quality projects, consistently meeting deadlines and exceeding client expectations.",
       "Collaborate effectively with PHP, React, and Ruby on Rails (ROR) teams to ensure seamless integration of design and functionality.",
-      "Specialized in crafting responsive and adaptive designs, ensuring optimal user experience across a wide range of devices and screen sizes.",
+      "Focused on collaborating within agile teams to deliver user-centric interfaces and ensure design consistency across projects.",
       "Committed to developing scalable and reusable code, driving long-term efficiency and maintainability in all design and development efforts."
     ],
     cardGradient: "from-indigo-50 via-violet-50 to-purple-100 dark:from-[#06061e] dark:via-[#0a0828] dark:to-[#100a30]",
@@ -44,12 +49,13 @@ const experiences = [
     company: "Freelancer",
     location: "Lahore, Pakistan",
     date: "2020 - 2021",
-    role: "UI Developer",
+    role: "UI Designer",
     logo: null,
     logoClass: "",
     description: [
-      "Delivered custom web designs with a focus on scalability and reusability, utilizing Bootstrap, CSS, and SCSS for responsive layouts.",
-      "Developed clean, maintainable code to ensure seamless functionality across different platforms and devices."
+      "Worked indirectly with clients to transform ideas into visually appealing, intuitive interfaces tailored to their needs.",
+      "Collaborated with developers and stakeholders to deliver seamless, pixel-perfect user experiences on tight deadlines.",
+      "Delivered custom web designs with a focus on scalability and reusability, utilizing Bootstrap, CSS, and SCSS for responsive layouts."
     ],
     cardGradient: "from-amber-50 via-orange-50 to-yellow-100 dark:from-[#1a1005] dark:via-[#1e1205] dark:to-[#241508]",
     borderColor: "border-amber-200/80 dark:border-amber-500/20 hover:border-amber-400/50 dark:hover:border-amber-400/40",
