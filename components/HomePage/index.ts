@@ -1,0 +1,10 @@
+export { default as Expertise } from "./Expertise";
+export { default as Hero } from "./Hero";
+export { default as Endorsements } from "./Endorsements";
+export { default as Contacts } from "./Contacts";
+export { default as Footer } from "./Footer";
+export { default as Experience } from "./Experience";
+export { default as Certifications } from "./Certifications";
+export { default as Projects } from "./Projects";
+export { default as DarkModeToast } from "./DarkModeToast";
+export { default as TechStack } from "./TechStack";

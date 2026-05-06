@@ -4,6 +4,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import LinkedinIcon from "@/components/ReusableSvgs/LinkedinIcon";
+import { motion, AnimatePresence } from "framer-motion";
 
 const comments = [
   {
@@ -157,18 +158,21 @@ export default function Endorsements() {
           const scale = 1 - stackPosition * 0.055;
 
           return (
-            <article
+            <motion.article
               key={name}
               aria-hidden={!isActive}
-              className={[
-                "absolute w-[min(88vw,360px)] rounded-[2rem] border border-indigo-200/60 bg-linear-to-br from-indigo-50 to-violet-50 px-6 pb-7 pt-20 text-center shadow-2xl shadow-slate-900/15 transition-all duration-500 ease-out dark:border-violet-500/20 dark:from-[#0d0826] dark:to-[#120a30] dark:shadow-black/30",
-                isVisible ? "opacity-100" : "pointer-events-none opacity-0",
-                isActive ? "z-30" : "pointer-events-none",
-              ].join(" ")}
-              style={{
-                transform: `translate(${translateX}px, ${translateY}px) rotate(${rotate}deg) scale(${scale})`,
+              layout
+              initial={false}
+              animate={{
+                x: translateX,
+                y: translateY,
+                rotate: rotate,
+                scale: scale,
+                opacity: isVisible ? 1 : 0,
                 zIndex: 40 - stackPosition,
               }}
+              transition={{ type: "spring", stiffness: 260, damping: 20 }}
+              className={`absolute w-[min(88vw,360px)] rounded-[2rem] border border-indigo-200/60 bg-linear-to-br from-indigo-50 to-violet-50 px-6 pb-7 pt-20 text-center shadow-2xl shadow-slate-900/15 dark:border-violet-500/20 dark:from-[#0d0826] dark:to-[#120a30] dark:shadow-black/30 ${isActive ? "z-30 cursor-grab active:cursor-grabbing" : "pointer-events-none"}`}
             >
               <span
                 aria-hidden
@@ -230,7 +234,7 @@ export default function Endorsements() {
                 <LinkedinIcon width={13} height={13} aria-hidden="true" />
                 View on LinkedIn
               </a>
-            </article>
+            </motion.article>
           );
         })}
 
