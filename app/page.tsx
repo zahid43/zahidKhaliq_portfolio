@@ -3,6 +3,7 @@ import {
   Hero,
   Endorsements,
   Contacts,
+  ContactForm,
   Footer,
   Experience,
   Certifications,
@@ -34,6 +35,9 @@ export default function Home() {
       <Projects />
       <Divider />
       <Endorsements />
+      <Divider />
+      <ContactForm />
+      <Divider />
       <Contacts />
       <Footer />
       <DarkModeToast />
