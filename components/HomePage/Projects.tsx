@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
+import { motion, AnimatePresence } from "framer-motion";
 
 const projects = [
   {
@@ -111,7 +112,13 @@ export default function Projects() {
 
       <div className="container relative z-10">
         {/* Header */}
-        <div className="mx-auto max-w-2xl text-center mb-12 lg:mb-16">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="mx-auto max-w-2xl text-center mb-12 lg:mb-16"
+        >
           <span className="inline-flex items-center justify-center gap-2 text-xs font-bold uppercase tracking-[0.25em] text-accent mb-3">
             <span className="h-[2px] w-4 rounded-full bg-accent" />
             Portfolio
@@ -121,13 +128,17 @@ export default function Projects() {
           <p className="text-sm text-muted mt-3 max-w-sm mx-auto">
             A curated set of projects spanning Webflow builds, React apps, and full design systems.
           </p>
-        </div>
+        </motion.div>
 
         {/* Two-panel layout */}
         <div className="grid grid-cols-1 lg:grid-cols-[260px_1fr] gap-6 lg:gap-10 items-start">
 
           {/* Left: project selector */}
-          <nav
+          <motion.nav
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.2 }}
             aria-label="Projects"
             className="flex lg:flex-col gap-2 overflow-x-auto pb-2 lg:pb-0 lg:sticky lg:top-24 [scrollbar-width:none] [-webkit-overflow-scrolling:touch]"
           >
@@ -142,7 +153,10 @@ export default function Projects() {
                   }`}
               >
                 {active === i && (
-                  <span className="hidden lg:block absolute left-0 top-1/2 -translate-y-1/2 h-8 w-[3px] rounded-r-full bg-accent" />
+                  <motion.span 
+                    layoutId="active-pill"
+                    className="hidden lg:block absolute left-0 top-1/2 -translate-y-1/2 h-8 w-[3px] rounded-r-full bg-accent" 
+                  />
                 )}
                 <div className="flex items-center gap-3 lg:gap-2.5">
                   <span className={`text-xs font-mono font-bold tabular-nums shrink-0 ${active === i ? "text-accent" : "text-muted"}`}>
@@ -163,10 +177,15 @@ export default function Projects() {
                 </div>
               </button>
             ))}
-          </nav>
+          </motion.nav>
 
           {/* Right: browser preview */}
-          <div>
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+          >
             <div className="rounded-2xl overflow-hidden border border-foreground/10 dark:border-white/8 shadow-2xl shadow-black/10 dark:shadow-black/40">
               {/* Browser chrome */}
               <div className="flex items-center gap-3 px-4 py-3 bg-surface border-b border-foreground/8 dark:border-white/6">
@@ -180,11 +199,19 @@ export default function Projects() {
                     <svg className="w-2.5 h-2.5 text-muted shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
                       <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
                     </svg>
-                    <span className="text-[10px] text-muted truncate">
-                      {project.liveUrl === "#"
-                        ? `www.${project.title.toLowerCase().replace(/\s+/g, "")}.com`
-                        : project.liveUrl}
-                    </span>
+                    <AnimatePresence mode="wait">
+                      <motion.span 
+                        key={project.id}
+                        initial={{ opacity: 0, y: 5 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -5 }}
+                        className="text-[10px] text-muted truncate"
+                      >
+                        {project.liveUrl === "#"
+                          ? `www.${project.title.toLowerCase().replace(/\s+/g, "")}.com`
+                          : project.liveUrl}
+                      </motion.span>
+                    </AnimatePresence>
                   </div>
                 </div>
                 <span className="text-[11px] font-mono text-muted shrink-0">
@@ -194,52 +221,72 @@ export default function Projects() {
 
               {/* Viewport */}
               <div className="relative w-full aspect-video bg-surface overflow-hidden">
-                <Image
-                  key={project.image}
-                  src={project.image}
-                  alt={project.title}
-                  fill
-                  className="object-cover object-top"
-                  sizes="(max-width: 1024px) 100vw, calc(100vw - 340px)"
-                  priority={active === 0}
-                />
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={project.id}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.4 }}
+                    className="absolute inset-0"
+                  >
+                    <Image
+                      src={project.image}
+                      alt={project.title}
+                      fill
+                      className="object-cover object-top"
+                      sizes="(max-width: 1024px) 100vw, calc(100vw - 340px)"
+                      priority
+                    />
+                  </motion.div>
+                </AnimatePresence>
                 {/* Bottom gradient for readability */}
                 <div className="absolute inset-0 bg-linear-to-t from-black/85 via-black/20 to-transparent" />
 
                 {/* Info overlay */}
                 <div className="absolute bottom-0 left-0 right-0 p-5 lg:p-7">
-                  <div className="flex items-end justify-between gap-4">
-                    <div className="min-w-0">
-                      <div className="flex items-center gap-2 mb-1.5">
-                        <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/55">{project.category}</span>
-                        <span className="h-[3px] w-[3px] rounded-full bg-white/30" />
-                        <span className="text-[10px] text-white/40">{project.year}</span>
-                      </div>
-                      <h5 className="font-bold text-white mb-2 leading-tight">{project.title}</h5>
-                      <p className="text-xs leading-relaxed text-white/65 max-w-lg hidden lg:block line-clamp-2">
-                        {project.description}
-                      </p>
-                    </div>
-                    <a
-                      href={project.liveUrl}
-                      target={project.liveUrl !== "#" ? "_blank" : undefined}
-                      rel="noopener noreferrer"
-                      className="shrink-0 flex items-center gap-1.5 text-[11px] font-bold text-white bg-white/12 hover:bg-white/22 border border-white/20 px-4 py-2 rounded-full transition-all duration-200 backdrop-blur-sm group/btn"
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={project.id}
+                      initial={{ opacity: 0, y: 15 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      transition={{ duration: 0.3 }}
                     >
-                      Live Site
-                      <svg className="w-3 h-3 transition-transform group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                      </svg>
-                    </a>
-                  </div>
+                      <div className="flex items-end justify-between gap-4">
+                        <div className="min-w-0">
+                          <div className="flex items-center gap-2 mb-1.5">
+                            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/55">{project.category}</span>
+                            <span className="h-[3px] w-[3px] rounded-full bg-white/30" />
+                            <span className="text-[10px] text-white/40">{project.year}</span>
+                          </div>
+                          <h5 className="font-bold text-white mb-2 leading-tight">{project.title}</h5>
+                          <p className="text-xs leading-relaxed text-white/65 max-w-lg hidden lg:block line-clamp-2">
+                            {project.description}
+                          </p>
+                        </div>
+                        <a
+                          href={project.liveUrl}
+                          target={project.liveUrl !== "#" ? "_blank" : undefined}
+                          rel="noopener noreferrer"
+                          className="shrink-0 flex items-center gap-1.5 text-[11px] font-bold text-white bg-white/12 hover:bg-white/22 border border-white/20 px-4 py-2 rounded-full transition-all duration-200 backdrop-blur-sm group/btn"
+                        >
+                          Live Site
+                          <svg className="w-3 h-3 transition-transform group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                          </svg>
+                        </a>
+                      </div>
 
-                  <div className="flex flex-wrap gap-1.5 mt-4">
-                    {project.tech.map(t => (
-                      <span key={t} className="text-[10px] font-semibold px-2.5 py-0.5 rounded-full bg-white/10 border border-white/15 text-white/75 backdrop-blur-sm">
-                        {t}
-                      </span>
-                    ))}
-                  </div>
+                      <div className="flex flex-wrap gap-1.5 mt-4">
+                        {project.tech.map(t => (
+                          <span key={t} className="text-[10px] font-semibold px-2.5 py-0.5 rounded-full bg-white/10 border border-white/15 text-white/75 backdrop-blur-sm">
+                            {t}
+                          </span>
+                        ))}
+                      </div>
+                    </motion.div>
+                  </AnimatePresence>
                 </div>
               </div>
             </div>
@@ -280,7 +327,7 @@ export default function Projects() {
                 </svg>
               </button>
             </div>
-          </div>
+          </motion.div>
 
         </div>
       </div>

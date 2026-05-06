@@ -1,15 +1,17 @@
-import Expertise from "@/components/HomePage/Expertise";
-import Hero from "@/components/HomePage/Hero";
-import Endorsements from "@/components/HomePage/Endorsements";
-import Contacts from "@/components/HomePage/Contacts";
-import Footer from "@/components/HomePage/Footer";
-import Experience from "@/components/HomePage/Experience";
-import Certifications from "@/components/HomePage/Certifications";
-import Projects from "@/components/HomePage/Projects";
-import Services from "@/components/HomePage/Services";
-import TechStack from "@/components/HomePage/TechStack";
-import CTABanner from "@/components/HomePage/CTABanner";
-import DarkModeToast from "@/components/HomePage/DarkModeToast";
+import {
+  Expertise,
+  Hero,
+  Endorsements,
+  Contacts,
+  Footer,
+  Experience,
+  Certifications,
+  Projects,
+  DarkModeToast,
+  TechStack,
+  Services,
+  CTABanner,
+} from "@/components/HomePage";
 
 const Divider = () => (
   <div className="container">

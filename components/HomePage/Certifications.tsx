@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import { useRef } from "react";
 import { ExternalLinkIcon, CourseraLogo } from "@/components/ReusableSvgs";
 
 const certifications = [
@@ -33,8 +32,6 @@ const certifications = [
 ];
 
 export default function Certifications() {
-  const trackRef = useRef<HTMLDivElement>(null);
-
   return (
     <section className="relative overflow-hidden py-16 lg:py-24" id="certifications">
       <div className="pointer-events-none absolute left-0 top-1/2 h-72 w-72 rounded-full bg-blue-400/8 dark:bg-blue-600/10 blur-3xl" />
@@ -55,19 +52,11 @@ export default function Certifications() {
       </div>
 
       {/* Fade edges */}
-      <div className="relative">
-        <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-24 z-10 bg-linear-to-r from-background to-transparent" />
-        <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-24 z-10 bg-linear-to-l from-background to-transparent" />
-
+      <div className="relative [mask-image:linear-gradient(to_right,transparent,black_15%,black_85%,transparent)]">
         {/* Marquee track */}
-        <div
-          className="overflow-hidden"
-          onMouseEnter={() => { if (trackRef.current) trackRef.current.style.animationPlayState = "paused"; }}
-          onMouseLeave={() => { if (trackRef.current) trackRef.current.style.animationPlayState = "running"; }}
-        >
+        <div className="overflow-hidden group">
           <div
-            ref={trackRef}
-            className="flex gap-4 w-max"
+            className="flex gap-4 w-max group-hover:[animation-play-state:paused]"
             style={{ animation: "marquee 28s linear infinite" }}
           >
             {/* Render twice for seamless loop */}

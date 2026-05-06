@@ -1,5 +1,8 @@
+'use client';
+
 import React from 'react';
 import Image from 'next/image';
+import { motion } from 'framer-motion';
 
 const experiences = [
   {
@@ -15,6 +18,7 @@ const experiences = [
       "Collaborate closely with backend engineers to implement seamless user experiences.",
       "Utilize modern frameworks to deliver production-grade solutions, keeping code clean, reusable, and efficient."
     ],
+    tech: ["Next.js", "React", "TypeScript", "Tailwind"],
     cardGradient: "from-teal-50 via-cyan-50 to-emerald-100 dark:from-[#041510] dark:via-[#071e1a] dark:to-[#0c1428]",
     borderColor: "border-teal-200/80 dark:border-teal-500/20 hover:border-teal-400/50 dark:hover:border-teal-400/40",
     glowTop: "bg-teal-400/15 dark:bg-teal-500/20",
@@ -36,6 +40,7 @@ const experiences = [
       "Focused on collaborating within agile teams to deliver user-centric interfaces and ensure design consistency across projects.",
       "Committed to developing scalable and reusable code, driving long-term efficiency and maintainability in all design and development efforts."
     ],
+    tech: ["React", "ROR", "PHP", "Agile"],
     cardGradient: "from-indigo-50 via-violet-50 to-purple-100 dark:from-[#06061e] dark:via-[#0a0828] dark:to-[#100a30]",
     borderColor: "border-indigo-200/80 dark:border-indigo-500/20 hover:border-indigo-400/50 dark:hover:border-indigo-400/40",
     glowTop: "bg-indigo-400/15 dark:bg-indigo-500/20",
@@ -56,6 +61,7 @@ const experiences = [
       "Collaborated with developers and stakeholders to deliver seamless, pixel-perfect user experiences on tight deadlines.",
       "Delivered custom web designs with a focus on scalability and reusability, utilizing Bootstrap, CSS, and SCSS for responsive layouts."
     ],
+    tech: ["Figma", "Bootstrap", "SCSS", "UI Design"],
     cardGradient: "from-amber-50 via-orange-50 to-yellow-100 dark:from-[#1a1005] dark:via-[#1e1205] dark:to-[#241508]",
     borderColor: "border-amber-200/80 dark:border-amber-500/20 hover:border-amber-400/50 dark:hover:border-amber-400/40",
     glowTop: "bg-amber-400/15 dark:bg-amber-500/20",
@@ -69,7 +75,7 @@ const ExperienceCard = ({ exp }: { exp: typeof experiences[0] }) => {
   const initial = exp.company.trim()[0].toUpperCase();
 
   return (
-    <div className={`relative bg-linear-to-br ${exp.cardGradient} backdrop-blur-xl border ${exp.borderColor} rounded-2xl p-6 lg:p-8 shadow-xl transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl group overflow-hidden`}>
+    <div className={`relative bg-linear-to-br ${exp.cardGradient} backdrop-blur-xl border ${exp.borderColor} rounded-2xl p-6 lg:p-8 shadow-xl transition-all duration-500 group overflow-hidden`}>
 
       {/* Nebula glow orbs */}
       <div className={`pointer-events-none absolute -top-10 -right-10 h-36 w-36 rounded-full ${exp.glowTop} blur-3xl`} />
@@ -130,6 +136,15 @@ const ExperienceCard = ({ exp }: { exp: typeof experiences[0] }) => {
             <span className="text-xs text-teal-600 dark:text-teal-400 font-medium">Currently building</span>
           </div>
         )}
+
+        {/* Tech Stack used in this role */}
+        <div className="mt-6 flex flex-wrap gap-1.5">
+          {exp.tech?.map((t) => (
+            <span key={t} className="text-[10px] font-bold px-2 py-0.5 rounded-md bg-darkBlue/5 dark:bg-white/5 border border-darkBlue/10 dark:border-white/10 opacity-70 group-hover:opacity-100 transition-opacity">
+              {t}
+            </span>
+          ))}
+        </div>
       </div>
     </div>
   );
@@ -169,7 +184,14 @@ export default function Experience() {
             {experiences.map((exp, index) => {
               const isEven = index % 2 === 0;
               return (
-                <div key={exp.id} className={`relative flex flex-col lg:flex-row w-full items-center ${isEven ? 'lg:flex-row-reverse' : ''}`}>
+                <motion.div 
+                  key={exp.id} 
+                  initial={{ opacity: 0, x: isEven ? 50 : -50 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, margin: "-100px" }}
+                  transition={{ duration: 0.6, ease: "easeOut" }}
+                  className={`relative flex flex-col lg:flex-row w-full items-center ${isEven ? 'lg:flex-row-reverse' : ''}`}
+                >
 
                   {/* Pulsing center dot */}
                   <div className="absolute left-[20px] lg:left-1/2 -translate-x-1/2 z-20 top-8 lg:top-1/2 lg:-translate-y-1/2">
@@ -187,7 +209,7 @@ export default function Experience() {
                   <div className={`w-full lg:w-1/2 pl-14 lg:pl-0 ${isEven ? 'lg:pr-12' : 'lg:pl-12'}`}>
                     <ExperienceCard exp={exp} />
                   </div>
-                </div>
+                </motion.div>
               );
             })}
           </div>
