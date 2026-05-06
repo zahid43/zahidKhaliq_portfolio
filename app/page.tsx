@@ -6,6 +6,9 @@ import Footer from "@/components/HomePage/Footer";
 import Experience from "@/components/HomePage/Experience";
 import Certifications from "@/components/HomePage/Certifications";
 import Projects from "@/components/HomePage/Projects";
+import Services from "@/components/HomePage/Services";
+import TechStack from "@/components/HomePage/TechStack";
+import CTABanner from "@/components/HomePage/CTABanner";
 import DarkModeToast from "@/components/HomePage/DarkModeToast";
 
 const Divider = () => (
@@ -22,12 +25,16 @@ export default function Home() {
       <Divider />
       <Expertise />
       <Divider />
+      <Services />
+      <Divider />
+      {/* <TechStack />
+      <Divider /> */}
       <Experience />
       <Divider />
       <Certifications />
       <Divider />
       <Projects />
-      <Divider />
+      <CTABanner />
       <Endorsements />
       <Contacts />
       <Footer />
