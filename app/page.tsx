@@ -38,6 +38,7 @@ export default function Home() {
       <Projects />
       <CTABanner />
       <Endorsements />
+      <Divider />
       <Contacts />
       <Footer />
       <DarkModeToast />
