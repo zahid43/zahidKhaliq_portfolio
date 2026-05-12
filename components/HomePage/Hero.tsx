@@ -21,7 +21,7 @@ const itemVariants = {
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.55, ease: [0.25, 0.1, 0.25, 1] },
+    transition: { duration: 0.55, ease: [0.25, 0.1, 0.25, 1] as [number, number, number, number] },
   },
 };
 
@@ -94,7 +94,7 @@ function LetterStagger({ text, startDelay }: { text: string; startDelay: number 
           className="inline-block"
           initial={{ opacity: 0, y: 52, filter: "blur(8px)" }}
           animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-          transition={{ delay: startDelay + i * 0.065, duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
+          transition={{ delay: startDelay + i * 0.065, duration: 0.5, ease: [0.25, 0.1, 0.25, 1] as const }}
         >
           {char}
         </motion.span>
@@ -114,7 +114,7 @@ function ShimmerScramble({ text, startDelay }: { text: string; startDelay: numbe
           className="inline-block hero-name-shimmer cursor-default select-none"
           initial={{ opacity: 0, y: 52, filter: "blur(8px)" }}
           animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-          transition={{ delay: startDelay + i * 0.065, duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
+          transition={{ delay: startDelay + i * 0.065, duration: 0.5, ease: [0.25, 0.1, 0.25, 1] as const }}
         >
           {char}
         </motion.span>
@@ -308,7 +308,7 @@ export default function Hero() {
             className="grid place-items-center order-last lg:order-0"
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.75, delay: 0.25, ease: [0.25, 0.1, 0.25, 1] }}
+            transition={{ duration: 0.75, delay: 0.25, ease: [0.25, 0.1, 0.25, 1] as const }}
           >
             <motion.div
               className="relative w-72 h-72 sm:w-96 sm:h-96 lg:w-130 lg:h-130 mt-10 lg:mt-0 mx-auto"

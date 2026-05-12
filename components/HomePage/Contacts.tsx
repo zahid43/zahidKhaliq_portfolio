@@ -1,175 +1,166 @@
 'use client';
 
-import React from 'react';
-import { motion } from 'framer-motion'; // AnimatePresence is no longer needed here
-import Image from 'next/image';
-import SecondaryCard from "./SecondaryCard";
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import LinkedinIcon from "@/components/ReusableSvgs/LinkedinIcon";
 import WhatsAppIcon from "@/components/ReusableSvgs/WhatsAppIcon";
 import XIcon from "@/components/ReusableSvgs/XIcon";
-import ContactFormCard from './ContactFormCard'; // Import the new card component
-import { FileText, Phone, Mail, ArrowDownToLine } from "lucide-react";
+import FloatingField from "@/components/UI/FloatingField";
+import { FileText, Phone, Mail, ArrowUpRight, Send, CheckCircle, AlertCircle, Loader2 } from "lucide-react";
 
-const contactLinks = [
-  {
-    label: "Call",
-    href: "tel:+923213022223",
-    icon: <Phone size={15} />,
-    className: "bg-emerald-500/5 text-emerald-600 dark:text-emerald-400 border-emerald-500/20 hover:bg-emerald-500/20 hover:border-emerald-500/50 hover:shadow-[0_0_20px_rgba(16,185,129,0.2)]",
-  },
-  {
-    label: "Email",
-    href: "mailto:zaahid.khaliq@gmail.com",
-    icon: <Mail size={15} />,
-    className: "bg-sky-500/5 text-sky-600 dark:text-sky-400 border-sky-500/20 hover:bg-sky-500/20 hover:border-sky-500/50 hover:shadow-[0_0_20px_rgba(14,165,233,0.2)]",
-  },
-  {
-    label: "WhatsApp",
-    href: "https://wa.me/923213022223",
-    icon: <WhatsAppIcon />,
-    className: "bg-green-500/5 text-green-600 dark:text-green-400 border-green-500/20 hover:bg-green-500/20 hover:border-green-500/50 hover:shadow-[0_0_20px_rgba(34,197,94,0.2)]",
-  },
-  {
-    label: "LinkedIn",
-    href: "https://linkedin.com/in/zaahidkhaliq",
-    icon: <LinkedinIcon width={15} height={15} />,
-    className: "bg-[#0A66C2]/5 text-[#0A66C2] dark:text-[#60a5fa] border-[#0A66C2]/20 hover:bg-[#0A66C2]/20 hover:border-[#0A66C2]/50 hover:shadow-[0_0_20px_rgba(10,102,194,0.2)]",
-  },
-  {
-    label: "X | Twitter",
-    href: "https://x.com/zaahidkhaliq",
-    icon: <XIcon />,
-    className: "bg-zinc-900/5 dark:bg-white/5 text-zinc-900 dark:text-white border-zinc-900/20 dark:border-white/20 hover:bg-zinc-900/10 dark:hover:bg-white/10 hover:border-zinc-900/40 dark:hover:border-white/40",
-  },
+type Status = 'idle' | 'loading' | 'success' | 'error';
+
+const links = [
+  { label: 'Call', sub: '+92 321 302 2223', href: 'tel:+923213022223', icon: <Phone size={18} />, color: 'text-emerald-600 dark:text-emerald-400', bg: 'bg-emerald-500/10 group-hover:bg-emerald-500/15', border: 'border-emerald-500/20' },
+  { label: 'Email', sub: 'zaahid.khaliq@gmail.com', href: 'mailto:zaahid.khaliq@gmail.com', icon: <Mail size={18} />, color: 'text-sky-600 dark:text-sky-400', bg: 'bg-sky-500/10 group-hover:bg-sky-500/15', border: 'border-sky-500/20' },
+  { label: 'WhatsApp', sub: 'Send a quick message', href: 'https://wa.me/923213022223', icon: <WhatsAppIcon />, color: 'text-green-600 dark:text-green-400', bg: 'bg-green-500/10 group-hover:bg-green-500/15', border: 'border-green-500/20' },
+  { label: 'LinkedIn', sub: '/in/zaahidkhaliq', href: 'https://linkedin.com/in/zaahidkhaliq', icon: <LinkedinIcon width={18} height={18} />, color: 'text-blue-700 dark:text-blue-400', bg: 'bg-blue-500/10 group-hover:bg-blue-500/15', border: 'border-blue-500/20' },
+  { label: 'X / Twitter', sub: '@zaahidkhaliq', href: 'https://x.com/zaahidkhaliq', icon: <XIcon />, color: 'text-foreground', bg: 'bg-foreground/5 group-hover:bg-foreground/10', border: 'border-foreground/15' },
+  { label: 'Resume', sub: 'PDF · Frontend Engineer', href: '/resume/Zahid_Khaliq_Frontend_engineer.pdf', icon: <FileText size={18} />, color: 'text-amber-600 dark:text-amber-400', bg: 'bg-amber-500/10 group-hover:bg-amber-500/15', border: 'border-amber-500/20', download: true },
 ];
 
 export default function Contacts() {
+  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const [status, setStatus] = useState<Status>('idle');
+  const [errorMsg, setErrorMsg] = useState('');
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
+    if (status === 'error') setStatus('idle');
+  };
+
+  const handleSubmit = async (e: React.SyntheticEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setStatus('loading');
+    setErrorMsg('');
+    try {
+      const res = await fetch('/api/contact', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(formData) });
+      const data = await res.json();
+      if (res.ok) { setStatus('success'); setFormData({ name: '', email: '', message: '' }); }
+      else { setErrorMsg(data.error ?? 'Something went wrong.'); setStatus('error'); }
+    } catch { setErrorMsg('Network error. Please try again.'); setStatus('error'); }
+  };
+
   return (
-    <section id="contact" className="container py-16 lg:py-24 relative overflow-hidden">
-      {/* Galaxy dust dots */}
-      <div className="pointer-events-none absolute top-4 left-1/3 h-1 w-1 rounded-full bg-darkBlue/25 dark:bg-white/50" />
-      <div className="pointer-events-none absolute bottom-6 right-1/4 h-[3px] w-[3px] rounded-full bg-darkBlue/20 dark:bg-white/40" />
-      <div className="pointer-events-none absolute top-1/2 left-[12%] h-1 w-1 rounded-full bg-darkBlue/15 dark:bg-white/35" />
+    <section id="contact" className="relative overflow-hidden py-20 lg:py-32">
 
-      {/* Spinning stars */}
-      <Image src="/images/star.svg" alt="" width={22} height={22}
-        className="pointer-events-none absolute top-2 right-8 opacity-20 dark:opacity-45 animate-spin [animation-duration:13s]" />
-      <Image src="/images/star.svg" alt="" width={14} height={14}
-        className="pointer-events-none absolute bottom-4 left-6 opacity-15 dark:opacity-35 animate-spin [animation-duration:18s] [animation-direction:reverse]" />
+      {/* Ambient glow */}
+      <div className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 h-[600px] w-[800px] rounded-full bg-accent/5 dark:bg-accent/8 blur-[140px]" />
 
-      <div className="relative z-10 w-full max-w-6xl mx-auto">
+      <div className="container relative z-10 max-w-6xl">
 
-        {/* Unified Outer Card wrapping everything */}
-        <div className="relative rounded-[2.5rem] border border-foreground/10 bg-surface/30 dark:bg-black/10 backdrop-blur-md p-6 md:p-10 lg:p-14 overflow-hidden shadow-2xl">
-          
-          {/* Large Code </> Watermark */}
-          <div className="pointer-events-none absolute -right-12 -bottom-12 select-none text-[18rem] md:text-[24rem] font-mono font-black leading-none text-darkBlue/[0.03] dark:text-white/[0.05] rotate-[-12deg]">
-            {`</>`}
+        {/* Header */}
+        <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="mb-16 lg:mb-20">
+          <span className="inline-block mb-4 rounded-full border border-accent/25 bg-accent/8 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-accent">
+            Get In Touch
+          </span>
+          <h2 className="font-black text-foreground leading-[1.1] max-w-lg">
+            Let&apos;s Build<br />
+            <span className="bg-gradient-to-r from-accent via-fuchsia-500 to-accentAlt bg-clip-text text-transparent">
+              Something Great
+            </span>
+          </h2>
+        </motion.div>
+
+        {/* Two columns */}
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.2fr] gap-16 lg:gap-24">
+
+          {/* LEFT — Links */}
+          <div className="flex flex-col gap-3">
+            <motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.4 }}
+              className="text-xs font-semibold uppercase tracking-widest text-muted mb-2">
+              Reach me via
+            </motion.p>
+
+            {links.map((link, i) => (
+              <motion.a
+                key={link.label}
+                href={link.href}
+                target={link.href.startsWith('http') ? '_blank' : undefined}
+                rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                download={link.download ? 'Zahid Khaliq - Frontend Engineer.pdf' : undefined}
+                initial={{ opacity: 0, x: -16 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: i * 0.07 }}
+                className="group flex items-center gap-4 rounded-2xl border border-transparent hover:border-foreground/8 hover:bg-foreground/[0.02] px-4 py-3.5 transition-all duration-200"
+              >
+                <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border transition-all duration-200 ${link.color} ${link.bg} ${link.border}`}>
+                  {link.icon}
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className="text-sm font-bold text-foreground">{link.label}</p>
+                  <p className="text-xs text-muted truncate">{link.sub}</p>
+                </div>
+                <ArrowUpRight size={15} className="text-muted/40 group-hover:text-muted transition-all duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 shrink-0" />
+              </motion.a>
+            ))}
+
+            {/* Available badge */}
+            <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: 0.5 }}
+              className="mt-4 inline-flex items-center gap-2 rounded-full border border-emerald-400/25 bg-emerald-500/8 px-4 py-2 self-start">
+              <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
+              <span className="text-xs font-semibold text-emerald-600 dark:text-emerald-400">Available for new projects</span>
+            </motion.div>
           </div>
 
-          {/* Section Header */}
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="mb-12 text-center relative z-10"
-          >
-            <p className="mb-2 text-xs font-semibold uppercase tracking-[0.25em] text-muted">
-              GET IN TOUCH
-            </p>
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground">
-              Let&apos;s Build Something Great
-            </h2>
-            <p className="mt-3 text-sm text-muted max-w-md mx-auto">
-              Open to new opportunities, collaborations, or just a friendly hello.
-            </p>
+          {/* RIGHT — Form */}
+          <motion.div initial={{ opacity: 0, x: 24 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.15 }}>
+            <AnimatePresence mode="wait">
+              {status === 'success' ? (
+                <motion.div key="success" initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }}
+                  className="flex flex-col items-center justify-center gap-5 py-20 text-center"
+                >
+                  <div className="flex h-16 w-16 items-center justify-center rounded-full bg-emerald-500/10 border border-emerald-500/25">
+                    <CheckCircle size={28} className="text-emerald-600 dark:text-emerald-400" />
+                  </div>
+                  <div>
+                    <p className="font-black text-foreground">Message Sent!</p>
+                    <p className="mt-1.5 text-sm text-muted">I&apos;ll get back to you as soon as possible.</p>
+                  </div>
+                  <button onClick={() => setStatus('idle')} className="text-sm text-accent hover:underline transition-all">Send another →</button>
+                </motion.div>
+              ) : (
+                <motion.form key="form" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onSubmit={handleSubmit} className="flex flex-col gap-4">
+
+                  <div className="mb-2">
+                    <p className="text-xs font-semibold uppercase tracking-widest text-muted mb-1">Send a message</p>
+                    <h3 className="font-black text-foreground">Drop me a line</h3>
+                    <p className="text-sm text-muted mt-1">I typically reply within 24 hours.</p>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-4">
+                    <FloatingField label="Name" name="name" value={formData.name} onChange={handleChange} disabled={status === 'loading'} required />
+                    <FloatingField label="Email" name="email" as="input" type="email" value={formData.email} onChange={handleChange} disabled={status === 'loading'} required />
+                  </div>
+                  <FloatingField label="Message" name="message" as="textarea" rows={6} value={formData.message} onChange={handleChange} disabled={status === 'loading'} required />
+
+                  <AnimatePresence>
+                    {status === 'error' && (
+                      <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }}
+                        className="flex items-center gap-2 rounded-xl bg-red-500/10 border border-red-500/20 px-4 py-3 text-sm text-red-600 dark:text-red-400"
+                      >
+                        <AlertCircle size={14} className="shrink-0" /><span>{errorMsg}</span>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+
+                  <motion.button
+                    whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.97 }}
+                    type="submit" disabled={status === 'loading'}
+                    className="group relative mt-1 flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-accent to-fuchsia-500 px-6 py-4 text-sm font-bold text-white shadow-[0_6px_20px_rgba(99,102,241,0.3)] hover:shadow-[0_10px_32px_rgba(99,102,241,0.5)] transition-all duration-300 disabled:opacity-60 overflow-hidden"
+                  >
+                    <div className="pointer-events-none absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12" />
+                    {status === 'loading'
+                      ? <><Loader2 size={15} className="animate-spin" /><span>Sending…</span></>
+                      : <><Send size={15} /><span>Send Message</span></>
+                    }
+                  </motion.button>
+                </motion.form>
+              )}
+            </AnimatePresence>
           </motion.div>
 
-          {/* Two-column layout - items-stretch ensures same height */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch relative z-10">
-
-            {/* Left — HIRE ME module */}
-            <motion.div
-              initial={{ opacity: 0, x: -24 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="flex"
-            >
-              <SecondaryCard
-                heading={
-                  <span className="inline-flex flex-wrap items-center gap-x-2.5 gap-y-1">
-                    <span>HIRE ME</span>
-                    <span className="h-1.5 w-1.5 rounded-full bg-current opacity-50" />
-                    <span>20+ PROJECTS DELIVERED</span>
-                  </span>
-                }
-                desc="Searching for a Frontend Partner?"
-                bgUpdate="bg-linear-to-br from-indigo-100 via-white to-teal-50 dark:from-[#0a0524] dark:via-[#0d072e] dark:to-[#081a1a]"
-                backBox="bg-linear-to-br from-indigo-200 via-violet-300 to-teal-200 dark:from-indigo-900/40 dark:via-violet-900/40 dark:to-teal-900/40"
-                cardPadding="p-8 md:p-10"
-                cardHeight="h-full"
-              >
-                <div className="flex flex-col gap-4 w-full max-w-[340px]">
-                  {/* Resume Button */}
-                  <motion.a
-                    whileHover={{ scale: 1.01 }}
-                    whileTap={{ scale: 0.98 }}
-                    href="/resume/Zahid_Khaliq_Frontend_engineer.pdf"
-                    download="Zahid Khaliq - Frontend Engineer.pdf"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group relative flex items-center justify-between w-full rounded-2xl bg-linear-to-r from-amber-300 to-amber-400 dark:from-amber-400 dark:to-yellow-400 px-5 py-4 text-zinc-900 shadow-[0_8px_20px_rgba(251,191,36,0.2)] hover:shadow-[0_12px_30px_rgba(251,191,36,0.4)] transition-all duration-300 overflow-hidden"
-                  >
-                    <div className="pointer-events-none absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-linear-to-r from-transparent via-white/30 to-transparent skew-x-12" />
-                    <div className="flex items-center gap-3">
-                      <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-zinc-900/12 shrink-0">
-                        <FileText size={18} />
-                      </div>
-                      <div>
-                        <div className="text-sm font-bold leading-none">Download Resume</div>
-                        <div className="text-[11px] text-zinc-900/55 mt-0.5 font-bold">PDF · Frontend Engineer</div>
-                      </div>
-                    </div>
-                    <ArrowDownToLine size={16} className="shrink-0 transition-transform duration-300 group-hover:translate-y-0.5" />
-                  </motion.a>
-
-                  {/* Contact links grid */}
-                  <div className="grid grid-cols-6 gap-2">
-                    {contactLinks.map((link, i) => (
-                      <motion.a
-                        key={link.label}
-                        whileHover={{ scale: 1.02, y: -2 }}
-                        href={link.href}
-                        target={link.href.startsWith("http") ? "_blank" : undefined}
-                        rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                        aria-label={link.label}
-                        className={`flex flex-col items-center justify-center gap-2 rounded-xl border px-2 py-4 text-[10px] font-bold transition-all duration-300 backdrop-blur-md ${
-                          i < 3 ? "col-span-2" : "col-span-3"
-                        } ${link.className}`}
-                      >
-                        {link.icon}
-                        <span>{link.label}</span>
-                      </motion.a>
-                    ))}
-                  </div>
-                </div>
-              </SecondaryCard>
-            </motion.div>
-
-            {/* Right — Contact Form module */}
-            <motion.div
-              initial={{ opacity: 0, x: 24 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="flex"
-            >
-              <ContactFormCard />
-            </motion.div>
-
-          </div>
         </div>
       </div>
     </section>
