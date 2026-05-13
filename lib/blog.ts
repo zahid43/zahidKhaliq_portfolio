@@ -7,6 +7,7 @@ import framerMotion from "./posts/framer-motion";
 import typescriptGenerics from "./posts/typescript-generics";
 import darkMode from "./posts/dark-mode";
 import reactPerformance from "./posts/react-performance";
+import cssHtmlCheatSheet from "./posts/css-html-cheat-sheet";
 
 export const posts = [
   tailwindV4,
@@ -16,4 +17,5 @@ export const posts = [
   typescriptGenerics,
   darkMode,
   reactPerformance,
+  cssHtmlCheatSheet,
 ];

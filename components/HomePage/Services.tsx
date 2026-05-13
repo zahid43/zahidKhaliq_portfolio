@@ -1,7 +1,6 @@
 "use client";
 import Image from "next/image";
-import { useState, useRef, useEffect, useCallback } from "react";
-import { motion, useMotionValue, animate } from "framer-motion";
+import { useState } from "react";
 
 const services = [
   {
@@ -15,7 +14,7 @@ const services = [
     badgeColor: "bg-indigo-100 dark:bg-indigo-900/40 text-indigo-700 dark:text-indigo-300 border-indigo-300/50 dark:border-indigo-500/30",
     dotColor: "bg-indigo-500",
     icon: (
-      <svg aria-hidden="true" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
+      <svg aria-hidden="true" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
         <polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2" />
         <circle cx="12" cy="12" r="3" />
       </svg>
@@ -32,7 +31,7 @@ const services = [
     badgeColor: "bg-violet-100 dark:bg-violet-900/40 text-violet-700 dark:text-violet-300 border-violet-300/50 dark:border-violet-500/30",
     dotColor: "bg-violet-500",
     icon: (
-      <svg aria-hidden="true" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
+      <svg aria-hidden="true" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
         <polyline points="16 18 22 12 16 6" />
         <polyline points="8 6 2 12 8 18" />
       </svg>
@@ -49,7 +48,7 @@ const services = [
     badgeColor: "bg-amber-100 dark:bg-amber-900/40 text-amber-700 dark:text-amber-300 border-amber-300/50 dark:border-amber-500/30",
     dotColor: "bg-amber-500",
     icon: (
-      <svg aria-hidden="true" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
+      <svg aria-hidden="true" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
         <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" />
         <line x1="3" y1="6" x2="21" y2="6" />
         <path d="M16 10a4 4 0 01-8 0" />
@@ -67,7 +66,7 @@ const services = [
     badgeColor: "bg-teal-100 dark:bg-teal-900/40 text-teal-700 dark:text-teal-300 border-teal-300/50 dark:border-teal-500/30",
     dotColor: "bg-teal-500",
     icon: (
-      <svg aria-hidden="true" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
+      <svg aria-hidden="true" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
         <rect x="2" y="3" width="20" height="14" rx="2" />
         <path d="M8 21h8M12 17v4" />
         <path d="M6 8l3 3-3 3" />
@@ -77,66 +76,10 @@ const services = [
   },
 ];
 
-const GAP = 20;
-
-const SPRING = { type: "spring" as const, stiffness: 300, damping: 30 };
-
 export default function Services() {
-  const [current, setCurrent] = useState(0);
-  const [cardWidth, setCardWidth] = useState(0);
-  const [cardsPerView, setCardsPerView] = useState(1);
-  const trackRef = useRef<HTMLDivElement>(null);
-  const x = useMotionValue(0);
+  const [flippedIdx, setFlippedIdx] = useState<number | null>(null);
 
-  const currentRef = useRef(current);
-  currentRef.current = current;
-
-  const goTo = useCallback((index: number, cw: number) => {
-    animate(x, -(index * (cw + GAP)), SPRING);
-  }, [x]);
-
-  useEffect(() => {
-    const measure = () => {
-      if (!trackRef.current) return;
-      const w = window.innerWidth;
-      const cpv = w >= 1024 ? 3 : w >= 640 ? 2 : 1;
-      const cw = (trackRef.current.offsetWidth - GAP * (cpv - 1)) / cpv;
-      const mi = Math.max(0, services.length - cpv);
-      setCardsPerView(cpv);
-      setCardWidth(cw);
-      animate(x, -(Math.min(currentRef.current, mi) * (cw + GAP)), { duration: 0 });
-    };
-    measure();
-    let timer: ReturnType<typeof setTimeout>;
-    const onResize = () => { clearTimeout(timer); timer = setTimeout(measure, 100); };
-    window.addEventListener("resize", onResize);
-    return () => { window.removeEventListener("resize", onResize); clearTimeout(timer); };
-  }, [x]);
-
-  const mi = Math.max(0, services.length - cardsPerView);
-
-  const prev = () => {
-    const n = Math.max(0, current - 1);
-    setCurrent(n);
-    goTo(n, cardWidth);
-  };
-
-  const next = () => {
-    const n = Math.min(mi, current + 1);
-    setCurrent(n);
-    goTo(n, cardWidth);
-  };
-
-  const handleDragEnd = (_: unknown, info: { offset: { x: number }; velocity: { x: number } }) => {
-    const step = cardWidth + GAP;
-    const raw = -x.get() / step;
-    let idx = Math.round(raw);
-    if (info.velocity.x < -300) idx = Math.ceil(raw);
-    else if (info.velocity.x > 300) idx = Math.floor(raw);
-    idx = Math.max(0, Math.min(mi, idx));
-    setCurrent(idx);
-    goTo(idx, cardWidth);
-  };
+  const toggle = (i: number) => setFlippedIdx(prev => prev === i ? null : i);
 
   return (
     <section aria-label="Services" className="relative overflow-hidden py-16 lg:py-24">
@@ -163,105 +106,75 @@ export default function Services() {
           </p>
         </div>
 
-        {/* Slider */}
-        <div>
-          <div
-            ref={trackRef}
-            className="overflow-hidden mask-[linear-gradient(to_right,transparent,black_5%,black_95%,transparent)]"
-          >
-            <motion.div
-              className="flex"
-              style={{ x, gap: GAP }}
-              drag="x"
-              dragConstraints={{
-                left: cardWidth ? -(mi * (cardWidth + GAP)) : 0,
-                right: 0,
-              }}
-              dragElastic={0}
-              dragMomentum={false}
-              onDragEnd={handleDragEnd}
-            >
-              {services.map((service) => (
-                <div
-                  key={service.title}
-                  style={{ minWidth: cardWidth || undefined }}
-                  className={`relative bg-linear-to-br ${service.cardGradient} border ${service.borderColor} rounded-2xl p-6 lg:p-8 transition-colors duration-500 hover:shadow-xl group overflow-hidden select-none`}
+        {/* Flip cards grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 max-w-6xl mx-auto">
+          {services.map((service, i) => {
+            const isFlipped = flippedIdx === i;
+            return (
+              <div
+                key={service.title}
+                className="group h-72 perspective-[1000px] cursor-pointer"
+                onClick={() => toggle(i)}
+                onMouseLeave={() => flippedIdx === i && setFlippedIdx(null)}
+              >
+                {/* Flip container */}
+                <div className={`relative w-full h-full transform-3d transition-transform duration-500
+                  group-hover:transform-[rotateY(180deg)]
+                  ${isFlipped ? "transform-[rotateY(180deg)]" : ""}`}
                 >
-                  {/* Glow orb */}
-                  <div className={`pointer-events-none absolute -top-8 -right-8 h-32 w-32 rounded-full ${service.glowColor} blur-2xl`} />
+                  {/* ── Front ── */}
+                  <div className={`absolute inset-0 backface-hidden overflow-hidden rounded-2xl border bg-linear-to-br ${service.cardGradient} ${service.borderColor} flex flex-col items-center justify-center gap-4 p-6 text-center`}>
+                    {/* Glow orb */}
+                    <div className={`pointer-events-none absolute -top-6 -right-6 h-28 w-28 rounded-full ${service.glowColor} blur-2xl`} />
+                    {/* Spinning star */}
+                    <svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="currentColor" className="pointer-events-none absolute top-4 right-5 opacity-20 dark:opacity-50 animate-spin [animation-duration:12s]">
+                      <path d="M12 2l1.5 8.5L22 12l-8.5 1.5L12 22l-1.5-8.5L2 12l8.5-1.5Z" />
+                    </svg>
 
-                  {/* Spinning star */}
-                  <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" className="pointer-events-none absolute top-4 right-6 opacity-20 dark:opacity-50 animate-spin [animation-duration:12s]">
-                    <path d="M12 2l1.5 8.5L22 12l-8.5 1.5L12 22l-1.5-8.5L2 12l8.5-1.5Z" />
-                  </svg>
-
-                  <div className="relative z-10">
                     {/* Icon */}
-                    <div className="flex items-start justify-between gap-3 mb-5">
-                      <div className={`rounded-xl p-2.5 border ${service.badgeColor} bg-linear-to-br`}>
-                        {service.icon}
-                      </div>
+                    <div className={`relative z-10 rounded-2xl p-3.5 border bg-linear-to-br ${service.badgeColor}`}>
+                      {service.icon}
                     </div>
 
                     {/* Title */}
-                    <h6 className="font-bold mb-2">{service.title}</h6>
+                    <h6 className="relative z-10 font-bold leading-snug">{service.title}</h6>
 
-                    {/* Description */}
-                    <p className="text-xs leading-relaxed text-muted mb-5">{service.description}</p>
+                    {/* Hint */}
+                    <span className="relative z-10 text-[10px] uppercase tracking-widest text-foreground/30 flex items-center gap-1.5">
+                      <svg aria-hidden="true" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
+                        <path d="M7 8l-4 4 4 4M17 8l4 4-4 4M14 4l-4 16" />
+                      </svg>
+                      Tap to explore
+                    </span>
+                  </div>
 
-                    {/* Points */}
-                    <ul className="flex flex-col gap-2">
-                      {service.points.map((point) => (
-                        <li key={point} className="flex items-center gap-2.5 text-xs text-foreground/70">
-                          <span className={`shrink-0 w-1.5 h-1.5 rounded-full ${service.dotColor}`} />
-                          {point}
-                        </li>
-                      ))}
-                    </ul>
+                  {/* ── Back ── */}
+                  <div className={`absolute inset-0 backface-hidden transform-[rotateY(180deg)] overflow-hidden rounded-2xl border bg-linear-to-br ${service.cardGradient} ${service.borderColor} flex flex-col p-6`}>
+                    {/* Glow orb */}
+                    <div className={`pointer-events-none absolute -bottom-6 -left-6 h-28 w-28 rounded-full ${service.glowColor} blur-2xl`} />
+
+                    <div className="relative z-10 flex flex-col h-full">
+                      {/* Title */}
+                      <h6 className="font-bold text-sm mb-2">{service.title}</h6>
+
+                      {/* Description */}
+                      <p className="text-xs leading-relaxed text-muted mb-4">{service.description}</p>
+
+                      {/* Points */}
+                      <ul className="flex flex-col gap-2 mt-auto">
+                        {service.points.map((point) => (
+                          <li key={point} className="flex items-center gap-2 text-xs text-foreground/70">
+                            <span className={`shrink-0 w-1.5 h-1.5 rounded-full ${service.dotColor}`} />
+                            {point}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
                   </div>
                 </div>
-              ))}
-            </motion.div>
-          </div>
-
-          {/* Navigation */}
-          <div className="flex items-center justify-center gap-3 mt-8">
-            {/* Prev */}
-            <button
-              onClick={prev}
-              disabled={current === 0}
-              aria-label="Previous"
-              className="flex h-9 w-9 items-center justify-center rounded-full border border-foreground/10 bg-background/80 text-foreground/60 transition-all hover:border-foreground/30 hover:text-foreground disabled:cursor-not-allowed disabled:opacity-30"
-            >
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
-                <polyline points="15 18 9 12 15 6" />
-              </svg>
-            </button>
-
-            {/* Dots */}
-            {Array.from({ length: mi + 1 }).map((_, i) => (
-              <button
-                key={i}
-                onClick={() => { setCurrent(i); goTo(i, cardWidth); }}
-                aria-label={`Go to slide ${i + 1}`}
-                className={`h-1.5 rounded-full transition-all duration-300 ${
-                  i === current ? "w-5 bg-accent" : "w-1.5 bg-foreground/20 hover:bg-foreground/40"
-                }`}
-              />
-            ))}
-
-            {/* Next */}
-            <button
-              onClick={next}
-              disabled={current === mi}
-              aria-label="Next"
-              className="flex h-9 w-9 items-center justify-center rounded-full border border-foreground/10 bg-background/80 text-foreground/60 transition-all hover:border-foreground/30 hover:text-foreground disabled:cursor-not-allowed disabled:opacity-30"
-            >
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
-                <polyline points="9 18 15 12 9 6" />
-              </svg>
-            </button>
-          </div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

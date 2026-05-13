@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
@@ -35,24 +36,53 @@ const fadeUp = {
   show: { opacity: 1, y: 0, transition: { duration: 0.45, ease: "easeOut" as const } },
 };
 
+// ─── Spotlight helpers ────────────────────────────────────────────────────────
+function handleSpotlight(e: React.MouseEvent<HTMLDivElement>) {
+  const rect = e.currentTarget.getBoundingClientRect();
+  e.currentTarget.style.setProperty("--mx", `${e.clientX - rect.left}px`);
+  e.currentTarget.style.setProperty("--my", `${e.clientY - rect.top}px`);
+}
+
+const Spotlight = ({ color = "var(--color-accent)" }: { color?: string }) => (
+  <div
+    aria-hidden="true"
+    className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl"
+    style={{
+      background: `radial-gradient(circle 220px at var(--mx, 50%) var(--my, 50%), color-mix(in srgb, ${color} 13%, transparent), transparent 70%)`,
+    }}
+  />
+);
+
+// ─── Shared dim transition ────────────────────────────────────────────────────
+const dimClass = (dimmed: boolean) =>
+  `transition-all duration-300 ${dimmed ? "opacity-35 scale-[0.985]" : "opacity-100 scale-100"}`;
+
 // ─── Featured Card ────────────────────────────────────────────────────────────
-function FeaturedCard({ post, num }: { post: BlogPost; num: string }) {
+function FeaturedCard({
+  post, num, dimmed, onHover, onLeave,
+}: {
+  post: BlogPost; num: string; dimmed: boolean;
+  onHover: () => void; onLeave: () => void;
+}) {
   const isPublished = !!post.slug;
 
   const inner = (
-    <div className="relative h-full rounded-2xl overflow-hidden bg-[#06041a] border border-white/[0.07] hover:border-white/[0.14] transition-all duration-500 group flex flex-col shadow-xl shadow-black/25">
+    <div
+      onMouseMove={handleSpotlight}
+      className="relative h-full rounded-2xl overflow-hidden bg-[#06041a] border border-white/[0.07] hover:border-white/[0.14] transition-all duration-500 group flex flex-col shadow-xl shadow-black/25"
+    >
+      <Spotlight color="rgb(139 92 246)" />
+
       {/* Glow orbs */}
       <div className="pointer-events-none absolute -top-24 -right-24 h-72 w-72 rounded-full bg-violet-600/20 blur-3xl" />
       <div className="pointer-events-none absolute -bottom-16 -left-16 h-56 w-56 rounded-full bg-indigo-600/15 blur-3xl" />
-      {/* Hover shine */}
-      <div className="pointer-events-none absolute inset-0 bg-linear-to-br from-transparent via-white/[0.025] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
 
-      {/* CodeBraces watermark — top-left */}
+      {/* CodeBraces watermark */}
       <div className="pointer-events-none absolute -top-3 -left-3 opacity-[0.055] text-white select-none">
         <CodeBraces width={110} height={110} />
       </div>
 
-      {/* Number watermark — bottom-right */}
+      {/* Number watermark */}
       <div className="pointer-events-none absolute -bottom-2 -right-1 select-none font-black leading-none text-white/[0.04] text-[7.5rem] tabular-nums">
         {num}
       </div>
@@ -61,7 +91,6 @@ function FeaturedCard({ post, num }: { post: BlogPost; num: string }) {
       <div className="h-[3px] w-full flex-shrink-0 bg-linear-to-r from-violet-500 via-indigo-500 to-transparent" />
 
       <div className="relative z-10 flex flex-col flex-1 p-6 lg:p-8">
-        {/* Meta row */}
         <div className="flex items-center justify-between mb-6">
           <span className="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-[0.25em] text-white/35">
             <span className="h-[2px] w-3 rounded-full bg-white/25" />
@@ -72,17 +101,14 @@ function FeaturedCard({ post, num }: { post: BlogPost; num: string }) {
           </span>
         </div>
 
-        {/* Title */}
         <h3 className="text-xl lg:text-[1.4rem] font-bold text-white leading-tight mb-4">
           {post.title}
         </h3>
 
-        {/* Excerpt */}
         <p className="text-white/45 text-[13px] leading-relaxed flex-1 mb-6">
           {post.excerpt}
         </p>
 
-        {/* Footer */}
         <div className="flex items-center justify-between gap-4 pt-4 border-t border-white/[0.06]">
           <div className="flex items-center gap-2">
             <span className="text-[11px] text-white/25">{post.date}</span>
@@ -105,7 +131,12 @@ function FeaturedCard({ post, num }: { post: BlogPost; num: string }) {
   );
 
   return (
-    <motion.div variants={fadeUp} className="md:col-span-2 lg:col-span-2 lg:row-span-2">
+    <motion.div
+      variants={fadeUp}
+      className={`md:col-span-2 lg:col-span-2 lg:row-span-2 ${dimClass(dimmed)}`}
+      onMouseEnter={onHover}
+      onMouseLeave={onLeave}
+    >
       {isPublished ? (
         <Link href={`/blog/${post.slug}`} className="block h-full">{inner}</Link>
       ) : inner}
@@ -114,28 +145,37 @@ function FeaturedCard({ post, num }: { post: BlogPost; num: string }) {
 }
 
 // ─── Normal Card ──────────────────────────────────────────────────────────────
-function NormalCard({ post, num }: { post: BlogPost; num: string }) {
+function NormalCard({
+  post, num, dimmed, onHover, onLeave,
+}: {
+  post: BlogPost; num: string; dimmed: boolean;
+  onHover: () => void; onLeave: () => void;
+}) {
   const isPublished = !!post.slug;
   const strip = categoryStrip[post.category] ?? "bg-accent";
   const tc = categoryText[post.category] ?? "text-accent";
 
   const inner = (
-    <div className="relative h-full rounded-2xl overflow-hidden bg-white dark:bg-[#0d0b1e] border border-black/[0.07] dark:border-white/[0.07] hover:border-black/[0.14] dark:hover:border-white/[0.14] transition-all duration-300 group flex shadow-sm hover:shadow-md hover:shadow-black/5 dark:hover:shadow-black/30">
+    <div
+      onMouseMove={handleSpotlight}
+      className="relative h-full rounded-2xl overflow-hidden bg-white dark:bg-[#0d0b1e] border border-black/[0.07] dark:border-white/[0.07] hover:border-black/[0.14] dark:hover:border-white/[0.14] transition-all duration-300 group flex shadow-sm hover:shadow-md hover:shadow-black/5 dark:hover:shadow-black/30"
+    >
+      <Spotlight />
+
       {/* Colored left strip */}
       <div className={`w-[3px] flex-shrink-0 ${strip} opacity-80 group-hover:opacity-100 transition-opacity duration-300`} />
 
       <div className="flex flex-col flex-1 p-5 min-w-0 relative">
-        {/* CodeBraces watermark — center-right */}
+        {/* CodeBraces watermark */}
         <div className="pointer-events-none absolute right-2 top-1/2 -translate-y-1/2 opacity-[0.04] dark:opacity-[0.06] text-darkBlue dark:text-white select-none">
           <CodeBraces width={72} height={72} />
         </div>
 
-        {/* Number watermark — bottom-right */}
+        {/* Number watermark */}
         <div className="pointer-events-none absolute -bottom-2 -right-1 select-none font-black leading-none text-darkBlue/[0.04] dark:text-white/[0.04] text-[5.5rem] tabular-nums">
           {num}
         </div>
 
-        {/* Top */}
         <div className="flex items-start justify-between gap-2 mb-3 relative z-10">
           <span className={`text-[10px] font-bold uppercase tracking-[0.2em] ${tc}`}>
             {post.category}
@@ -145,17 +185,14 @@ function NormalCard({ post, num }: { post: BlogPost; num: string }) {
           </span>
         </div>
 
-        {/* Title */}
         <h3 className="relative z-10 text-[13.5px] font-bold leading-snug text-darkBlue dark:text-white/90 mb-2.5 line-clamp-3 flex-1">
           {post.title}
         </h3>
 
-        {/* Excerpt */}
         <p className="relative z-10 text-[11.5px] text-darkBlue/45 dark:text-white/38 leading-relaxed line-clamp-2 mb-4">
           {post.excerpt}
         </p>
 
-        {/* Footer */}
         <div className="relative z-10 flex items-center justify-between gap-2">
           <div className="flex items-center gap-1.5">
             <span className="text-[10px] text-darkBlue/28 dark:text-white/22">{post.date}</span>
@@ -178,7 +215,12 @@ function NormalCard({ post, num }: { post: BlogPost; num: string }) {
   );
 
   return (
-    <motion.div variants={fadeUp}>
+    <motion.div
+      variants={fadeUp}
+      className={dimClass(dimmed)}
+      onMouseEnter={onHover}
+      onMouseLeave={onLeave}
+    >
       {isPublished ? (
         <Link href={`/blog/${post.slug}`} className="block h-full">{inner}</Link>
       ) : inner}
@@ -187,22 +229,31 @@ function NormalCard({ post, num }: { post: BlogPost; num: string }) {
 }
 
 // ─── Wide Card ────────────────────────────────────────────────────────────────
-function WideCard({ post, num }: { post: BlogPost; num: string }) {
+function WideCard({
+  post, num, dimmed, onHover, onLeave,
+}: {
+  post: BlogPost; num: string; dimmed: boolean;
+  onHover: () => void; onLeave: () => void;
+}) {
   const isPublished = !!post.slug;
   const strip = categoryStrip[post.category] ?? "bg-accent";
   const tc = categoryText[post.category] ?? "text-accent";
 
   const inner = (
-    <div className={`relative h-full rounded-2xl overflow-hidden bg-linear-to-br ${post.color.gradient} border ${post.color.border} transition-all duration-400 group flex flex-col sm:flex-row shadow-sm hover:shadow-md`}>
+    <div
+      onMouseMove={handleSpotlight}
+      className={`relative h-full rounded-2xl overflow-hidden bg-linear-to-br ${post.color.gradient} border ${post.color.border} transition-all duration-400 group flex flex-col sm:flex-row shadow-sm hover:shadow-md`}
+    >
+      <Spotlight />
+
       {/* Top strip on mobile, left strip on sm+ */}
       <div className={`h-[3px] sm:h-auto sm:w-[3px] flex-shrink-0 ${strip} opacity-80 group-hover:opacity-100 transition-opacity duration-300`} />
 
-      {/* CodeBraces watermark — bottom-left of content area */}
+      {/* CodeBraces watermark */}
       <div className="pointer-events-none absolute bottom-2 left-6 opacity-[0.04] dark:opacity-[0.06] text-darkBlue dark:text-white select-none">
         <CodeBraces width={80} height={80} />
       </div>
 
-      {/* Main content */}
       <div className="flex-1 p-5 lg:p-7 flex flex-col justify-between min-w-0 relative z-10">
         <div>
           <div className="flex items-center gap-3 mb-3">
@@ -250,7 +301,12 @@ function WideCard({ post, num }: { post: BlogPost; num: string }) {
   );
 
   return (
-    <motion.div variants={fadeUp} className="md:col-span-2 lg:col-span-3">
+    <motion.div
+      variants={fadeUp}
+      className={`md:col-span-2 lg:col-span-3 ${dimClass(dimmed)}`}
+      onMouseEnter={onHover}
+      onMouseLeave={onLeave}
+    >
       {isPublished ? (
         <Link href={`/blog/${post.slug}`} className="block h-full">{inner}</Link>
       ) : inner}
@@ -259,14 +315,21 @@ function WideCard({ post, num }: { post: BlogPost; num: string }) {
 }
 
 // ─── Dispatcher ───────────────────────────────────────────────────────────────
-function PostCard({ post, num }: { post: BlogPost; num: string }) {
-  if (post.size === "featured") return <FeaturedCard post={post} num={num} />;
-  if (post.size === "wide") return <WideCard post={post} num={num} />;
-  return <NormalCard post={post} num={num} />;
+function PostCard({
+  post, num, dimmed, onHover, onLeave,
+}: {
+  post: BlogPost; num: string; dimmed: boolean;
+  onHover: () => void; onLeave: () => void;
+}) {
+  if (post.size === "featured") return <FeaturedCard post={post} num={num} dimmed={dimmed} onHover={onHover} onLeave={onLeave} />;
+  if (post.size === "wide") return <WideCard post={post} num={num} dimmed={dimmed} onHover={onHover} onLeave={onLeave} />;
+  return <NormalCard post={post} num={num} dimmed={dimmed} onHover={onHover} onLeave={onLeave} />;
 }
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
 export default function BlogPage() {
+  const [hoveredId, setHoveredId] = useState<number | null>(null);
+
   const ordered = [
     ...posts.filter(p => p.size !== "wide"),
     ...posts.filter(p => p.size === "wide"),
@@ -320,6 +383,9 @@ export default function BlogPage() {
                 key={post.id}
                 post={post}
                 num={String(i + 1).padStart(2, "0")}
+                dimmed={hoveredId !== null && hoveredId !== post.id}
+                onHover={() => setHoveredId(post.id)}
+                onLeave={() => setHoveredId(null)}
               />
             ))}
           </motion.div>

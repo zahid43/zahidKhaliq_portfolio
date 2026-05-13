@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { posts, type ContentBlock } from "@/lib/blog";
-import { CodeBlock, TerminalBlock } from "@/components/Blog";
+import { CodeBlock, TerminalBlock, MagicLink } from "@/components/Blog";
 import { Footer } from "@/components/HomePage";
 import CodeBraces from "@/components/ReusableSvgs/CodeBraces";
 
@@ -42,13 +42,13 @@ function renderBlock(block: ContentBlock, i: number) {
     case "heading":
       if (block.level === 2) {
         return (
-          <h2
+          <h4
             key={i}
             className="mt-10 mb-4 flex items-center gap-3 text-xl font-bold text-darkBlue dark:text-foreground"
           >
             <span className="h-[2px] w-5 rounded-full bg-accent flex-shrink-0" />
             {block.text}
-          </h2>
+          </h4>
         );
       }
       return (
@@ -103,6 +103,17 @@ function renderBlock(block: ContentBlock, i: number) {
             {block.text}
           </p>
         </blockquote>
+      );
+
+    case "link":
+      return (
+        <MagicLink
+          key={i}
+          href={block.href}
+          text={block.text}
+          description={block.description}
+          copyable={block.copyable}
+        />
       );
 
     default:

@@ -4,7 +4,8 @@ export type ContentBlock =
   | { type: "terminal"; commands: string[]; title?: string }
   | { type: "code"; code: string; language: string; filename?: string }
   | { type: "list"; items: string[] }
-  | { type: "quote"; text: string };
+  | { type: "quote"; text: string }
+  | { type: "link"; href: string; text: string; description?: string; copyable?: boolean };
 
 export type PostSize = "featured" | "wide" | "normal";
 

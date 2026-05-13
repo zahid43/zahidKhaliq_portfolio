@@ -8,7 +8,7 @@ const meta = {
   title: "Mastering Tailwind CSS v4: What Changed and Why It Matters",
   excerpt:
     "Tailwind v4 moves configuration entirely into CSS via @theme inline — no more tailwind.config.js. I migrated this very portfolio to v4 and learned some important gotchas along the way: cascade layers, the new @custom-variant syntax for dark mode, and how PostCSS integration changed. Here's the full breakdown with before/after examples.",
-  date: "May 2025",
+  date: "May 2026",
   category: "CSS",
   readTime: "6 min read",
   size: "featured",
