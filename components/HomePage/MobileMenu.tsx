@@ -1,13 +1,14 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import Image from "next/image";
-import { X } from "lucide-react";
+import { CloseIcon } from "@/components/ReusableSvgs";
 import { Logo } from "@/components/ReusableSvgs";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { useTheme } from "next-themes";
 import Link from "next/link";
-import { navLinks } from "@/lib/constants";
+import { navLinks, pageNavLinks } from "@/lib/constants";
 import { socialLinks } from "@/lib/socialLinks";
 
 interface MobileMenuProps {
@@ -17,6 +18,8 @@ interface MobileMenuProps {
 
 export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
   const { resolvedTheme } = useTheme();
+  const pathname = usePathname();
+  const isHome = pathname === "/";
   const [mounted, setMounted] = useState(false);
   useEffect(() => { setMounted(true); }, []);
   const isDark = !mounted || resolvedTheme !== "light";
@@ -143,7 +146,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                 transform: isOpen ? "scale(1)" : "scale(0.6) rotate(-90deg)",
               }}
             >
-              <X size={16} />
+              <CloseIcon width={16} height={16} />
             </button>
           </div>
 
@@ -197,7 +200,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
             {navLinks.map((label, i) => (
               <a
                 key={label}
-                href={`#${label.toLowerCase().replace(/ /g, "-")}`}
+                href={`${isHome ? "" : "/"}#${label.toLowerCase().replace(/ /g, "-")}`}
                 onClick={onClose}
                 tabIndex={isOpen ? 0 : -1}
                 className="group flex items-center gap-3 rounded-2xl px-4 py-3 text-[17px] font-medium text-indigo-800/80 dark:text-white/70 transition-all duration-300 hover:translate-x-1.5 hover:bg-indigo-100/60 dark:hover:bg-white/8 hover:text-indigo-900 dark:hover:text-white active:scale-95"
@@ -210,6 +213,27 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                 <span className="h-px w-4 rounded-full bg-indigo-500 dark:bg-indigo-400 transition-all duration-300 group-hover:w-6 group-hover:bg-teal-500 dark:group-hover:bg-teal-400" />
                 {label}
               </a>
+            ))}
+            {pageNavLinks.map(({ label, href }, i) => (
+              <Link
+                key={label}
+                href={href}
+                onClick={onClose}
+                tabIndex={isOpen ? 0 : -1}
+                className={`group flex items-center gap-3 rounded-2xl px-4 py-3 text-[17px] font-medium transition-all duration-300 hover:translate-x-1.5 hover:bg-indigo-100/60 dark:hover:bg-white/8 active:scale-95 ${
+                  pathname === href
+                    ? "text-accent"
+                    : "text-indigo-800/80 dark:text-white/70 hover:text-indigo-900 dark:hover:text-white"
+                }`}
+                style={{
+                  transitionDelay: isOpen ? `${260 + (navLinks.length + i) * 55}ms` : "0ms",
+                  opacity: isOpen ? 1 : 0,
+                  transform: isOpen ? "translateX(0)" : "translateX(40px)",
+                }}
+              >
+                <span className="h-px w-4 rounded-full bg-indigo-500 dark:bg-indigo-400 transition-all duration-300 group-hover:w-6 group-hover:bg-teal-500 dark:group-hover:bg-teal-400" />
+                {label}
+              </Link>
             ))}
           </nav>
 

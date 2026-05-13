@@ -8,7 +8,6 @@ import {
   Certifications,
   Projects,
   DarkModeToast,
-  TechStack,
   Services,
   CTABanner,
 } from "@/components/HomePage";
@@ -29,8 +28,6 @@ export default function Home() {
       <Divider />
       <Services />
       <Divider />
-      {/* <TechStack />
-      <Divider /> */}
       <Experience />
       <Divider />
       <Certifications />

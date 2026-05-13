@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeftIcon, ChevronRightIcon } from "@/components/ReusableSvgs";
 import LinkedinIcon from "@/components/ReusableSvgs/LinkedinIcon";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -245,7 +245,7 @@ export default function Endorsements() {
             aria-label="Previous endorsement"
             className="grid h-11 w-11 place-items-center rounded-full border border-black/10 bg-white text-darkBlue shadow-lg transition hover:-translate-x-0.5 hover:bg-lightBlue dark:border-white/10 dark:bg-white/10 dark:text-white dark:hover:bg-white/15"
           >
-            <ChevronLeft size={18} aria-hidden="true" />
+            <ChevronLeftIcon width={18} height={18} aria-hidden="true" />
           </button>
 
           <div className="flex items-center gap-2">
@@ -271,7 +271,7 @@ export default function Endorsements() {
             aria-label="Next endorsement"
             className="grid h-11 w-11 place-items-center rounded-full border border-black/10 bg-white text-darkBlue shadow-lg transition hover:translate-x-0.5 hover:bg-lightBlue dark:border-white/10 dark:bg-white/10 dark:text-white dark:hover:bg-white/15"
           >
-            <ChevronRight size={18} aria-hidden="true" />
+            <ChevronRightIcon width={18} height={18} aria-hidden="true" />
           </button>
         </div>
       </div>

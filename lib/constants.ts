@@ -1,5 +1,9 @@
 export const navLinks = ["Home", "About me", "Experience", "Projects", "Endorsements", "Contact"];
 
+export const pageNavLinks = [
+  { label: "Blog", href: "/blog" },
+];
+
 export const socialLinks = [
   {
     href: "https://linkedin.com/in/zaahidkhaliq",

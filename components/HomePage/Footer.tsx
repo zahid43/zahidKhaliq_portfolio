@@ -1,6 +1,5 @@
 import Image from "next/image";
-import { Mail } from "lucide-react";
-import { NextjsIcon, TailwindIcon, FigmaIcon } from "@/components/ReusableSvgs";
+import { NextjsIcon, TailwindIcon, FigmaIcon, MailIcon } from "@/components/ReusableSvgs";
 import { socialLinks } from "@/lib/socialLinks";
 
 const hoverColors: Record<string, string> = {
@@ -12,7 +11,7 @@ const hoverColors: Record<string, string> = {
 const emailLink = {
   label: "Email",
   href: "mailto:zaahid.khaliq@gmail.com",
-  Icon: Mail,
+  Icon: MailIcon,
   hover: "hover:bg-rose-500 hover:border-rose-500 hover:text-white",
 };
 

@@ -6,7 +6,7 @@ import { motion, AnimatePresence, useInView } from 'framer-motion';
 import LinkedinIcon from "@/components/ReusableSvgs/LinkedinIcon";
 import WhatsAppIcon from "@/components/ReusableSvgs/WhatsAppIcon";
 import XIcon from "@/components/ReusableSvgs/XIcon";
-import { FileText, Phone, Mail, Send, AlertCircle, Loader2 } from "lucide-react";
+import { FileTextIcon, PhoneIcon, MailIcon, SendIcon, AlertCircleIcon, Loader2Icon } from "@/components/ReusableSvgs";
 
 type Status = 'idle' | 'loading' | 'success' | 'error';
 
@@ -42,12 +42,12 @@ function useTyper(lines: string[], started: boolean, speed = 32) {
 }
 
 const links = [
-  { label: 'call()', href: 'tel:+923213022223', icon: <Phone size={12} />, cls: 'text-emerald-400 border-emerald-500/30 hover:border-emerald-400/60 hover:bg-emerald-500/10 hover:text-emerald-300' },
-  { label: 'mail()', href: 'mailto:zaahid.khaliq@gmail.com', icon: <Mail size={12} />, cls: 'text-sky-400 border-sky-500/30 hover:border-sky-400/60 hover:bg-sky-500/10 hover:text-sky-300' },
+  { label: 'call()', href: 'tel:+923213022223', icon: <PhoneIcon width={12} height={12} />, cls: 'text-emerald-400 border-emerald-500/30 hover:border-emerald-400/60 hover:bg-emerald-500/10 hover:text-emerald-300' },
+  { label: 'mail()', href: 'mailto:zaahid.khaliq@gmail.com', icon: <MailIcon width={12} height={12} />, cls: 'text-sky-400 border-sky-500/30 hover:border-sky-400/60 hover:bg-sky-500/10 hover:text-sky-300' },
   { label: 'whatsapp()', href: 'https://wa.me/923213022223', icon: <WhatsAppIcon />, cls: 'text-green-400 border-green-500/30 hover:border-green-400/60 hover:bg-green-500/10 hover:text-green-300' },
   { label: 'linkedin()', href: 'https://linkedin.com/in/zaahidkhaliq', icon: <LinkedinIcon width={12} height={12} />, cls: 'text-blue-400 border-blue-500/30 hover:border-blue-400/60 hover:bg-blue-500/10 hover:text-blue-300' },
   { label: 'twitter()', href: 'https://x.com/zaahidkhaliq', icon: <XIcon />, cls: 'text-slate-400 border-slate-500/30 hover:border-slate-400/60 hover:bg-slate-500/10 hover:text-slate-300' },
-  { label: 'resume.pdf', href: '/resume/Zahid_Khaliq_Frontend_engineer.pdf', download: true, icon: <FileText size={12} />, cls: 'text-amber-400 border-amber-500/30 hover:border-amber-400/60 hover:bg-amber-500/10 hover:text-amber-300' },
+  { label: 'resume.pdf', href: '/resume/Zahid_Khaliq_Frontend_engineer.pdf', download: true, icon: <FileTextIcon width={12} height={12} />, cls: 'text-amber-400 border-amber-500/30 hover:border-amber-400/60 hover:bg-amber-500/10 hover:text-amber-300' },
 ];
 
 function TermRow({ label }: { label: string }) {
@@ -263,7 +263,7 @@ export default function Contacts() {
                             {status === 'error' && (
                               <motion.p initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }}
                                 className="font-mono text-xs text-red-400 flex items-center gap-2">
-                                <span>{'>'}</span><AlertCircle size={11} /><span>{errorMsg}</span>
+                                <span>{'>'}</span><AlertCircleIcon width={11} height={11} /><span>{errorMsg}</span>
                               </motion.p>
                             )}
                           </AnimatePresence>
@@ -277,8 +277,8 @@ export default function Contacts() {
                           >
                             <div className="pointer-events-none absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-accent/10 to-transparent" />
                             {status === 'loading'
-                              ? <><Loader2 size={13} className="animate-spin" /><span>{'./sending.sh…'}</span></>
-                              : <><Send size={13} /><span>{'./send.sh ↵'}</span></>
+                              ? <><Loader2Icon width={13} height={13} className="animate-spin" /><span>{'./sending.sh…'}</span></>
+                              : <><SendIcon width={13} height={13} /><span>{'./send.sh ↵'}</span></>
                             }
                           </motion.button>
 

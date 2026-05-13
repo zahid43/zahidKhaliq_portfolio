@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Home, ArrowLeft } from "lucide-react";
+import { HomeIcon, ArrowLeftIcon } from "@/components/ReusableSvgs";
 import { CodeBraces } from "@/components/ReusableSvgs";
 
 export default function NotFound() {
@@ -74,14 +74,14 @@ export default function NotFound() {
             href="/"
             className="inline-flex items-center gap-2 rounded-full bg-accent px-6 py-2.5 text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:bg-accent/85 hover:shadow-[0_0_18px_rgba(99,102,241,0.45)]"
           >
-            <Home size={14} />
+            <HomeIcon width={14} height={14} />
             Go Home
           </Link>
           <button
             onClick={() => window.history.back()}
             className="inline-flex items-center gap-2 rounded-full border border-foreground/15 bg-foreground/5 px-6 py-2.5 text-sm font-medium text-foreground/60 transition-all duration-200 hover:bg-foreground/10 hover:text-foreground"
           >
-            <ArrowLeft size={14} />
+            <ArrowLeftIcon width={14} height={14} />
             Go Back
           </button>
         </div>
