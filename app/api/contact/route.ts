@@ -19,7 +19,7 @@ export async function POST(request: Request) {
       from: 'ZK Portfolio <onboarding@resend.dev>',
       to: [process.env.CONTACT_TO_EMAIL ?? 'zaahid.khaliq@gmail.com'],
       replyTo: email,
-      subject: `New message from ${name} — Portfolio`,
+      subject: `New message from ${name} ~ Portfolio`,
       html: `
         <div style="font-family:sans-serif;max-width:600px;margin:0 auto;padding:24px;background:#f9fafb;border-radius:12px;">
           <h2 style="color:#1E1B4B;margin:0 0 20px;">New Message</h2>

@@ -33,7 +33,7 @@ const projects = [
     category: "Bootstrap / SCSS / Drupal",
     year: "2022",
     description:
-      "A full-cycle design and tech agency delivering smart, scalable solutions — combining expert consulting, strategic design, and AI-driven automation.",
+      "A full-cycle design and tech agency delivering smart, scalable solutions ~ combining expert consulting, strategic design, and AI-driven automation.",
     tech: ["Bootstrap 5", "SCSS", "Drupal"],
     liveUrl: "https://www.creativefaze.com",
     image: "/images/portfolio/p3.png",
@@ -44,7 +44,7 @@ const projects = [
     category: "Bootstrap / SCSS / Drupal",
     year: "2021",
     description:
-      "An orphanage and school platform for the future of Haiti — featuring integrated donation capabilities and compelling mission storytelling.",
+      "An orphanage and school platform for the future of Haiti ~ featuring integrated donation capabilities and compelling mission storytelling.",
     tech: ["Bootstrap", "SCSS", "Drupal"],
     liveUrl: "https://www.centerofhope-haiti.org/",
     image: "/images/portfolio/p2.png",
@@ -55,7 +55,7 @@ const projects = [
     category: "Rails / TailwindCSS",
     year: "2022",
     description:
-      "Connecticut's premier health news portal — featuring real-time medical coverage, career listings, and community health resources via NBC Connecticut.",
+      "Connecticut's premier health news portal ~ featuring real-time medical coverage, career listings, and community health resources via NBC Connecticut.",
     tech: ["Tailwind", "Rails", "PostgreSQL"],
     liveUrl: "https://cthealthnews.com/",
     image: "/images/portfolio/p6.png",
@@ -77,7 +77,7 @@ const projects = [
     category: "Haml / SCSS",
     year: "2021",
     description:
-      "A social media platform for the future of education — featuring integrated donation capabilities and compelling mission storytelling.",
+      "A social media platform for the future of education ~ featuring integrated donation capabilities and compelling mission storytelling.",
     tech: ["Laravel", "SCSS", "JQuery"],
     liveUrl: "https://slyng.com/",
     image: "/images/portfolio/p5.png",

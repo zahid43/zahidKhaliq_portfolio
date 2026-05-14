@@ -7,7 +7,7 @@ const meta = {
   slug: "tailwind-v4",
   title: "Mastering Tailwind CSS v4: What Changed and Why It Matters",
   excerpt:
-    "Tailwind v4 moves configuration entirely into CSS via @theme inline — no more tailwind.config.js. I migrated this very portfolio to v4 and learned some important gotchas along the way: cascade layers, the new @custom-variant syntax for dark mode, and how PostCSS integration changed. Here's the full breakdown with before/after examples.",
+    "Tailwind v4 moves configuration entirely into CSS via @theme inline ~ no more tailwind.config.js. I migrated this very portfolio to v4 and learned some important gotchas along the way: cascade layers, the new @custom-variant syntax for dark mode, and how PostCSS integration changed. Here's the full breakdown with before/after examples.",
   date: "May 2026",
   category: "CSS",
   readTime: "6 min read",
@@ -30,7 +30,7 @@ const meta = {
 const content: ContentBlock[] = [
   {
     type: "paragraph",
-    text: "Tailwind CSS v4 is the most significant release since the framework was first introduced. The headline change: there is no more tailwind.config.js. Configuration now lives entirely inside your CSS file using the @theme directive — and while it sounds strange at first, it turns out to be a much better mental model.",
+    text: "Tailwind CSS v4 is the most significant release since the framework was first introduced. The headline change: there is no more tailwind.config.js. Configuration now lives entirely inside your CSS file using the @theme directive ~ and while it sounds strange at first, it turns out to be a much better mental model.",
   },
   {
     type: "paragraph",
@@ -39,7 +39,7 @@ const content: ContentBlock[] = [
   {
     type: "heading",
     level: 2,
-    text: "Step 1 — Update Your Dependencies",
+    text: "Step 1 ~ Update Your Dependencies",
   },
   {
     type: "paragraph",
@@ -67,7 +67,7 @@ const content: ContentBlock[] = [
   {
     type: "heading",
     level: 2,
-    text: "Step 2 — Move Config into CSS",
+    text: "Step 2 ~ Move Config into CSS",
   },
   {
     type: "paragraph",
@@ -82,7 +82,7 @@ const content: ContentBlock[] = [
 /* Scope dark mode to the .dark class */
 @custom-variant dark (&:where(.dark, .dark *));
 
-/* Design tokens — replaces your tailwind.config.js theme */
+/* Design tokens ~ replaces your tailwind.config.js theme */
 @theme inline {
   --color-accent:    #6366F1;
   --color-accentAlt: #14B8A6;
@@ -106,17 +106,17 @@ const content: ContentBlock[] = [
   {
     type: "heading",
     level: 2,
-    text: "Step 3 — Handle the Breaking Changes",
+    text: "Step 3 ~ Handle the Breaking Changes",
   },
   {
     type: "paragraph",
-    text: "v4 renames a handful of utilities to match CSS spec naming. These break silently — no errors, just wrong styles:",
+    text: "v4 renames a handful of utilities to match CSS spec naming. These break silently ~ no errors, just wrong styles:",
   },
   {
     type: "code",
     language: "diff",
     filename: "migration.diff",
-    code: `/* Gradients — renamed to match CSS spec */
+    code: `/* Gradients ~ renamed to match CSS spec */
 - bg-gradient-to-r from-blue-500 to-purple-500
 + bg-linear-to-r from-blue-500 to-purple-500
 
@@ -133,7 +133,7 @@ const content: ContentBlock[] = [
   {
     type: "heading",
     level: 2,
-    text: "Step 4 — Audit Your Custom Utilities",
+    text: "Step 4 ~ Audit Your Custom Utilities",
   },
   {
     type: "paragraph",
@@ -143,10 +143,10 @@ const content: ContentBlock[] = [
     type: "code",
     language: "tsx",
     filename: "Component.tsx",
-    code: `{/* v3 — arbitrary CSS variable */}
+    code: `{/* v3 ~ arbitrary CSS variable */}
 <div className="bg-[--my-color]" />
 
-{/* v4 — new syntax with parentheses */}
+{/* v4 ~ new syntax with parentheses */}
 <div className="bg-(--my-color)" />`,
   },
   {
@@ -157,12 +157,12 @@ const content: ContentBlock[] = [
   {
     type: "list",
     items: [
-      "No more tailwind.config.js — all config lives in CSS via @theme",
+      "No more tailwind.config.js ~ all config lives in CSS via @theme",
       "bg-gradient-* renamed to bg-linear-* to match CSS spec",
       "@custom-variant replaces the darkMode: 'class' JS config option",
       "shadow-sm is now shadow-xs (shadows shifted down one step)",
       "Arbitrary CSS variables now use bg-(--var) instead of bg-[--var]",
-      "JIT is the only mode — there is no full pregenerated build",
+      "JIT is the only mode ~ there is no full pregenerated build",
     ],
   },
   {
@@ -171,7 +171,7 @@ const content: ContentBlock[] = [
   },
   {
     type: "paragraph",
-    text: "Overall, v4 is a big step forward. The migration takes about an hour for a medium-sized project. Once you've made the mental switch to CSS-first config, it's genuinely more intuitive — and the @custom-variant syntax for dark mode is cleaner than anything v3 offered.",
+    text: "Overall, v4 is a big step forward. The migration takes about an hour for a medium-sized project. Once you've made the mental switch to CSS-first config, it's genuinely more intuitive ~ and the @custom-variant syntax for dark mode is cleaner than anything v3 offered.",
   },
 ];
 

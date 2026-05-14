@@ -7,7 +7,7 @@ const meta = {
   slug: "react-performance",
   title: "React Performance: Stop Guessing, Start Measuring",
   excerpt:
-    "Profiler, memo, useMemo — knowing when NOT to use them matters as much as knowing when to.",
+    "Profiler, memo, useMemo ~ knowing when NOT to use them matters as much as knowing when to.",
   date: "Nov 2024",
   category: "React",
   readTime: "6 min read",

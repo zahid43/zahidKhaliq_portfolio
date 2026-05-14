@@ -5,9 +5,9 @@ import type { BlogPost, ContentBlock } from "../blog-types";
 const meta = {
   id: 9,
   slug: "js-snippets",
-  title: "JS Snippets — Browser Console Tricks Worth Keeping",
+  title: "JS Snippets ~ Browser Console Tricks Worth Keeping",
   excerpt:
-    "Handy one-off scripts I keep reaching for in DevTools. Paste, run, done — no libraries, no setup. Starting with the sticky positioning debugger that's saved me more than once.",
+    "Handy one-off scripts I keep reaching for in DevTools. Paste, run, done ~ no libraries, no setup. Starting with the sticky positioning debugger that's saved me more than once.",
   date: "May 2026",
   category: "JavaScript",
   readTime: "3 min read",
@@ -30,7 +30,7 @@ const meta = {
 const content: ContentBlock[] = [
   {
     type: "paragraph",
-    text: "These are the scripts I paste straight into the browser console when I hit a wall. No npm, no imports — just open DevTools and go.",
+    text: "These are the scripts I paste straight into the browser console when I hit a wall. No npm, no imports ~ just open DevTools and go.",
   },
 
   // ── position: sticky debugger ─────────────────────────────────────────────
@@ -59,12 +59,12 @@ while (parent) {
   },
   {
     type: "paragraph",
-    text: "Swap '.sticky' for whatever selector targets your stuck element. Any element that logs is a candidate — set its overflow back to visible (or remove it entirely) and your sticky should snap into place.",
+    text: "Swap '.sticky' for whatever selector targets your stuck element. Any element that logs is a candidate ~ set its overflow back to visible (or remove it entirely) and your sticky should snap into place.",
   },
   {
     type: "list",
     items: [
-      "overflow: hidden on a parent is the #1 cause — even if it's set on a grandparent several levels up",
+      "overflow: hidden on a parent is the #1 cause ~ even if it's set on a grandparent several levels up",
       "overflow: auto and overflow: scroll also break it, even when no scrollbar is visible",
       "position: sticky also requires a defined top / bottom / left / right value to kick in",
       "The parent must have enough height for the sticky element to actually travel within",

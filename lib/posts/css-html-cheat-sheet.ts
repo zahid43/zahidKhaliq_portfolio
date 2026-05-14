@@ -7,7 +7,7 @@ const meta = {
   slug: "css-html-cheat-sheet",
   title: "Frontend Cheat Sheet: HTML Basics, Media Queries & CSS Tricks",
   excerpt:
-    "A personal reference covering the essentials — linking assets in HTML, responsive media queries, SCSS mixins, sticky footers, gradient text, scrollbar styling, browser-specific queries, and more. Everything I keep going back to.",
+    "A personal reference covering the essentials ~ linking assets in HTML, responsive media queries, SCSS mixins, sticky footers, gradient text, scrollbar styling, browser-specific queries, and more. Everything I keep going back to.",
   date: "May 2026",
   category: "CSS",
   readTime: "7 min read",
@@ -30,14 +30,14 @@ const meta = {
 const content: ContentBlock[] = [
   {
     type: "paragraph",
-    text: "This is my personal reference sheet — the snippets and patterns I reach for constantly. Bookmark it, copy freely.",
+    text: "This is my personal reference sheet ~ the snippets and patterns I reach for constantly. Bookmark it, copy freely.",
   },
 
   // ── HTML Basics ──────────────────────────────────────────────────────────────
   {
     type: "heading",
     level: 2,
-    text: "HTML Basics — Linking Assets",
+    text: "HTML Basics ~ Linking Assets",
   },
   {
     type: "code",
@@ -84,7 +84,7 @@ const content: ContentBlock[] = [
   },
   {
     type: "paragraph",
-    text: "Handy URLs for prototyping — click any to copy, then paste straight into your src attribute.",
+    text: "Handy URLs for prototyping ~ click any to copy, then paste straight into your src attribute.",
   },
   {
     type: "link",
@@ -111,7 +111,7 @@ const content: ContentBlock[] = [
     type: "link",
     href: "https://www.rmp-streaming.com/media/bbb-360p.mp4",
     text: "Sample video (MP4)",
-    description: "360p Big Buck Bunny clip — reliable for video element testing",
+    description: "360p Big Buck Bunny clip ~ reliable for video element testing",
     copyable: true,
   },
 
@@ -123,7 +123,7 @@ const content: ContentBlock[] = [
   },
   {
     type: "paragraph",
-    text: "A media query consists of an optional media type and any number of expressions that limit when it triggers — width, pixel density, orientation, etc.",
+    text: "A media query consists of an optional media type and any number of expressions that limit when it triggers ~ width, pixel density, orientation, etc.",
   },
   {
     type: "code",
@@ -140,7 +140,7 @@ $desktop-lg-start:   "only screen and (max-width : 1440px)";`,
   {
     type: "code",
     language: "css",
-    filename: "Tablet — Landscape",
+    filename: "Tablet ~ Landscape",
     code: `@media only screen and (max-width: 1024px) {
   /* styles here */
 }`,
@@ -148,7 +148,7 @@ $desktop-lg-start:   "only screen and (max-width : 1440px)";`,
   {
     type: "code",
     language: "css",
-    filename: "Tablet — Portrait",
+    filename: "Tablet ~ Portrait",
     code: `@media only screen and (max-width: 768px) {
   /* styles here */
 }`,
@@ -162,7 +162,7 @@ $desktop-lg-start:   "only screen and (max-width : 1440px)";`,
   },
   {
     type: "paragraph",
-    text: "Cross-browser flexbox mixins using @mixin and @include — useful when you still need to support older WebKit targets.",
+    text: "Cross-browser flexbox mixins using @mixin and @include ~ useful when you still need to support older WebKit targets.",
   },
   {
     type: "code",
@@ -237,7 +237,7 @@ $desktop-lg-start:   "only screen and (max-width : 1440px)";`,
   {
     type: "code",
     language: "css",
-    filename: "Child — main content",
+    filename: "Child ~ main content",
     code: `.main-content {
   -webkit-box-flex: 1;
   -ms-flex: 1 0 auto;
@@ -372,7 +372,7 @@ input::-webkit-inner-spin-button {
   },
   {
     type: "paragraph",
-    text: "Creates a responsive grid that automatically adjusts column count based on available space — no media queries needed.",
+    text: "Creates a responsive grid that automatically adjusts column count based on available space ~ no media queries needed.",
   },
   {
     type: "code",
@@ -387,7 +387,7 @@ input::-webkit-inner-spin-button {
   {
     type: "heading",
     level: 2,
-    text: "Worth Watching — Kevin Powell",
+    text: "Worth Watching ~ Kevin Powell",
   },
   {
     type: "link",

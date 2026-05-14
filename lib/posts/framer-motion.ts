@@ -7,7 +7,7 @@ const meta = {
   slug: "framer-motion",
   title: "Framer Motion: The 80/20 Guide",
   excerpt:
-    "Spring physics, layout animations, and AnimatePresence — the 20% of the API you'll use 80% of the time.",
+    "Spring physics, layout animations, and AnimatePresence ~ the 20% of the API you'll use 80% of the time.",
   date: "Feb 2025",
   category: "Animation",
   readTime: "7 min read",

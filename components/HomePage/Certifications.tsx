@@ -47,7 +47,7 @@ export default function Certifications() {
             <span className="h-[2px] w-4 rounded-full bg-accent" />
           </span>
           <h4 className="font-bold">Licenses & Credentials</h4>
-          <p className="text-sm text-muted mt-3">Issued by Coursera — click any badge to verify</p>
+          <p className="text-sm text-muted mt-3">Issued by Coursera ~ click any badge to verify</p>
         </div>
       </div>
 

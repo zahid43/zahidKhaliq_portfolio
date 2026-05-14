@@ -7,7 +7,7 @@ const meta = {
   slug: "nextjs-app-router",
   title: "Next.js App Router: The Mental Model You Need",
   excerpt:
-    "Server components, client boundaries, and the new data fetching patterns — once the mental model clicks, everything becomes obvious.",
+    "Server components, client boundaries, and the new data fetching patterns ~ once the mental model clicks, everything becomes obvious.",
   date: "Apr 2025",
   category: "Next.js",
   readTime: "5 min read",

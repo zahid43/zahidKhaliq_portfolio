@@ -4,7 +4,7 @@ export default function CTABanner() {
   return (
     <section className="relative overflow-hidden py-16 lg:py-20">
       <div className="container relative z-10">
-        <div className="relative rounded-3xl overflow-hidden border border-accent/20 dark:border-accent/15 bg-gradient-to-br from-indigo-50 via-violet-50 to-purple-100 dark:from-[#06061e] dark:via-[#0d0828] dark:to-[#100a30] p-10 lg:p-16 shadow-2xl shadow-indigo-200/40 dark:shadow-indigo-950/60">
+        <div className="relative rounded-3xl overflow-hidden border border-accent/20 dark:border-accent/15 bg-linear-to-br from-indigo-50 via-violet-50 to-purple-100 dark:from-[#06061e] dark:via-[#0d0828] dark:to-[#100a30] p-10 lg:p-16 shadow-2xl shadow-indigo-200/40 dark:shadow-indigo-950/60">
 
           {/* Background glow orbs */}
           <div className="pointer-events-none absolute -top-16 -left-16 h-72 w-72 rounded-full bg-accent/20 dark:bg-accent/25 blur-3xl" />
@@ -48,7 +48,7 @@ export default function CTABanner() {
               </h3>
 
               <p className="text-sm leading-relaxed text-foreground/65 max-w-md mx-auto lg:mx-0">
-                Whether it&apos;s a Webflow site, a React app, or a full design-to-deployment build — I&apos;m open to freelance projects, full-time roles, and long-term collaborations.
+                Whether it&apos;s a Webflow site, a React app, or a full design-to-deployment build ~ I&apos;m open to freelance projects, full-time roles, and long-term collaborations.
               </p>
             </div>
 

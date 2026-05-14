@@ -7,7 +7,7 @@ const meta = {
   slug: "dark-mode",
   title: "Dark Mode Done Right: CSS Variables + next-themes",
   excerpt:
-    "Most dark mode implementations break on hydration or flicker on first load. Here's the SSR-safe pattern I use across all my Next.js projects — CSS custom properties paired with next-themes' class strategy, giving you flicker-free dark mode with proper system preference support out of the box.",
+    "Most dark mode implementations break on hydration or flicker on first load. Here's the SSR-safe pattern I use across all my Next.js projects ~ CSS custom properties paired with next-themes' class strategy, giving you flicker-free dark mode with proper system preference support out of the box.",
   date: "Dec 2024",
   category: "CSS",
   readTime: "5 min read",

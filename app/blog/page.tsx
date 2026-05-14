@@ -215,7 +215,7 @@ export default function BlogPage() {
             </span>
             <h4 className="font-bold mb-4">My Learnings</h4>
             <p className="text-darkBlue/60 dark:text-white/55 text-[15px] leading-relaxed">
-              Short, practical articles on frontend development — patterns I&apos;ve adopted, tools I&apos;ve found useful, and things I wish I&apos;d learned sooner.
+              Short, practical articles on frontend development ~ patterns I&apos;ve adopted, tools I&apos;ve found useful, and things I wish I&apos;d learned sooner.
             </p>
           </motion.div>
 

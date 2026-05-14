@@ -21,7 +21,7 @@ const comments = [
   },
   {
     name: "Yisal Khan",
-    desc: "Zahid Khaliq is one of the most motivated, hard working people I've ever met and worked with. His skills of Frontend Designing are amazing. He is always motivated to learn new Frontend Technologies — Tailwind, Webflow, MaterialUI and many more.",
+    desc: "Zahid Khaliq is one of the most motivated, hard working people I've ever met and worked with. His skills of Frontend Designing are amazing. He is always motivated to learn new Frontend Technologies ~ Tailwind, Webflow, MaterialUI and many more.",
     position: "Senior Software Engineer · NodeJS · Laravel",
     linkedinUrl: "https://www.linkedin.com/in/zaahidkhaliq/",
   },
@@ -79,7 +79,7 @@ export default function Endorsements() {
     );
   }, []);
 
-  // Auto-play — pauses on hover
+  // Auto-play ~ pauses on hover
   useEffect(() => {
     const interval = setInterval(() => {
       if (!isPaused.current) goToNext();

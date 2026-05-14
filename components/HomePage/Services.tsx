@@ -6,7 +6,7 @@ const services = [
   {
     title: "React & Next.js Apps",
     description:
-      "Building responsive, interactive UIs with React and Next.js — clean component architecture, smooth rendering, and polished user experiences.",
+      "Building responsive, interactive UIs with React and Next.js ~ clean component architecture, smooth rendering, and polished user experiences.",
     points: ["Component architecture", "App Router & layouts", "Tailwind CSS styling", "State management (hooks / Zustand)"],
     cardGradient: "from-indigo-50 via-blue-50 to-violet-100 dark:from-[#06061e] dark:via-[#0a0828] dark:to-[#100a30]",
     borderColor: "border-indigo-200/80 dark:border-indigo-500/20 hover:border-indigo-400/50 dark:hover:border-indigo-400/40",
@@ -23,7 +23,7 @@ const services = [
   {
     title: "HTML / CSS / SCSS",
     description:
-      "Pixel-perfect UI implementation from any Figma or design file — clean, maintainable, and cross-browser ready.",
+      "Pixel-perfect UI implementation from any Figma or design file ~ clean, maintainable, and cross-browser ready.",
     points: ["Bootstrap 5 layouts", "Custom SCSS architecture", "BEM / utility-first", "Cross-browser compatibility"],
     cardGradient: "from-violet-50 via-purple-50 to-fuchsia-100 dark:from-[#0e0520] dark:via-[#140728] dark:to-[#1c0a32]",
     borderColor: "border-violet-200/80 dark:border-violet-500/20 hover:border-violet-400/50 dark:hover:border-violet-400/40",
@@ -40,7 +40,7 @@ const services = [
   {
     title: "Shopify & WordPress UI",
     description:
-      "Crafting storefront themes, landing pages, and CMS templates — plus designing layouts handed off to ROR, PHP, and backend teams.",
+      "Crafting storefront themes, landing pages, and CMS templates ~ plus designing layouts handed off to ROR, PHP, and backend teams.",
     points: ["Shopify Liquid theme UI", "WordPress theme & page design", "Layout handoff for ROR / PHP teams", "Headless CMS frontend integration"],
     cardGradient: "from-amber-50 via-orange-50 to-yellow-100 dark:from-[#1a1005] dark:via-[#1e1205] dark:to-[#241508]",
     borderColor: "border-amber-200/80 dark:border-amber-500/20 hover:border-amber-400/50 dark:hover:border-amber-400/40",
@@ -58,7 +58,7 @@ const services = [
   {
     title: "Responsive Design & Animations",
     description:
-      "Bringing designs to life with fluid layouts, smooth transitions, and delightful micro-interactions — looking great on every screen size.",
+      "Bringing designs to life with fluid layouts, smooth transitions, and delightful micro-interactions ~ looking great on every screen size.",
     points: ["Mobile-first responsive layouts", "CSS & Framer Motion animations", "Micro-interactions & transitions", "Figma to code handoff"],
     cardGradient: "from-teal-50 via-emerald-50 to-cyan-100 dark:from-[#031a14] dark:via-[#051e16] dark:to-[#062018]",
     borderColor: "border-teal-200/80 dark:border-teal-500/20 hover:border-teal-400/50 dark:hover:border-teal-400/40",
@@ -102,7 +102,7 @@ export default function Services() {
           </span>
           <h4 className="font-bold">What I Build</h4>
           <p className="text-sm text-muted mt-3 max-w-md mx-auto">
-            From Figma to deployment — I cover the full frontend spectrum, with deep experience in the tools that ship fast and scale well.
+            From Figma to deployment ~ I cover the full frontend spectrum, with deep experience in the tools that ship fast and scale well.
           </p>
         </div>
 

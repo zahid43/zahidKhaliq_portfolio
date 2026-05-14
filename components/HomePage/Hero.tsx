@@ -257,7 +257,7 @@ export default function Hero() {
               {/* Description */}
               <motion.p variants={itemVariants}
                 className="text-sm leading-relaxed text-darkBlue/70 dark:text-white/65 max-w-md mx-auto lg:mx-0">
-                Crafting fast, beautiful, and accessible web experiences — from pixel-perfect UI to production-ready code.
+                Crafting fast, beautiful, and accessible web experiences ~ from pixel-perfect UI to production-ready code.
               </motion.p>
 
               {/* Stats count-up */}

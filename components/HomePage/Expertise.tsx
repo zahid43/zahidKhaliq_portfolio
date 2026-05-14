@@ -33,7 +33,7 @@ const expertiseItems = [
   {
     number: "4",
     title: "React & Next.js",
-    description: "Crafting performant, SEO-friendly apps with React and Next.js — from component design to full-stack deployment.",
+    description: "Crafting performant, SEO-friendly apps with React and Next.js ~ from component design to full-stack deployment.",
     starClass: "hidden lg:block -top-4 right-16 animate-spin [animation-duration:14s] [animation-direction:reverse] [filter:hue-rotate(160deg)_saturate(1.2)] dark:[filter:hue-rotate(160deg)_saturate(1.2)_brightness(1.6)]",
     cardSpecial: "bg-linear-to-br from-cyan-500/5 via-transparent to-blue-500/5 dark:from-cyan-500/10 dark:to-blue-500/5 hover:shadow-[0_0_30px_rgba(6,182,212,0.15)]",
     glowClass: "bg-cyan-400 dark:bg-cyan-500",
@@ -125,7 +125,7 @@ export default function Expertise() {
 <div className="container">
         <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_1px_minmax(0,1fr)] lg:items-center z-1 relative gap-y-16 lg:gap-y-0">
 
-          {/* Icon wheel — left */}
+          {/* Icon wheel ~ left */}
           <div 
             className="w-full flex items-center justify-center lg:order-0 py-8 lg:py-0 lg:pr-16 overflow-hidden"
             onMouseEnter={() => setIsHovered(true)}
@@ -193,7 +193,7 @@ export default function Expertise() {
             </div>
           </div>
 
-          {/* Cards — left */}
+          {/* Cards ~ left */}
           <div className="grid grid-cols-2 lg:grid-cols-1 gap-3 lg:gap-6 lg:pl-16 max-lg:auto-rows-[1fr]">
             <div className="col-span-2 lg:col-span-1 text-center lg:text-left mb-2 lg:mb-4">
               <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.25em] text-accent mb-2">
@@ -221,7 +221,7 @@ export default function Expertise() {
 
       {/* Skill marquee */}
       <div className="relative pt-12 [mask-image:linear-gradient(to_right,transparent,black_15%,black_85%,transparent)]">
-        {/* Row 1 — left */}
+        {/* Row 1 ~ left */}
         <div className="overflow-hidden mb-3 group">
           <div className="flex w-max group-hover:[animation-play-state:paused]" style={{ animation: "marquee 60s linear infinite" }}>
             {[...row1, ...row1, ...row1].map((skill, i) => (
@@ -233,7 +233,7 @@ export default function Expertise() {
           </div>
         </div>
 
-        {/* Row 2 — right */}
+        {/* Row 2 ~ right */}
         <div className="overflow-hidden group">
           <div className="flex w-max group-hover:[animation-play-state:paused]" style={{ animation: "marquee 60s linear infinite reverse" }}>
             {[...row2, ...row2, ...row2].map((skill, i) => (
