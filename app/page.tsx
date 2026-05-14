@@ -10,6 +10,7 @@ import {
   DarkModeToast,
   Services,
   CTABanner,
+  LatestPosts,
 } from "@/components/HomePage";
 
 const Divider = () => (
@@ -33,6 +34,8 @@ export default function Home() {
       <Certifications />
       <Divider />
       <Projects />
+      <Divider />
+      <LatestPosts />
       <CTABanner />
       <Endorsements />
       <Divider />

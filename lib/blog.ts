@@ -8,6 +8,7 @@ import typescriptGenerics from "./posts/typescript-generics";
 import darkMode from "./posts/dark-mode";
 import reactPerformance from "./posts/react-performance";
 import cssHtmlCheatSheet from "./posts/css-html-cheat-sheet";
+import jsSnippets from "./posts/js-snippets";
 
 export const posts = [
   tailwindV4,
@@ -18,4 +19,5 @@ export const posts = [
   darkMode,
   reactPerformance,
   cssHtmlCheatSheet,
+  jsSnippets,
 ];

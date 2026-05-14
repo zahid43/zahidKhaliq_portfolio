@@ -1,21 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { Footer } from "@/components/HomePage";
 import { posts, type BlogPost } from "@/lib/blog";
 import CodeBraces from "@/components/ReusableSvgs/CodeBraces";
-
-const categoryStrip: Record<string, string> = {
-  CSS: "bg-violet-500",
-  "Next.js": "bg-teal-400",
-  A11y: "bg-indigo-500",
-  Animation: "bg-pink-500",
-  TypeScript: "bg-amber-400",
-  React: "bg-cyan-400",
-};
 
 const categoryText: Record<string, string> = {
   CSS: "text-violet-600 dark:text-violet-400",
@@ -24,316 +15,173 @@ const categoryText: Record<string, string> = {
   Animation: "text-pink-600 dark:text-pink-400",
   TypeScript: "text-amber-600 dark:text-amber-400",
   React: "text-cyan-600 dark:text-cyan-400",
+  JavaScript: "text-orange-600 dark:text-orange-400",
+};
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 20 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.45, ease: "easeOut" as const } },
 };
 
 const stagger = {
   hidden: {},
-  show: { transition: { staggerChildren: 0.07 } },
+  show: { transition: { staggerChildren: 0.055 } },
 };
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 22 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.45, ease: "easeOut" as const } },
-};
+// ─── Preview Panel ────────────────────────────────────────────────────────────
+function PreviewPanel({ post }: { post: BlogPost }) {
+  const isPublished = !!post.slug;
+  const tc = categoryText[post.category] ?? "text-accent";
 
-// ─── Spotlight helpers ────────────────────────────────────────────────────────
-function handleSpotlight(e: React.MouseEvent<HTMLDivElement>) {
-  const rect = e.currentTarget.getBoundingClientRect();
-  e.currentTarget.style.setProperty("--mx", `${e.clientX - rect.left}px`);
-  e.currentTarget.style.setProperty("--my", `${e.clientY - rect.top}px`);
+  return (
+    <div className="relative h-[460px] w-full">
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={post.id}
+          initial={{ opacity: 0, y: 18, scale: 0.98 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          exit={{ opacity: 0, y: -12, scale: 0.98 }}
+          transition={{ duration: 0.32, ease: "easeOut" }}
+          className={`absolute inset-0 rounded-2xl overflow-hidden bg-linear-to-br ${post.color.gradient} border ${post.color.border} p-7 lg:p-9 flex flex-col shadow-md`}
+        >
+          {/* CodeBraces watermark */}
+          <div className="pointer-events-none absolute -bottom-4 -right-4 opacity-[0.045] dark:opacity-6 text-darkBlue dark:text-white select-none">
+            <CodeBraces width={140} height={140} />
+          </div>
+
+          {/* Post number watermark */}
+          <div className="pointer-events-none absolute top-4 right-6 font-black text-[5rem] leading-none tabular-nums text-darkBlue/5 dark:text-white/6 select-none">
+            {String(posts.findIndex(p => p.id === post.id) + 1).padStart(2, "0")}
+          </div>
+
+          {/* Content */}
+          <div className="relative z-10 flex flex-col h-full">
+            {/* Meta */}
+            <div className="flex items-center gap-3 mb-5">
+              <span className={`inline-flex items-center text-[10px] font-bold px-2.5 py-1 rounded-full border ${post.color.badge}`}>
+                {post.category}
+              </span>
+              <span className="text-[10px] text-darkBlue/35 dark:text-white/30">{post.date}</span>
+              <span className="h-[3px] w-[3px] rounded-full bg-darkBlue/15 dark:bg-white/15" />
+              <span className="text-[10px] text-darkBlue/35 dark:text-white/30">{post.readTime}</span>
+            </div>
+
+            {/* Title */}
+            <h3 className="text-xl lg:text-2xl font-bold leading-tight text-darkBlue dark:text-white mb-4">
+              {post.title}
+            </h3>
+
+            {/* Excerpt */}
+            <p className="text-[13px] leading-relaxed text-darkBlue/55 dark:text-white/50 flex-1 line-clamp-4">
+              {post.excerpt}
+            </p>
+
+            {/* CTA */}
+            <div className="mt-6 pt-5 border-t border-darkBlue/8 dark:border-white/7">
+              {isPublished ? (
+                <Link
+                  href={`/blog/${post.slug}`}
+                  className={`inline-flex items-center gap-2 text-[13px] font-semibold ${tc} hover:gap-3 transition-all duration-200`}
+                >
+                  Read post
+                  <span className="text-[16px] leading-none">→</span>
+                </Link>
+              ) : (
+                <span className="text-[10px] font-medium px-2.5 py-1 rounded-lg bg-darkBlue/5 dark:bg-white/5 border border-darkBlue/8 dark:border-white/8 text-darkBlue/30 dark:text-white/25 uppercase tracking-wider">
+                  Coming soon
+                </span>
+              )}
+            </div>
+          </div>
+        </motion.div>
+      </AnimatePresence>
+    </div>
+  );
 }
 
-const Spotlight = ({ color = "var(--color-accent)" }: { color?: string }) => (
-  <div
-    aria-hidden="true"
-    className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl"
-    style={{
-      background: `radial-gradient(circle 220px at var(--mx, 50%) var(--my, 50%), color-mix(in srgb, ${color} 13%, transparent), transparent 70%)`,
-    }}
-  />
-);
-
-// ─── Shared dim transition ────────────────────────────────────────────────────
-const dimClass = (dimmed: boolean) =>
-  `transition-all duration-300 ${dimmed ? "opacity-35 scale-[0.985]" : "opacity-100 scale-100"}`;
-
-// ─── Featured Card ────────────────────────────────────────────────────────────
-function FeaturedCard({
-  post, num, dimmed, onHover, onLeave,
+// ─── List Row ─────────────────────────────────────────────────────────────────
+function PostRow({
+  post, num, active, onHover,
 }: {
-  post: BlogPost; num: string; dimmed: boolean;
-  onHover: () => void; onLeave: () => void;
+  post: BlogPost; num: string; active: boolean; onHover: () => void;
 }) {
   const isPublished = !!post.slug;
+  const tc = categoryText[post.category] ?? "text-accent";
 
   const inner = (
     <div
-      onMouseMove={handleSpotlight}
-      className="relative h-full rounded-2xl overflow-hidden bg-[#06041a] border border-white/[0.07] hover:border-white/[0.14] transition-all duration-500 group flex flex-col shadow-xl shadow-black/25"
+      onMouseEnter={onHover}
+      className={`group relative flex items-center gap-4 px-4 py-4 rounded-xl cursor-pointer transition-all duration-200 ${
+        active
+          ? "bg-foreground/4 dark:bg-white/4"
+          : "hover:bg-foreground/[0.025] dark:hover:bg-white/2.5"
+      }`}
     >
-      <Spotlight color="rgb(139 92 246)" />
+      {/* Active left bar */}
+      <div
+        className={`absolute left-0 top-1/2 -translate-y-1/2 w-[2.5px] rounded-full bg-accent transition-all duration-300 ${
+          active ? "h-[60%] opacity-100" : "h-[30%] opacity-0 group-hover:opacity-40 group-hover:h-[40%]"
+        }`}
+      />
 
-      {/* Glow orbs */}
-      <div className="pointer-events-none absolute -top-24 -right-24 h-72 w-72 rounded-full bg-violet-600/20 blur-3xl" />
-      <div className="pointer-events-none absolute -bottom-16 -left-16 h-56 w-56 rounded-full bg-indigo-600/15 blur-3xl" />
-
-      {/* CodeBraces watermark */}
-      <div className="pointer-events-none absolute -top-3 -left-3 opacity-[0.055] text-white select-none">
-        <CodeBraces width={110} height={110} />
-      </div>
-
-      {/* Number watermark */}
-      <div className="pointer-events-none absolute -bottom-2 -right-1 select-none font-black leading-none text-white/[0.04] text-[7.5rem] tabular-nums">
+      {/* Number */}
+      <span className="font-mono text-[11px] tabular-nums text-foreground/22 dark:text-white/20 w-6 shrink-0 ml-1 select-none">
         {num}
-      </div>
+      </span>
 
-      {/* Top accent line */}
-      <div className="h-[3px] w-full flex-shrink-0 bg-linear-to-r from-violet-500 via-indigo-500 to-transparent" />
-
-      <div className="relative z-10 flex flex-col flex-1 p-6 lg:p-8">
-        <div className="flex items-center justify-between mb-6">
-          <span className="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-[0.25em] text-white/35">
-            <span className="h-[2px] w-3 rounded-full bg-white/25" />
-            Latest Post
-          </span>
-          <span className={`inline-flex items-center text-[10px] font-bold px-2.5 py-0.5 rounded-full border ${post.color.badge}`}>
-            {post.category}
-          </span>
-        </div>
-
-        <h3 className="text-xl lg:text-[1.4rem] font-bold text-white leading-tight mb-4">
-          {post.title}
-        </h3>
-
-        <p className="text-white/45 text-[13px] leading-relaxed flex-1 mb-6">
-          {post.excerpt}
-        </p>
-
-        <div className="flex items-center justify-between gap-4 pt-4 border-t border-white/[0.06]">
-          <div className="flex items-center gap-2">
-            <span className="text-[11px] text-white/25">{post.date}</span>
-            <span className="h-[3px] w-[3px] rounded-full bg-white/15" />
-            <span className="text-[11px] text-white/25">{post.readTime}</span>
-          </div>
-
-          {isPublished ? (
-            <span className="inline-flex items-center gap-2 text-[12px] font-semibold px-4 py-2 rounded-xl border border-white/10 bg-white/[0.06] text-white/80 group-hover:bg-white/[0.11] group-hover:border-white/18 group-hover:text-white transition-all duration-200">
-              Read post <span className="group-hover:translate-x-0.5 inline-block transition-transform duration-200">→</span>
-            </span>
-          ) : (
-            <span className="text-[10px] font-medium px-2.5 py-1 rounded-lg bg-white/[0.04] border border-white/[0.07] text-white/20 uppercase tracking-wider">
-              Coming soon
-            </span>
-          )}
-        </div>
-      </div>
-    </div>
-  );
-
-  return (
-    <motion.div
-      variants={fadeUp}
-      className={`md:col-span-2 lg:col-span-2 lg:row-span-2 ${dimClass(dimmed)}`}
-      onMouseEnter={onHover}
-      onMouseLeave={onLeave}
-    >
-      {isPublished ? (
-        <Link href={`/blog/${post.slug}`} className="block h-full">{inner}</Link>
-      ) : inner}
-    </motion.div>
-  );
-}
-
-// ─── Normal Card ──────────────────────────────────────────────────────────────
-function NormalCard({
-  post, num, dimmed, onHover, onLeave,
-}: {
-  post: BlogPost; num: string; dimmed: boolean;
-  onHover: () => void; onLeave: () => void;
-}) {
-  const isPublished = !!post.slug;
-  const strip = categoryStrip[post.category] ?? "bg-accent";
-  const tc = categoryText[post.category] ?? "text-accent";
-
-  const inner = (
-    <div
-      onMouseMove={handleSpotlight}
-      className="relative h-full rounded-2xl overflow-hidden bg-white dark:bg-[#0d0b1e] border border-black/[0.07] dark:border-white/[0.07] hover:border-black/[0.14] dark:hover:border-white/[0.14] transition-all duration-300 group flex shadow-sm hover:shadow-md hover:shadow-black/5 dark:hover:shadow-black/30"
-    >
-      <Spotlight />
-
-      {/* Colored left strip */}
-      <div className={`w-[3px] flex-shrink-0 ${strip} opacity-80 group-hover:opacity-100 transition-opacity duration-300`} />
-
-      <div className="flex flex-col flex-1 p-5 min-w-0 relative">
-        {/* CodeBraces watermark */}
-        <div className="pointer-events-none absolute right-2 top-1/2 -translate-y-1/2 opacity-[0.04] dark:opacity-[0.06] text-darkBlue dark:text-white select-none">
-          <CodeBraces width={72} height={72} />
-        </div>
-
-        {/* Number watermark */}
-        <div className="pointer-events-none absolute -bottom-2 -right-1 select-none font-black leading-none text-darkBlue/[0.04] dark:text-white/[0.04] text-[5.5rem] tabular-nums">
-          {num}
-        </div>
-
-        <div className="flex items-start justify-between gap-2 mb-3 relative z-10">
-          <span className={`text-[10px] font-bold uppercase tracking-[0.2em] ${tc}`}>
-            {post.category}
-          </span>
-          <span className="font-mono text-[10px] text-darkBlue/20 dark:text-white/18 tabular-nums shrink-0">
-            {num}
-          </span>
-        </div>
-
-        <h3 className="relative z-10 text-[13.5px] font-bold leading-snug text-darkBlue dark:text-white/90 mb-2.5 line-clamp-3 flex-1">
-          {post.title}
-        </h3>
-
-        <p className="relative z-10 text-[11.5px] text-darkBlue/45 dark:text-white/38 leading-relaxed line-clamp-2 mb-4">
-          {post.excerpt}
-        </p>
-
-        <div className="relative z-10 flex items-center justify-between gap-2">
-          <div className="flex items-center gap-1.5">
-            <span className="text-[10px] text-darkBlue/28 dark:text-white/22">{post.date}</span>
-            <span className="h-[3px] w-[3px] rounded-full bg-darkBlue/12 dark:bg-white/12" />
-            <span className="text-[10px] text-darkBlue/28 dark:text-white/22">{post.readTime}</span>
-          </div>
-
-          {isPublished ? (
-            <span className={`text-[11px] font-semibold ${tc} flex items-center gap-1 group-hover:gap-1.5 transition-all duration-200`}>
-              Read <span>→</span>
-            </span>
-          ) : (
-            <span className="text-[9px] font-medium px-2 py-0.5 rounded bg-darkBlue/[0.04] dark:bg-white/[0.04] border border-darkBlue/[0.07] dark:border-white/[0.07] text-darkBlue/22 dark:text-white/18 uppercase tracking-wider">
-              Soon
-            </span>
-          )}
-        </div>
-      </div>
-    </div>
-  );
-
-  return (
-    <motion.div
-      variants={fadeUp}
-      className={dimClass(dimmed)}
-      onMouseEnter={onHover}
-      onMouseLeave={onLeave}
-    >
-      {isPublished ? (
-        <Link href={`/blog/${post.slug}`} className="block h-full">{inner}</Link>
-      ) : inner}
-    </motion.div>
-  );
-}
-
-// ─── Wide Card ────────────────────────────────────────────────────────────────
-function WideCard({
-  post, num, dimmed, onHover, onLeave,
-}: {
-  post: BlogPost; num: string; dimmed: boolean;
-  onHover: () => void; onLeave: () => void;
-}) {
-  const isPublished = !!post.slug;
-  const strip = categoryStrip[post.category] ?? "bg-accent";
-  const tc = categoryText[post.category] ?? "text-accent";
-
-  const inner = (
-    <div
-      onMouseMove={handleSpotlight}
-      className={`relative h-full rounded-2xl overflow-hidden bg-linear-to-br ${post.color.gradient} border ${post.color.border} transition-all duration-400 group flex flex-col sm:flex-row shadow-sm hover:shadow-md`}
-    >
-      <Spotlight />
-
-      {/* Top strip on mobile, left strip on sm+ */}
-      <div className={`h-[3px] sm:h-auto sm:w-[3px] flex-shrink-0 ${strip} opacity-80 group-hover:opacity-100 transition-opacity duration-300`} />
-
-      {/* CodeBraces watermark */}
-      <div className="pointer-events-none absolute bottom-2 left-6 opacity-[0.04] dark:opacity-[0.06] text-darkBlue dark:text-white select-none">
-        <CodeBraces width={80} height={80} />
-      </div>
-
-      <div className="flex-1 p-5 lg:p-7 flex flex-col justify-between min-w-0 relative z-10">
-        <div>
-          <div className="flex items-center gap-3 mb-3">
-            <span className={`text-[10px] font-bold uppercase tracking-[0.2em] ${tc}`}>
-              {post.category}
-            </span>
-          </div>
-          <h3 className="text-base lg:text-[17px] font-bold leading-snug text-darkBlue dark:text-white mb-2.5">
-            {post.title}
-          </h3>
-          <p className="text-[12.5px] text-darkBlue/52 dark:text-white/45 leading-relaxed line-clamp-3">
-            {post.excerpt}
-          </p>
-        </div>
-
-        <div className="flex items-center justify-between mt-5 pt-4 border-t border-darkBlue/[0.07] dark:border-white/[0.07]">
-          <div className="flex items-center gap-2">
-            <span className="text-[11px] text-darkBlue/32 dark:text-white/28">{post.date}</span>
-            <span className="h-[3px] w-[3px] rounded-full bg-darkBlue/12 dark:bg-white/12" />
-            <span className="text-[11px] text-darkBlue/32 dark:text-white/28">{post.readTime}</span>
-          </div>
-          {isPublished ? (
-            <span className={`text-[11px] font-semibold ${tc} flex items-center gap-1 group-hover:gap-1.5 transition-all duration-200`}>
-              Read <span>→</span>
-            </span>
-          ) : (
-            <span className="text-[9px] font-medium px-2 py-0.5 rounded bg-darkBlue/[0.04] dark:bg-white/[0.04] border border-darkBlue/[0.07] dark:border-white/[0.07] text-darkBlue/22 dark:text-white/18 uppercase tracking-wider">
-              Soon
-            </span>
-          )}
-        </div>
-      </div>
-
-      {/* Right metadata panel */}
-      <div className="hidden sm:flex flex-col items-center justify-center px-7 lg:px-10 border-l border-darkBlue/[0.07] dark:border-white/[0.07] shrink-0 gap-3 min-w-[120px] relative z-10">
-        <span className="font-mono text-[3.5rem] font-black leading-none tabular-nums text-darkBlue/[0.07] dark:text-white/[0.08] select-none">
-          {num}
+      {/* Text */}
+      <div className="flex-1 min-w-0">
+        <span className={`text-[9px] font-bold uppercase tracking-[0.22em] ${tc} block mb-0.5`}>
+          {post.category}
         </span>
-        <div className="h-px w-6 rounded-full bg-darkBlue/10 dark:bg-white/10" />
-        <span className="text-[10px] text-darkBlue/28 dark:text-white/25 uppercase tracking-[0.18em] text-center leading-tight">
-          {post.readTime}
+        <span
+          className={`text-[13.5px] font-semibold leading-snug block truncate transition-colors duration-200 ${
+            active
+              ? "text-foreground dark:text-white"
+              : "text-foreground/65 dark:text-white/55 group-hover:text-foreground/85 dark:group-hover:text-white/80"
+          }`}
+        >
+          {post.title}
+        </span>
+        <span className="lg:hidden mt-1 block text-[11.5px] leading-relaxed text-foreground/45 dark:text-white/38 line-clamp-2">
+          {post.excerpt}
         </span>
       </div>
+
+      {/* Meta */}
+      <div className="hidden sm:flex items-center gap-1.5 shrink-0">
+        <span className="text-[10px] text-foreground/28 dark:text-white/25">{post.date}</span>
+        <span className="h-[3px] w-[3px] rounded-full bg-foreground/12 dark:bg-white/12" />
+        <span className="text-[10px] text-foreground/22 dark:text-white/20">{post.readTime}</span>
+      </div>
+
+      {/* Arrow */}
+      <svg
+        aria-hidden="true"
+        width="14" height="14" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round"
+        className={`shrink-0 transition-all duration-200 ${
+          active ? "text-accent translate-x-0.5" : "text-foreground/18 dark:text-white/15 group-hover:text-foreground/45 dark:group-hover:text-white/40"
+        }`}
+      >
+        <line x1="7" y1="17" x2="17" y2="7" />
+        <polyline points="7 7 17 7 17 17" />
+      </svg>
     </div>
   );
 
+  if (!isPublished) return <motion.div variants={fadeUp}>{inner}</motion.div>;
+
   return (
-    <motion.div
-      variants={fadeUp}
-      className={`md:col-span-2 lg:col-span-3 ${dimClass(dimmed)}`}
-      onMouseEnter={onHover}
-      onMouseLeave={onLeave}
-    >
-      {isPublished ? (
-        <Link href={`/blog/${post.slug}`} className="block h-full">{inner}</Link>
-      ) : inner}
+    <motion.div variants={fadeUp}>
+      <Link href={`/blog/${post.slug}`} className="block">{inner}</Link>
     </motion.div>
   );
-}
-
-// ─── Dispatcher ───────────────────────────────────────────────────────────────
-function PostCard({
-  post, num, dimmed, onHover, onLeave,
-}: {
-  post: BlogPost; num: string; dimmed: boolean;
-  onHover: () => void; onLeave: () => void;
-}) {
-  if (post.size === "featured") return <FeaturedCard post={post} num={num} dimmed={dimmed} onHover={onHover} onLeave={onLeave} />;
-  if (post.size === "wide") return <WideCard post={post} num={num} dimmed={dimmed} onHover={onHover} onLeave={onLeave} />;
-  return <NormalCard post={post} num={num} dimmed={dimmed} onHover={onHover} onLeave={onLeave} />;
 }
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
 export default function BlogPage() {
-  const [hoveredId, setHoveredId] = useState<number | null>(null);
-
-  const ordered = [
-    ...posts.filter(p => p.size !== "wide"),
-    ...posts.filter(p => p.size === "wide"),
-  ];
+  const [activePost, setActivePost] = useState<BlogPost>(posts[0]);
 
   return (
     <>
@@ -371,24 +219,43 @@ export default function BlogPage() {
             </p>
           </motion.div>
 
-          {/* Grid */}
-          <motion.div
-            variants={stagger}
-            initial="hidden"
-            animate="show"
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 [grid-auto-rows:minmax(170px,auto)] gap-4"
-          >
-            {ordered.map((post, i) => (
-              <PostCard
-                key={post.id}
-                post={post}
-                num={String(i + 1).padStart(2, "0")}
-                dimmed={hoveredId !== null && hoveredId !== post.id}
-                onHover={() => setHoveredId(post.id)}
-                onLeave={() => setHoveredId(null)}
-              />
-            ))}
-          </motion.div>
+          {/* Two-column layout */}
+          <div className="flex flex-col lg:flex-row gap-8 lg:gap-14 items-start max-w-5xl mx-auto">
+
+            {/* List */}
+            <motion.div
+              variants={stagger}
+              initial="hidden"
+              animate="show"
+              className="flex-1 w-full space-y-1"
+            >
+              {/* Divider top */}
+              <div className="h-px bg-foreground/6 dark:bg-white/5 mb-3" />
+
+              {posts.map((post, i) => (
+                <PostRow
+                  key={post.id}
+                  post={post}
+                  num={String(i + 1).padStart(2, "0")}
+                  active={activePost.id === post.id}
+                  onHover={() => setActivePost(post)}
+                />
+              ))}
+
+              {/* Divider bottom */}
+              <div className="h-px bg-foreground/6 dark:bg-white/5 mt-3" />
+            </motion.div>
+
+            {/* Preview panel — desktop only */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.55, ease: "easeOut", delay: 0.25 }}
+              className="hidden lg:block w-[400px] shrink-0 sticky top-24"
+            >
+              <PreviewPanel post={activePost} />
+            </motion.div>
+          </div>
         </div>
       </section>
 

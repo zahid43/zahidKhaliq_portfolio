@@ -121,12 +121,10 @@ export default function Contacts() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="font-black"
+            className="font-bold"
           >
             Let&apos;s Build{' '}
-            <span className="bg-gradient-to-r from-accent via-fuchsia-500 to-accentAlt bg-clip-text text-transparent">
               Something Great
-            </span>
           </motion.h4>
         </div>
 

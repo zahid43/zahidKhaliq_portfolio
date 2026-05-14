@@ -2,11 +2,8 @@
 
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
-import Link from "next/link";
 import { Logo } from "@/components/ReusableSvgs";
-import { ThemeToggle } from "@/components/ThemeToggle";
 import MobileMenu from "@/components/HomePage/MobileMenu";
-import { navLinks, pageNavLinks } from "@/lib/constants";
 import { HamburgerIcon } from "@/components/ReusableSvgs";
 
 export default function Navbar() {
@@ -32,43 +29,7 @@ export default function Navbar() {
               <Logo width={160} height={40} className="text-accent" />
             </a>
 
-            {/* Desktop links */}
-            <ul className="hidden items-center gap-7 md:flex">
-              {navLinks.map((label) => (
-                <li key={label}>
-                  <a
-                    href={`${isHome ? "" : "/"}#${label.toLowerCase().replace(/ /g, "-")}`}
-                    className="text-sm font-medium text-foreground/60 transition-colors duration-200 hover:text-foreground"
-                  >
-                    {label}
-                  </a>
-                </li>
-              ))}
-
-              {pageNavLinks.map(({ label, href }) => (
-                <li key={label}>
-                  <Link
-                    href={href}
-                    className={`text-sm font-medium transition-colors duration-200 ${
-                      pathname === href
-                        ? "text-accent"
-                        : "text-foreground/60 hover:text-foreground"
-                    }`}
-                  >
-                    {label}
-                  </Link>
-                </li>
-              ))}
-
-              <li>
-                <ThemeToggle />
-              </li>
-            </ul>
-
-            {/* Mobile: hamburger only — ThemeToggle lives in the sidebar */}
-            <div className="md:hidden">
-              <HamburgerIcon onClick={() => setMenuOpen(true)} />
-            </div>
+            <HamburgerIcon onClick={() => setMenuOpen(true)} />
           </nav>
         </div>
       </header>
