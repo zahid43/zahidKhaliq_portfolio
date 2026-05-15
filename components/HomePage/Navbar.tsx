@@ -3,8 +3,8 @@
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { Logo } from "@/components/ReusableSvgs";
-import MobileMenu from "@/components/HomePage/MobileMenu";
-import { HamburgerIcon } from "@/components/ReusableSvgs";
+import Sidebar from "@/components/HomePage/Sidebar";
+import { SidebarIcon } from "@/components/ReusableSvgs";
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -29,12 +29,12 @@ export default function Navbar() {
               <Logo width={160} height={40} className="text-accent" />
             </a>
 
-            <HamburgerIcon onClick={() => setMenuOpen(true)} />
+            <SidebarIcon onClick={() => setMenuOpen(true)} isOpen={menuOpen} />
           </nav>
         </div>
       </header>
 
-      <MobileMenu isOpen={menuOpen} onClose={() => setMenuOpen(false)} />
+      <Sidebar isOpen={menuOpen} onClose={() => setMenuOpen(false)} />
     </>
   );
 }

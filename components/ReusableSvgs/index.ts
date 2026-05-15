@@ -8,7 +8,7 @@ export { default as NextjsIcon } from './NextjsIcon';
 export { default as FigmaIcon } from './FigmaIcon';
 export { default as WhatsAppIcon } from './WhatsAppIcon';
 export { default as XIcon } from './XIcon';
-export { default as HamburgerIcon } from './HamburgerIcon';
+export { default as SidebarIcon } from './SidebarIcon';
 export { default as ExternalLinkIcon } from './ExternalLinkIcon';
 export { default as CourseraLogo } from './CourseraLogo';
 export { default as GithubIcon } from './GithubIcon';

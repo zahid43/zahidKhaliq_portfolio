@@ -11,12 +11,12 @@ import Link from "next/link";
 import { navLinks, pageNavLinks } from "@/lib/constants";
 import { socialLinks } from "@/lib/socialLinks";
 
-interface MobileMenuProps {
+interface SidebarProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
-export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
+export default function Sidebar({ isOpen, onClose }: SidebarProps) {
   const { resolvedTheme } = useTheme();
   const pathname = usePathname();
   const isHome = pathname === "/";
@@ -38,7 +38,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
       <div
         aria-hidden="true"
         onClick={onClose}
-        className="fixed inset-0 z-[150] transition-all duration-500"
+        className="fixed inset-0 z-150 transition-all duration-500"
         style={{
           backdropFilter: isOpen ? "blur(6px)" : "none",
           WebkitBackdropFilter: isOpen ? "blur(6px)" : "none",
@@ -54,7 +54,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
       <aside
         aria-label="Navigation menu"
         aria-hidden={!isOpen}
-        className="fixed right-0 top-0 z-[200] h-full w-[min(340px,88vw)] overflow-hidden transition-all duration-[480ms] ease-[cubic-bezier(0.32,0.72,0,1)]"
+        className="fixed right-0 top-0 z-200 h-full w-[min(340px,88vw)] overflow-hidden transition-all duration-480ms ease-[cubic-bezier(0.32,0.72,0,1)]"
         style={{
           transform: isOpen ? "translateX(0)" : "translateX(100%)",
           opacity: isOpen ? 1 : 0,
@@ -150,38 +150,66 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
             </button>
           </div>
 
-          {/* Profile card */}
+          {/* Book card profile */}
           <div
-            className="mt-6 mb-5 flex items-center gap-4 transition-all duration-500"
+            className="mt-6 mb-5 flex justify-center transition-all duration-500"
             style={{
               transitionDelay: isOpen ? "160ms" : "0ms",
               opacity: isOpen ? 1 : 0,
               transform: isOpen ? "translateY(0)" : "translateY(16px)",
             }}
           >
-            {/* Avatar */}
-            <div className="relative shrink-0">
-              <div className="absolute inset-0 rounded-full bg-accent/30 blur-md scale-110" />
-              <div className="relative h-16 w-16 rounded-full overflow-hidden ring-2 ring-accent/40">
+            <div
+              className="group relative flex items-end justify-center [transform-style:preserve-3d]"
+              style={{ width: "200px", height: "260px", perspective: "2500px", padding: "0 24px 20px" }}
+            >
+              {/* Cover — tilts back on hover */}
+              <div
+                className="absolute inset-0 overflow-hidden rounded-2xl transition-all duration-500 group-hover:[transform:perspective(900px)_translateY(-5%)_rotateX(25deg)_translateZ(0)] group-hover:shadow-[2px_35px_32px_-8px_rgba(0,0,0,0.75)] dark:group-hover:shadow-[2px_35px_32px_-8px_rgba(0,0,0,0.75)]"
+              >
+                {/* Light mode cover */}
+                <div className="absolute inset-0 bg-linear-to-br from-indigo-100 via-violet-100 to-teal-50 dark:from-[#0d0b26] dark:via-[#130d35] dark:to-[#071a17]" />
+                <img
+                  src="/images/wavesCard.svg"
+                  aria-hidden="true"
+                  className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-20 dark:opacity-25"
+                  style={isDark ? { mixBlendMode: "screen" } : { mixBlendMode: "multiply", filter: "hue-rotate(180deg)" }}
+                />
+                <div className="pointer-events-none absolute -top-8 -right-8 h-28 w-28 rounded-full bg-indigo-400/25 dark:bg-indigo-500/30 blur-2xl" />
+                <div className="pointer-events-none absolute -bottom-6 -left-6 h-24 w-24 rounded-full bg-teal-400/20 dark:bg-teal-500/20 blur-2xl" />
+                {/* Top gradient — fades in on hover */}
+                <div className="absolute inset-x-0 top-0 h-full bg-linear-to-b from-indigo-200/60 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100 dark:from-[rgba(12,13,19,0.5)]" />
+                {/* Bottom gradient — always present for title readability */}
+                <div className="absolute inset-x-0 bottom-0 h-28 bg-linear-to-b from-transparent via-indigo-100/80 to-indigo-50/98 dark:via-[rgba(12,13,19,0.65)] dark:to-[rgba(12,13,19,0.96)]" />
+              </div>
+
+              {/* Character — visible by default, pops out on hover */}
+              <div
+                className="absolute inset-0 overflow-hidden rounded-2xl opacity-100 transition-all duration-500 group-hover:transform-[translate3d(0%,-18%,100px)]"
+                style={{ zIndex: 1 }}
+              >
                 <Image
                   src="/images/zahidTransparent.png"
                   alt="Zahid Khaliq"
                   fill
-                  className="object-cover object-top"
+                  className="object-contain object-bottom"
                 />
+                {/* Gradient scrim so title text stays readable */}
+                <div className="absolute inset-x-0 bottom-0 h-28 bg-linear-to-b from-transparent via-indigo-50/80 to-indigo-50/98 dark:via-[rgba(12,13,19,0.65)] dark:to-[rgba(12,13,19,0.96)]" />
               </div>
-              {/* Online dot */}
-              <span className="absolute bottom-0.5 right-0.5 h-3 w-3 rounded-full bg-emerald-400 ring-2 ring-white dark:ring-[#0d0b26]" />
-            </div>
 
-            {/* Info */}
-            <div>
-              <p className="text-base font-bold text-indigo-900 dark:text-white leading-tight">Zahid Khaliq</p>
-              <p className="text-xs text-indigo-700/70 dark:text-white/55 mt-0.5">Frontend Engineer</p>
-              <span className="mt-1.5 inline-flex items-center gap-1.5 rounded-full bg-emerald-500/12 dark:bg-emerald-500/15 border border-emerald-500/25 px-2.5 py-0.5 text-[10px] font-semibold text-emerald-700 dark:text-emerald-400">
-                <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                Available for work
-              </span>
+              {/* Title — floats forward on hover */}
+              <div
+                className="relative w-full text-center transition-all duration-500 group-hover:[transform:translate3d(0%,-50px,100px)]"
+                style={{ zIndex: 2 }}
+              >
+                <p className="text-sm font-bold leading-tight text-indigo-900 dark:text-white">Zahid Khaliq</p>
+                <p className="mt-0.5 text-[11px] text-indigo-700/60 dark:text-white/55">Frontend Engineer</p>
+                <span className="mt-2 inline-flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2.5 py-0.5 text-[9px] font-semibold text-emerald-700 dark:text-emerald-400">
+                  <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-500" />
+                  Available for work
+                </span>
+              </div>
             </div>
           </div>
 
