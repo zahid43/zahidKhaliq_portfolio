@@ -69,7 +69,7 @@ function renderBlock(block: ContentBlock, i: number) {
             key={i}
             className="mt-10 mb-4 flex items-center gap-3 text-xl font-bold text-darkBlue dark:text-foreground"
           >
-            <span className="h-[2px] w-5 rounded-full bg-accent flex-shrink-0" />
+            <span className="h-[2px] w-5 rounded-full bg-accent shrink-0" />
             {block.text}
           </h4>
         );
@@ -104,7 +104,7 @@ function renderBlock(block: ContentBlock, i: number) {
               key={j}
               className="flex items-start gap-2.5 text-[14px] leading-relaxed text-darkBlue/75 dark:text-white/70"
             >
-              <span className="mt-1 text-accent text-xs opacity-70 flex-shrink-0">
+              <span className="mt-1 text-accent text-xs opacity-70 shrink-0">
                 ✦
               </span>
               <span>{item}</span>
@@ -283,7 +283,7 @@ export default async function BlogDetailPage({
         <div className="container relative z-10">
           <div className="mx-auto max-w-2xl">
             {/* Glass card */}
-            <div className="relative overflow-hidden rounded-2xl bg-white/55 dark:bg-white/[0.025] backdrop-blur-md border border-black/[0.06] dark:border-white/[0.06] px-7 py-9 lg:px-10 lg:py-12 shadow-sm shadow-black/5 dark:shadow-black/20">
+            <div className="relative overflow-hidden rounded-2xl bg-white/55 dark:bg-white/ backdrop-blur-md border border-black/[0.06] dark:border-white/[0.06] px-7 py-9 lg:px-10 lg:py-12 shadow-sm shadow-black/5 dark:shadow-black/20">
 
               {/* CodeBraces — top-right */}
               <div className="pointer-events-none absolute -top-5 -right-5 opacity-[0.045] dark:opacity-[0.065] text-darkBlue dark:text-white select-none">

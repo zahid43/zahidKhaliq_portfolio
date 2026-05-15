@@ -155,23 +155,13 @@ body {
   filter: blur(100px);
   opacity: 0.75;
 }
-h1 {
-  font-size: clamp(2.5rem, 5vw + 1rem, 4.5rem);
-}
-h2 {
-  font-size: clamp(2rem, 4vw + 1rem, 3.5rem);
-}
-h3 {
-  font-size: clamp(1.75rem, 3vw + 1rem, 2.5rem);
-}
-h4 {
-  font-size: clamp(1.5rem, 2vw + 1rem, 2rem);
-}
-h5 {
-  font-size: clamp(1.25rem, 1.5vw + 1rem, 1.5rem);
-}
-h6 {
-  font-size: clamp(1rem, 1vw + 1rem, 1.25rem);
+@layer base {
+  h1 { font-size: clamp(2.5rem, 5vw + 1rem, 4.5rem); }
+  h2 { font-size: clamp(2rem, 4vw + 1rem, 3.5rem); }
+  h3 { font-size: clamp(1.75rem, 3vw + 1rem, 2.5rem); }
+  h4 { font-size: clamp(1.5rem, 2vw + 1rem, 2rem); }
+  h5 { font-size: clamp(1.25rem, 1.5vw + 1rem, 1.5rem); }
+  h6 { font-size: clamp(1rem, 1vw + 1rem, 1.25rem); }
 }
 
 .hero-name-shimmer {
