@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { Logo } from "@/components/ReusableSvgs";
 import Sidebar from "@/components/HomePage/Sidebar";
 import { SidebarIcon } from "@/components/ReusableSvgs";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -29,7 +30,10 @@ export default function Navbar() {
               <Logo width={160} height={40} className="text-accent" />
             </a>
 
-            <SidebarIcon onClick={() => setMenuOpen(true)} isOpen={menuOpen} />
+            <div className="flex items-center gap-1">
+              <ThemeToggle />
+              <SidebarIcon onClick={() => setMenuOpen(true)} isOpen={menuOpen} />
+            </div>
           </nav>
         </div>
       </header>

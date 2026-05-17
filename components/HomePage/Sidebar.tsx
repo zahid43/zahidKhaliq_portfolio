@@ -5,7 +5,6 @@ import { usePathname } from "next/navigation";
 import Image from "next/image";
 import { CloseIcon } from "@/components/ReusableSvgs";
 import { Logo } from "@/components/ReusableSvgs";
-import { ThemeToggle } from "@/components/ThemeToggle";
 import { useTheme } from "next-themes";
 import Link from "next/link";
 import { navLinks, pageNavLinks } from "@/lib/constants";
@@ -277,23 +276,20 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
             }}
           >
             <div className="mb-5 h-px bg-linear-to-r from-transparent via-indigo-300/40 dark:via-white/20 to-transparent" />
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2.5">
-                {socialLinks.map(({ href, label, Icon }) => (
-                  <Link
-                    key={label}
-                    href={href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={label}
-                    className="grid h-9 w-9 place-items-center rounded-full border border-indigo-200 dark:border-white/15 text-indigo-700 dark:text-white transition-all duration-300 hover:scale-110 hover:bg-indigo-100 dark:hover:bg-white/20"
-                    style={{ background: iconBg }}
-                  >
-                    <Icon width={14} height={14} />
-                  </Link>
-                ))}
-              </div>
-              <ThemeToggle />
+            <div className="flex items-center gap-2.5">
+              {socialLinks.map(({ href, label, Icon }) => (
+                <Link
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  className="grid h-9 w-9 place-items-center rounded-full border border-indigo-200 dark:border-white/15 text-indigo-700 dark:text-white transition-all duration-300 hover:scale-110 hover:bg-indigo-100 dark:hover:bg-white/20"
+                  style={{ background: iconBg }}
+                >
+                  <Icon width={14} height={14} />
+                </Link>
+              ))}
             </div>
           </div>
 

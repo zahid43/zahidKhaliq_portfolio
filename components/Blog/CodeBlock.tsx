@@ -42,7 +42,7 @@ export default function CodeBlock({
   return (
     <div className="my-7 rounded-xl overflow-hidden shadow-2xl border border-white/8 ring-1 ring-black/10 dark:ring-white/5">
       {/* Window chrome / title bar */}
-      <div className="flex items-center justify-between px-4 py-2.5 bg-[#323233]">
+      <div className="flex items-center justify-between px-4 py-2.5 bg-[#1e1e22]">
         <div className="flex items-center gap-1.5">
           <span className="h-3 w-3 rounded-full bg-[#ff5f56]" />
           <span className="h-3 w-3 rounded-full bg-[#ffbd2e]" />
@@ -60,8 +60,8 @@ export default function CodeBlock({
       </div>
 
       {/* Tab bar */}
-      <div className="flex bg-[#252526] border-b border-[#1e1e1e]/80">
-        <div className="flex items-center gap-2 px-4 py-[7px] bg-[#1e1e1e] border-t-[1.5px] border-t-[#6366f1]">
+      <div className="flex bg-[#18181f] border-b border-white/5">
+        <div className="flex items-center gap-2 px-4 py-[7px] bg-[#12121a] border-t-[1.5px] border-t-[#6366f1]">
           <span className="text-[10px] text-[#858585]">{icon}</span>
           <span className="text-[12px] font-mono text-[#cccccc]">
             {displayName}
@@ -70,7 +70,7 @@ export default function CodeBlock({
       </div>
 
       {/* Code area */}
-      <div className="bg-[#1e1e1e] overflow-x-auto">
+      <div className="bg-[#12121a] overflow-x-auto">
         <SyntaxHighlighter
           language={language === "diff" ? "diff" : language}
           style={vscDarkPlus}

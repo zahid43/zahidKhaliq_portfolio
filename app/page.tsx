@@ -7,7 +7,6 @@ import {
   Experience,
   Certifications,
   Projects,
-  DarkModeToast,
   Services,
   CTABanner,
   LatestPosts,
@@ -41,7 +40,6 @@ export default function Home() {
       <Divider />
       <Contacts />
       <Footer />
-      <DarkModeToast />
     </>
   );
 }

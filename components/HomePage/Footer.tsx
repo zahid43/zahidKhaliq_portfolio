@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { NextjsIcon, TailwindIcon, FigmaIcon, MailIcon } from "@/components/ReusableSvgs";
 import { socialLinks } from "@/lib/socialLinks";
+import LiveClock from "./LiveClock";
 
 const hoverColors: Record<string, string> = {
   LinkedIn: "hover:bg-[#0A66C2] hover:border-[#0A66C2] hover:text-white",
@@ -62,7 +63,11 @@ export default function Footer() {
       </div>
 
       <div className="mt-8 flex flex-col items-center justify-between gap-2 border-t border-black/8 pt-6 text-xs text-darkBlue/40 dark:border-white/8 dark:text-white/35 sm:flex-row relative z-10">
-        <p>© {new Date().getFullYear()} Zahid Khaliq. All rights reserved.</p>
+        <div className="flex items-center gap-3 flex-wrap justify-center sm:justify-start">
+          <p>© {new Date().getFullYear()} Zahid Khaliq. All rights reserved.</p>
+          <span className="h-[3px] w-[3px] rounded-full bg-darkBlue/20 dark:bg-white/20 hidden sm:block" />
+          <LiveClock />
+        </div>
         <p className="flex items-center gap-1.5 flex-wrap justify-center sm:justify-start">
           Built with{" "}
           <a href="https://nextjs.org" target="_blank" rel="noopener noreferrer"
@@ -75,16 +80,10 @@ export default function Footer() {
             className="inline-flex items-center gap-1 transition-all duration-200 hover:scale-110 text-darkBlue/40 dark:text-white/35 hover:text-cyan-500 dark:hover:text-cyan-400">
             <TailwindIcon width={16} height={16} aria-hidden="true" />
             <span className="sr-only">Tailwind CSS</span>
-          </a>
-          {" · "}
-          Inspired by{" "}
-          <a href="https://www.figma.com/design/POGH7JC8mcsWXcCZx8DRuh/Free-Designer-Portfolio-and-Webflow-Template--Community---Community-?node-id=0-1&p=f&t=3xsvJ9aJXVZIHqFJ-0"
-            target="_blank" rel="noopener noreferrer"
-            className="inline-flex items-center gap-1 underline underline-offset-2 transition-all duration-200 hover:scale-105 text-darkBlue/40 dark:text-white/35 hover:text-[#A259FF] dark:hover:text-[#A259FF]">
-            <FigmaIcon width={14} height={14} aria-hidden="true" /> this Figma template
-          </a>
+          </a> 
         </p>
       </div>
+
     </footer>
   );
 }

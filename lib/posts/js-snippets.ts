@@ -70,6 +70,100 @@ while (parent) {
       "The parent must have enough height for the sticky element to actually travel within",
     ],
   },
+
+  // ── Images missing alt text ────────────────────────────────────────────────
+  {
+    type: "heading",
+    level: 2,
+    text: "Find Every Image Missing Alt Text",
+  },
+  {
+    type: "paragraph",
+    text: "A quick accessibility audit without any tooling. This logs every img element that has no alt attribute or an empty one, and highlights them in red so they're easy to spot visually.",
+  },
+  {
+    type: "code",
+    language: "javascript",
+    filename: "a11y-images.js",
+    code: `const bad = [...document.querySelectorAll('img')]
+  .filter(img => !img.alt || img.alt.trim() === '');
+
+bad.forEach(img => {
+  img.style.outline = '3px solid red';
+  console.log('Missing alt:', img.src);
+});
+
+console.log(\`Found \${bad.length} image(s) without alt text\`);`,
+  },
+
+  // ── Find largest DOM nodes ─────────────────────────────────────────────────
+  {
+    type: "heading",
+    level: 2,
+    text: "Find the Heaviest Elements on the Page",
+  },
+  {
+    type: "paragraph",
+    text: "When a page feels sluggish to render, deep DOM trees are often the culprit. This snippet counts child nodes per element and surfaces the top offenders — the ones most likely to be causing layout thrashing or slow paint.",
+  },
+  {
+    type: "code",
+    language: "javascript",
+    filename: "dom-weight.js",
+    code: `const results = [...document.querySelectorAll('*')]
+  .map(el => ({
+    el,
+    children: el.querySelectorAll('*').length,
+    tag: el.tagName.toLowerCase(),
+    classes: el.className,
+  }))
+  .sort((a, b) => b.children - a.children)
+  .slice(0, 10);
+
+console.table(results.map(r => ({
+  tag: r.tag,
+  children: r.children,
+  classes: typeof r.classes === 'string' ? r.classes.slice(0, 60) : '',
+})));`,
+  },
+
+  // ── Monitor all fetch calls ────────────────────────────────────────────────
+  {
+    type: "heading",
+    level: 2,
+    text: "Log Every fetch Request on the Page",
+  },
+  {
+    type: "paragraph",
+    text: "Sometimes Network tab is too noisy and you just want a clean log of what URLs are being fetched and what came back. This patches the global fetch so every call prints its URL and status to the console.",
+  },
+  {
+    type: "code",
+    language: "javascript",
+    filename: "fetch-logger.js",
+    code: `const _fetch = window.fetch;
+
+window.fetch = async (...args) => {
+  const url = typeof args[0] === 'string' ? args[0] : args[0].url;
+  console.log('[fetch →]', url);
+
+  const res = await _fetch(...args);
+
+  console.log(\`[fetch ←] \${res.status} \${res.statusText}\`, url);
+  return res;
+};
+
+console.log('Fetch logger active. Refresh won\\'t persist this.');`,
+  },
+  {
+    type: "paragraph",
+    text: "Remember this only lasts for the current page session — a refresh wipes it. If you need something persistent, use the Network tab's filter or a browser extension instead.",
+  },
+
+  {
+    type: "quote",
+    text: "The browser console is one of the most underrated debugging environments. Most developers use it for console.log — it can do a lot more.",
+  },
 ];
 
 // ─── Export ───────────────────────────────────────────────────────────────────

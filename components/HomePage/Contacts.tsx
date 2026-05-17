@@ -3,16 +3,15 @@
 import Image from "next/image";
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence, useInView } from 'framer-motion';
+import { getLocalTZ } from "@/lib/date-utils";
 import LinkedinIcon from "@/components/ReusableSvgs/LinkedinIcon";
-import WhatsAppIcon from "@/components/ReusableSvgs/WhatsAppIcon";
-import XIcon from "@/components/ReusableSvgs/XIcon";
-import { FileTextIcon, PhoneIcon, MailIcon, SendIcon, AlertCircleIcon, Loader2Icon } from "@/components/ReusableSvgs";
+import { WhatsAppIcon, XIcon, PhoneIcon, MailIcon, FileTextIcon, SendIcon, AlertCircleIcon, Loader2Icon } from "@/components/ReusableSvgs";
 
 type Status = 'idle' | 'loading' | 'success' | 'error';
 
 const BOOT_LINES = [
   '$ ./contact --init',
-  '> Establishing connection to zahid khaliq portfolio...',
+  '> Establishing connection to zahid.khaliq...',
   '> Status: ✓  available for new projects',
   '> Ready. Type your message below.',
 ];
@@ -67,7 +66,25 @@ export default function Contacts() {
   const [status, setStatus] = useState<Status>('idle');
   const [errorMsg, setErrorMsg] = useState('');
   const [showForm, setShowForm] = useState(false);
+  const [clock, setClock] = useState<{ abbr: string; time: string } | null>(null);
   const { output, done } = useTyper(BOOT_LINES, isInView);
+
+  useEffect(() => {
+    const { abbr } = getLocalTZ();
+    const tick = () =>
+      setClock({
+        abbr,
+        time: new Date().toLocaleTimeString("en-US", {
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+          hour12: false,
+        }),
+      });
+    tick();
+    const id = setInterval(tick, 1000);
+    return () => clearInterval(id);
+  }, []);
 
   useEffect(() => {
     if (!done) return;
@@ -121,10 +138,9 @@ export default function Contacts() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="font-bold"
+            className="font-black"
           >
-            Let&apos;s Build{' '}
-              Something Great
+            Let&apos;s Build{' '} Something Great
           </motion.h4>
         </div>
 
@@ -145,9 +161,12 @@ export default function Contacts() {
             </div>
             <div className="flex-1 flex justify-center">
               <span className="font-mono text-[11px] text-white/30 select-none">
-                ~/portfolio — contact.sh — 80×24
+                ~/portfolio — contact.sh
               </span>
             </div>
+            <span className="font-mono text-[11px] text-emerald-400/70 select-none tabular-nums">
+              {clock ? `[${clock.abbr}] ${clock.time}` : ""}
+            </span>
           </div>
 
           {/* Terminal body */}

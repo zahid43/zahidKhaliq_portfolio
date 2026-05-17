@@ -122,7 +122,7 @@ export default function Expertise() {
       <div className="pointer-events-none absolute left-0 top-20 h-72 w-72 rounded-full bg-teal-400/10 dark:bg-teal-600/15 blur-3xl" />
       <div className="pointer-events-none absolute right-0 bottom-20 h-80 w-80 rounded-full bg-indigo-400/10 dark:bg-indigo-600/15 blur-3xl" />
 
-<div className="container">
+      <div className="container">
         <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_1px_minmax(0,1fr)] lg:items-center z-1 relative gap-y-16 lg:gap-y-0">
 
           {/* Icon wheel ~ left */}
@@ -185,12 +185,6 @@ export default function Expertise() {
           {/* Divider */}
           <div className="hidden lg:block relative h-full">
             <div className="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-px bg-linear-to-b from-transparent via-accent/40 to-transparent" />
-            <div className="absolute left-1/2 top-[-20px] -translate-x-1/2 translate-y-2 z-10">
-              <div className="relative w-5 h-5">
-                <div className="absolute inset-0 scale-[2] rounded-full bg-accent/30 animate-ping [animation-duration:2.5s]" />
-                <div className="relative w-full h-full rounded-full bg-background border-[3px] border-accent shadow-[0_0_12px_rgba(99,102,241,0.5)]" />
-              </div>
-            </div>
           </div>
 
           {/* Cards ~ left */}

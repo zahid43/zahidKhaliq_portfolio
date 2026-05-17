@@ -119,7 +119,7 @@ export default function Endorsements() {
   };
 
   return (
-    <section id="endorsements" className="container pt-16 lg:pt-24 overflow-hidden pb-32">
+    <section id="endorsements" className="container pt-16 lg:pt-24 overflow-hidden pb-60">
       <div className="mx-auto max-w-3xl text-center mb-28">
         <span className="inline-flex items-center justify-center gap-2 text-xs font-bold uppercase tracking-[0.25em] text-accent mb-3">
           <span className="h-[2px] w-4 rounded-full bg-accent" />
@@ -238,7 +238,7 @@ export default function Endorsements() {
           );
         })}
 
-        <div className="absolute -bottom-32 left-1/2 z-10 flex -translate-x-1/2 items-center gap-4">
+        <div className="absolute -bottom-40 left-1/2 z-10 flex -translate-x-1/2 items-center gap-4">
           <button
             type="button"
             onClick={goToPrev}

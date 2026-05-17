@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/HomePage/Navbar";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import AutoTheme from "@/components/AutoTheme";
 import ScrollProgress from "@/components/ScrollProgress";
 
 const geistSans = Geist({
@@ -15,9 +16,31 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://zahidkhaliq.dev";
+
 export const metadata: Metadata = {
-  title: "Zahid Khaliq - Portfolio",
-  description: "Portfolio of Zahid Khaliq | Frontend Engineer",
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: "Zahid Khaliq — Frontend Engineer",
+    template: "%s ~ Zahid Khaliq",
+  },
+  description:
+    "Frontend Engineer building fast, accessible, and polished web experiences with React, Next.js, and TypeScript.",
+  openGraph: {
+    type: "website",
+    url: siteUrl,
+    siteName: "Zahid Khaliq",
+    title: "Zahid Khaliq — Frontend Engineer",
+    description:
+      "Frontend Engineer building fast, accessible, and polished web experiences with React, Next.js, and TypeScript.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Zahid Khaliq — Frontend Engineer",
+    description:
+      "Frontend Engineer building fast, accessible, and polished web experiences with React, Next.js, and TypeScript.",
+    creator: "@zaahidkhaliq",
+  },
 };
 
 export default function RootLayout({
@@ -33,6 +56,7 @@ export default function RootLayout({
     >
       <body className="min-h-screen flex flex-col">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <AutoTheme />
           <ScrollProgress />
           <Navbar />
           <main>

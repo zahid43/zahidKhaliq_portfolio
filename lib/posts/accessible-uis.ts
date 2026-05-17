@@ -8,7 +8,7 @@ const meta = {
   title: "Accessible UIs from the Start",
   excerpt:
     "Around 15% of the world's population lives with some form of disability. Here's the practical side of building UIs that work for all of them ~ semantic HTML, keyboard nav, ARIA, contrast, forms, and a checklist you can use today.",
-  date: "May 2026",
+  date: "Apr 2026",
   category: "A11y",
   readTime: "8 min read",
   size: "normal",

@@ -6,9 +6,15 @@ import { SunIcon, MoonIcon } from "@/components/ReusableSvgs";
 export function ThemeToggle() {
   const { resolvedTheme, setTheme } = useTheme();
 
+  const toggle = () => {
+    const next = resolvedTheme === "dark" ? "light" : "dark";
+    localStorage.setItem("themeManual", next);
+    setTheme(next);
+  };
+
   return (
     <button
-      onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
+      onClick={toggle}
       className="p-2 rounded-full hover:bg-indigo-50 dark:hover:bg-indigo-950/60 transition-colors"
       aria-label="Toggle theme"
     >

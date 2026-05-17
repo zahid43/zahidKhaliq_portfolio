@@ -5,6 +5,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { Footer } from "@/components/HomePage";
 import { posts, type BlogPost } from "@/lib/blog";
+import { useState, useEffect } from "react";
+import { relativeFromString } from "@/lib/date-utils";
 
 // ─── Category config ──────────────────────────────────────────────────────────
 const cfg: Record<string, { text: string; strip: string; top: string; badge: string }> = {
@@ -12,56 +14,59 @@ const cfg: Record<string, { text: string; strip: string; top: string; badge: str
   "Next.js":  { text: "text-teal-600 dark:text-teal-400",    strip: "bg-teal-400",    top: "bg-teal-400",    badge: "bg-teal-100 dark:bg-teal-900/40 text-teal-700 dark:text-teal-300 border-teal-300/50 dark:border-teal-500/30" },
   A11y:       { text: "text-indigo-600 dark:text-indigo-400",strip: "bg-indigo-500",  top: "bg-indigo-500",  badge: "bg-indigo-100 dark:bg-indigo-900/40 text-indigo-700 dark:text-indigo-300 border-indigo-300/50 dark:border-indigo-500/30" },
   Animation:  { text: "text-pink-600 dark:text-pink-400",    strip: "bg-pink-500",    top: "bg-pink-500",    badge: "bg-pink-100 dark:bg-pink-900/40 text-pink-700 dark:text-pink-300 border-pink-300/50 dark:border-pink-500/30" },
-  TypeScript: { text: "text-amber-600 dark:text-amber-400",  strip: "bg-amber-400",   top: "bg-amber-400",   badge: "bg-amber-100 dark:bg-amber-900/40 text-amber-700 dark:text-amber-300 border-amber-300/50 dark:border-amber-500/30" },
   React:      { text: "text-cyan-600 dark:text-cyan-400",    strip: "bg-cyan-400",    top: "bg-cyan-400",    badge: "bg-cyan-100 dark:bg-cyan-900/40 text-cyan-700 dark:text-cyan-300 border-cyan-300/50 dark:border-cyan-500/30" },
   JavaScript: { text: "text-orange-600 dark:text-orange-400",strip: "bg-orange-400",  top: "bg-orange-400",  badge: "bg-orange-100 dark:bg-orange-900/40 text-orange-700 dark:text-orange-300 border-orange-300/50 dark:border-orange-500/30" },
 };
 
-const COLUMN_ORDER = ["React", "Next.js", "CSS", "TypeScript", "Animation", "A11y", "JavaScript"];
+const COLUMN_ORDER = ["React", "Next.js", "CSS", "Animation", "A11y", "JavaScript"];
 
 // ─── Kanban card ─────────────────────────────────────────────────────────────
 function KanbanCard({ post, index }: { post: BlogPost; index: number }) {
   const c = cfg[post.category] ?? { text: "text-accent", strip: "bg-accent", top: "bg-accent", badge: "" };
   const isPublished = !!post.slug;
+  const [relative, setRelative] = useState<string | null>(null);
+  useEffect(() => { setRelative(relativeFromString(post.date)); }, [post.date]);
 
   const inner = (
     <motion.div
       initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.35, delay: index * 0.07, ease: "easeOut" }}
-      className="group flex rounded-xl overflow-hidden bg-white dark:bg-white/[0.03] border border-black/[0.07] dark:border-white/[0.06] hover:border-black/[0.14] dark:hover:border-white/[0.13] shadow-sm hover:shadow-md hover:shadow-black/8 dark:hover:shadow-black/30 transition-all duration-300 hover:-translate-y-0.5"
+      className="group relative flex flex-col rounded-xl overflow-hidden bg-white dark:bg-[#13111f] border border-black/[0.08] dark:border-white/[0.07] shadow-sm hover:shadow-xl hover:shadow-black/10 dark:hover:shadow-black/50 hover:-translate-y-0.5 transition-all duration-200"
     >
-      {/* Left strip */}
-      <div className={`w-[3px] shrink-0 ${c.strip} opacity-70 group-hover:opacity-100 transition-opacity duration-300`} />
+      {/* Top accent bar */}
+      <div className={`h-[3px] w-full ${c.strip} opacity-80 group-hover:opacity-100 transition-opacity duration-200`} />
 
-      <div className="flex flex-col flex-1 p-4 min-w-0">
-        {/* Top row */}
-        <div className="flex items-center justify-between gap-2 mb-3">
-          <span className={`text-[9px] font-bold uppercase tracking-[0.22em] ${c.text}`}>
-            {post.category}
-          </span>
-          <span className="text-[9px] text-foreground/28 dark:text-white/22 shrink-0">{post.readTime}</span>
-        </div>
+      <div className="flex flex-col flex-1 p-4 gap-2.5 min-w-0">
 
         {/* Title */}
-        <h6 className={`text-[13px] font-bold leading-snug text-darkBlue dark:text-white/90 mb-2 line-clamp-2 transition-colors duration-200 ${isPublished ? `group-hover:${c.text.split(" ")[0].replace("text-", "text-")}` : ""}`}>
+        <p className={`text-[13px] font-semibold leading-snug text-darkBlue dark:text-white/88 line-clamp-2 transition-colors duration-200 ${isPublished ? `group-hover:${c.text.split(" ")[0]}` : ""}`}>
           {post.title}
-        </h6>
+        </p>
 
         {/* Excerpt */}
-        <p className="text-[11px] text-darkBlue/42 dark:text-white/35 leading-relaxed line-clamp-3 flex-1 mb-3">
+        <p className="text-[11px] text-darkBlue/45 dark:text-white/35 leading-relaxed line-clamp-2 flex-1">
           {post.excerpt}
         </p>
 
         {/* Footer */}
-        <div className="flex items-center justify-between pt-3 border-t border-black/[0.06] dark:border-white/[0.06]">
-          <span className="text-[9.5px] text-darkBlue/30 dark:text-white/22">{post.date}</span>
+        <div className="flex items-center justify-between pt-2.5 border-t border-black/[0.05] dark:border-white/[0.05] mt-auto">
+          <div className="flex items-center gap-2">
+            {isPublished ? (
+              <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 shrink-0" />
+            ) : (
+              <span className="h-1.5 w-1.5 rounded-full bg-amber-400 shrink-0" />
+            )}
+            <span className="text-[9px] text-darkBlue/35 dark:text-white/25">
+              {relative ?? post.readTime}
+            </span>
+          </div>
           {isPublished ? (
-            <span className={`text-[10px] font-semibold ${c.text} flex items-center gap-0.5 group-hover:gap-1.5 transition-all duration-200`}>
+            <span className={`text-[10px] font-semibold ${c.text} opacity-0 group-hover:opacity-100 flex items-center gap-0.5 group-hover:gap-1.5 transition-all duration-200`}>
               Read <span>→</span>
             </span>
           ) : (
-            <span className="text-[8.5px] font-medium px-1.5 py-0.5 rounded border border-black/[0.08] dark:border-white/[0.08] text-darkBlue/25 dark:text-white/20 uppercase tracking-wider">
+            <span className="text-[8px] font-semibold px-2 py-0.5 rounded-full bg-amber-400/10 dark:bg-amber-400/8 text-amber-600 dark:text-amber-400 uppercase tracking-wider">
               Soon
             </span>
           )}
@@ -78,16 +83,15 @@ function KanbanCard({ post, index }: { post: BlogPost; index: number }) {
 function PlaceholderCard({ category }: { category: string }) {
   const c = cfg[category] ?? { text: "text-accent", strip: "bg-accent", top: "bg-accent", badge: "" };
   return (
-    <div className="flex rounded-xl overflow-hidden border border-dashed border-black/[0.08] dark:border-white/[0.07] bg-transparent">
-      <div className={`w-[3px] shrink-0 ${c.strip} opacity-20`} />
-      <div className="flex flex-col items-center justify-center flex-1 py-5 px-4 gap-1.5">
-        <span className={`text-[9px] font-bold uppercase tracking-[0.22em] ${c.text} opacity-40`}>More coming</span>
-        <div className="flex gap-1">
-          {[0, 1, 2].map(i => (
-            <span key={i} className={`h-1 w-1 rounded-full ${c.strip} opacity-25`} />
-          ))}
-        </div>
+    <div className="flex flex-col items-center justify-center gap-2 rounded-xl border border-dashed border-black/[0.07] dark:border-white/[0.06] py-6 px-4">
+      <div className="flex gap-1">
+        {[0, 1, 2].map(i => (
+          <span key={i} className={`h-1 w-1 rounded-full ${c.strip} opacity-30`} />
+        ))}
       </div>
+      <span className={`text-[9px] font-medium uppercase tracking-[0.18em] ${c.text} opacity-35`}>
+        More coming
+      </span>
     </div>
   );
 }
@@ -102,13 +106,13 @@ function KanbanColumn({ category, colPosts, colIndex }: { category: string; colP
       initial={{ opacity: 0, y: 24 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.45, delay: colIndex * 0.08, ease: "easeOut" }}
-      className="w-[272px] shrink-0 flex flex-col"
+      className="w-[280px] shrink-0 flex flex-col h-[440px] lg:h-[calc(100vh-260px)] rounded-2xl overflow-hidden border border-black/[0.07] dark:border-white/[0.07] bg-black/[0.025] dark:bg-white/[0.025] shadow-sm"
     >
       {/* Column header */}
-      <div className="mb-3">
+      <div className="shrink-0 px-4 pt-0 pb-3 border-b border-black/[0.06] dark:border-white/[0.06] bg-black/[0.02] dark:bg-white/[0.02]">
         {/* Top accent bar */}
-        <div className={`h-[3px] w-full rounded-full ${c.top} mb-3 opacity-80`} />
-        <div className="flex items-center justify-between px-1">
+        <div className={`h-[3px] w-full rounded-full ${c.top} mb-3 opacity-85`} />
+        <div className="flex items-center justify-between">
           <span className={`text-[11px] font-black uppercase tracking-[0.25em] ${c.text}`}>
             {category}
           </span>
@@ -118,8 +122,11 @@ function KanbanColumn({ category, colPosts, colIndex }: { category: string; colP
         </div>
       </div>
 
-      {/* Cards */}
-      <div className="flex flex-col gap-2.5">
+      {/* Cards — scrollable body */}
+      <div
+        className="flex flex-col gap-2 flex-1 overflow-y-auto p-3"
+        style={{ scrollbarWidth: "thin", scrollbarColor: "rgba(99,102,241,0.2) transparent" }}
+      >
         {colPosts.map((post, i) => (
           <KanbanCard key={post.id} post={post} index={i} />
         ))}
@@ -234,7 +241,7 @@ export default function BlogPage() {
         <BoardStats published={published} comingSoon={comingSoon} topics={topics} />
 
         {/* Kanban board — edge-to-edge horizontal scroll */}
-        <div className="relative z-10 w-full overflow-x-auto pb-4">
+        <div className="kanban-x-scroll relative z-10 w-full overflow-x-auto pb-4">
           <div className="flex gap-4 px-6 lg:px-10 min-w-max">
             {columns.map((col, i) => (
               <KanbanColumn

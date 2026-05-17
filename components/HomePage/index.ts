@@ -6,7 +6,6 @@ export { default as Footer } from "./Footer";
 export { default as Experience } from "./Experience";
 export { default as Certifications } from "./Certifications";
 export { default as Projects } from "./Projects";
-export { default as DarkModeToast } from "./DarkModeToast";
 export { default as Services } from "./Services";
 export { default as CTABanner } from "./CTABanner";
 export { default as LatestPosts } from "./LatestPosts";
